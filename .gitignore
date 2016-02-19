@@ -1,0 +1,57 @@
+# Gitignore for Craft and general Mac dev
+# -------------------------------------
+# -------------------------------------
+
+
+# Craft / Runtime and backups folders
+# -------------------------------------
+/craft/storage/runtime/*
+/craft/storage/backups/*
+/craft/storage/userphotos/*
+!/craft/storage/logo/*
+
+# Craft / Uploaded files
+# -------------------------------------
+site/public/assets/uploads/*
+
+# Mac files
+# -------------------------------------
+.DS_Store
+.DS_Store?
+.AppleDouble
+.LSOverride
+ehthumbs.db
+Thumbs.db
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+._*
+.Spotlight-V100
+
+# Node/Ruby
+# -------------------------------------
+node_modules
+.ruby-version
+.ruby-gemset
+.npm
+
+# Sass/Codekit
+# -------------------------------------
+.codekit-cache
+.sass-cache/
+*.css.map
+
+# Webfonts
+# -------------------------------------
+webfonts
+
+# Misc / Logs
+# -------------------------------------
+.cache
+.project
+.settings
+*.log
+*.sql
+*.sqlite
