@@ -1,0 +1,64 @@
+// Rhyme Paysage (for Justin Parscher)
+// Dan O. Williams
+// Made with Measure
+// 2016
+
+@import '_measure-vars.scss';
+@import '_measure-mixins.scss';
+
+/*	-----------------------------------------------
+	Project variables	*/
+
+
+/*	-----------------------------------------------
+	uBand Styles
+	Critical CSS for inline	*/
+
+@import '_measure-defaults.scss';
+
+$font-title: -apple-system, BlinkMacSystemFont, 
+    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", 
+    "Fira Sans", "Droid Sans", "Helvetica Neue", 
+    sans-serif;
+
+@import '_measure-reset.scss';
+
+body {
+	font-size: 18px;
+	font-family: $font-body;
+	color: $color-black;
+	margin: $grid;
+}
+
+h1 {
+	font-size: 32px;
+	font-family: $font-title;
+	margin: $grid * 5 0;
+	font-weight: 300;
+}
+
+nav.primary {
+	font-style: italic;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+.entry {
+	padding-bottom: .45em;
+	line-height: 1.2;
+	text-indent: -1em;
+	padding-left: 1em;
+}
+
+span.title {
+	text-decoration: underline;
+}
+
+span.date {
+	font-size: 60%;
+	font-family: $font-title;
+	font-weight: bold;
+}
