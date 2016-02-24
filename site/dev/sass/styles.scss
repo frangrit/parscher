@@ -27,7 +27,7 @@ body {
 	font-size: 18px;
 	font-family: $font-body;
 	color: $color-black;
-	margin: $grid;
+	margin: $grid $grid $grid * 5 $grid;
 }
 
 h1 {
@@ -39,6 +39,17 @@ h1 {
 
 nav.primary {
 	font-style: italic;
+	text-decoration: underline;
+	&.top {
+		margin-bottom: $grid * 5;
+	}
+	&.bottom {
+		margin-top: $grid * 5;
+	}
+}
+
+nav.secondary {
+	margin: $double 0 $grid * 4;
 }
 
 a {
@@ -46,11 +57,18 @@ a {
 	color: inherit;
 }
 
-.entry {
+.entry,
+.primary-nav-item,
+.secondary-nav-item {
 	padding-bottom: .45em;
 	line-height: 1.2;
 	text-indent: -1em;
 	padding-left: 1em;
+}
+
+.secondary-nav-item._isActive {
+	font-family: $font-title;
+	font-weight: bold;
 }
 
 span.title {
