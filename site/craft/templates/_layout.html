@@ -15,91 +15,17 @@
 		<meta charset="utf-8" />
 		<title>{% if title is defined %}{{ title }} / {% endif %}{{ siteName }}</title>
 		<link rel="home" href="{{ siteUrl }}" />
-		<link rel="stylesheet" href="/css/styles.css"/>
+		{# <style>{{ source('css/uband.css') }}</style> #}
+		<link rel="stylesheet" href="/css/uband.css"/>
 	</head>
 	
-	<body>
+	<body class="{{ bodyClass }}">
 		<div id="container">
-			<header id="header">
-				<h1><a href="{{ siteUrl }}" class="_revealOnHover">R<span class="hidden">hyme</span> P<span class="hidden">aysage</span></a></h1>
+			<header id="header" class="restrict-column">
+				<h1><a href="{{ siteUrl }}" class="_revealOnHover _revealOnHome">R<span class="hidden">hyme</span> P<span class="hidden">aysage</span></a></h1>
 			</header>
-			<div class="content-start">
-				<nav class="primary top">
-					<ul class="primary-nav-list">
-						<li class="primary-nav-item"><a href="#">About</a></li>
-					</ul>
-				</nav>
-				<nav class="secondary">
-					<ul class="secondary-nav-list">
-						<li class="secondary-nav-item _isActive"><a href="#">All</a></li>
-						<li class="secondary-nav-item"><a href="#">Essays</a></li>
-						<li class="secondary-nav-item"><a href="#">Projects</a></li>
-						<li class="secondary-nav-item"><a href="#">Landscapes</a></li>
-						<li class="secondary-nav-item"><a href="#">Backyards</a></li>
-					</ul>
-				</nav>
-				<main id="content" role="main">
-					<ul class="entry-list">
-						<li class="entry"><a href="#"><span class="title">Completism</span> <span class="date">(2016)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Fiction for Spatial Design</span> <span class="date">(2016)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Introduction to <i>The Principles of Landscape Criticism</i></span> <span class="date">(2016)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Lot II</span> <span class="date">(2016)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Being Ecological</span> <span class="date">(2016)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">I Advance Masked</span> <span class="date">(2016)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Both</span> <span class="date">(2016)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Do Animals Play? Do Animals Work?</span> <span class="date">(2016)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Campaigns and Quarters</span> <span class="date">(2016)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Flatpack Parks</span> <span class="date">(2015)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Little Loops</span> <span class="date">(2015)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Are People Design Materials?</span> <span class="date">(2015)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">On Character</span> <span class="date">(20013–2015)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Firewalls</span> <span class="date">(2015)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Indoor Landscapes</span> <span class="date">(2015)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Pensées</span> <span class="date">(2015)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Inheritance</span> <span class="date">(2015)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">My Back Door</span> <span class="date">(2015)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">The Realms of Landscape III</span> <span class="date">(2015)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">The Realms of Landscape II: Vulgar Theaters</span> <span class="date">(2015)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">The Realms of Landscape</span> <span class="date">(2015)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Gestures</span> <span class="date">(2015)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Landscape Making and its Uses</span> <span class="date">(2014)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Miyamoto Landscape</span> <span class="date">(2014)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Child World</span> <span class="date">(2014)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Fairy World</span> <span class="date">(2014)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Is It A Landscape?</span> <span class="date">(2014)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Impedance</span> <span class="date">(2014)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Lot I</span> <span class="date">(2013–2014)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">The Cloth and the Wire Lot</span> <span class="date">(2014)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Lives of the Non-Architects</span> <span class="date">(2014)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Almost Nothing</span> <span class="date">(2014)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Rambles for Method</span> <span class="date">(2014)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Be the Best City You Can Be</span> <span class="date">(2014)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Discontent</span> <span class="date">(2013)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Plans And Sections Of The Winchester House</span> <span class="date">(2013)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Mulberry Leaves</span> <span class="date">(2013)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">On Miscellanies</span> <span class="date">(2013)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">The Domain Of…</span> <span class="date">(2013)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">“What Means the World to You?”</span> <span class="date">(2013)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Notebooks Out Paysagistes!</span> <span class="date">(2013)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Quotidiana</span> <span class="date">(2013)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Procedurals</span> <span class="date">(2013)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Less You or Less</span> <span class="date">(2013)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">“Rude Mechanicals”</span> <span class="date">(2013)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Ferry ’Cross the Mersey</span> <span class="date">(2013)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Back to C.T.</span> <span class="date">(2012)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Wizz Deflections on Space</span> <span class="date">(2012)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Edits Pt. 1</span> <span class="date">(2012)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Open Letter to the IIST</span> <span class="date">(2011)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Essay on Erving, MA (With Ten Views)</span> <span class="date">(2011)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Minute Particulars</span> <span class="date">(2009)</span></a></li>
-						<li class="entry"><a href="#"><span class="title">Amateur of Psychedelia</span> <span class="date">(2009)</span></a></li>
-					</ul>
-				</main>
-				<nav class="primary bottom">
-					<ul class="primary-nav-list">
-						<li class="primary-nav-item"><a href="#">Index</a></li>
-					</ul>
-				</nav>
-		</div>
+			{% block content %}
+			{% endblock %}
+		</div>{# /#container #}
 	</body>
 </html>

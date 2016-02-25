@@ -18,16 +18,85 @@
  #}
 
 {% extends "_layout" %}
+{% set bodyClass = "home" %}
 
 {% block content %}
-	<h1>{{ entry.title }}</h1>
-
-	{{ entry.body }}
-
-	<h2>Recent Items of Interest</h2>
-	<ul>
-		{% for entry in craft.entries.section('news').limit(5).find() %}
-			<li><a href="{{ entry.url }}">{{ entry.title }}</a></li>
-		{% endfor %}
-	</ul>
+	<div class="content-start">
+		<nav class="primary top restrict-column">
+			<ul class="primary-nav-list">
+				<li class="primary-nav-item"><a href="#">About</a></li>
+			</ul>
+		</nav>
+		<nav class="secondary">
+			<ul class="secondary-nav-list">
+				<li class="secondary-nav-item _isActive"><a href="#">All</a></li>
+				<li class="secondary-nav-item"><a href="#">Essays</a></li>
+				<li class="secondary-nav-item"><a href="#">Projects</a></li>
+				<li class="secondary-nav-item"><a href="#">Landscapes</a></li>
+				<li class="secondary-nav-item"><a href="#">Backyards</a></li>
+			</ul>
+		</nav>
+		<main id="content" role="main">
+			<ul class="entry-list restrict-column">
+				<li class="entry"><a href="#"><span class="title">Completism</span>&nbsp;<span class="date">(2016)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Fiction for Spatial Design</span>&nbsp;<span class="date">(2016)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Introduction to <i>The Principles of Landscape Criticism</i></span>&nbsp;<span class="date">(2016)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Lot II</span>&nbsp;<span class="date">(2016)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Being Ecological</span>&nbsp;<span class="date">(2016)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">I Advance Masked</span>&nbsp;<span class="date">(2016)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Both</span>&nbsp;<span class="date">(2016)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Do Animals Play? Do Animals Work?</span>&nbsp;<span class="date">(2016)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Campaigns and Quarters</span>&nbsp;<span class="date">(2016)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Flatpack Parks</span>&nbsp;<span class="date">(2015)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Little Loops</span>&nbsp;<span class="date">(2015)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Are People Design Materials?</span>&nbsp;<span class="date">(2015)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">On Character</span>&nbsp;<span class="date">(20013–2015)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Firewalls</span>&nbsp;<span class="date">(2015)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Indoor Landscapes</span>&nbsp;<span class="date">(2015)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Pensées</span>&nbsp;<span class="date">(2015)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Inheritance</span>&nbsp;<span class="date">(2015)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">My Back Door</span>&nbsp;<span class="date">(2015)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">The Realms of Landscape III</span>&nbsp;<span class="date">(2015)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">The Realms of Landscape II: Vulgar Theaters</span>&nbsp;<span class="date">(2015)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">The Realms of Landscape</span>&nbsp;<span class="date">(2015)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Gestures</span>&nbsp;<span class="date">(2015)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Landscape Making and its Uses</span>&nbsp;<span class="date">(2014)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Miyamoto Landscape</span>&nbsp;<span class="date">(2014)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Child World</span>&nbsp;<span class="date">(2014)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Fairy World</span>&nbsp;<span class="date">(2014)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Is It A Landscape?</span>&nbsp;<span class="date">(2014)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Impedance</span>&nbsp;<span class="date">(2014)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Lot I</span>&nbsp;<span class="date">(2013–2014)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">The Cloth and the Wire Lot</span>&nbsp;<span class="date">(2014)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Lives of the Non-Architects</span>&nbsp;<span class="date">(2014)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Almost Nothing</span>&nbsp;<span class="date">(2014)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Rambles for Method</span>&nbsp;<span class="date">(2014)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Be the Best City You Can Be</span>&nbsp;<span class="date">(2014)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Discontent</span>&nbsp;<span class="date">(2013)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Plans And Sections Of The Winchester House</span>&nbsp;<span class="date">(2013)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Mulberry Leaves</span>&nbsp;<span class="date">(2013)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">On Miscellanies</span>&nbsp;<span class="date">(2013)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">The Domain Of…</span>&nbsp;<span class="date">(2013)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">“What Means the World to You?”</span>&nbsp;<span class="date">(2013)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Notebooks Out Paysagistes!</span>&nbsp;<span class="date">(2013)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Quotidiana</span>&nbsp;<span class="date">(2013)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Procedurals</span>&nbsp;<span class="date">(2013)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Less You or Less</span>&nbsp;<span class="date">(2013)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">“Rude Mechanicals”</span>&nbsp;<span class="date">(2013)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Ferry ’Cross the Mersey</span>&nbsp;<span class="date">(2013)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Back to C.T.</span>&nbsp;<span class="date">(2012)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Wizz Deflections on Space</span>&nbsp;<span class="date">(2012)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Edits Pt. 1</span>&nbsp;<span class="date">(2012)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Open Letter to the IIST</span>&nbsp;<span class="date">(2011)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Essay on Erving, MA (With Ten Views)</span>&nbsp;<span class="date">(2011)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Minute Particulars</span>&nbsp;<span class="date">(2009)</span></a></li>
+				<li class="entry"><a href="#"><span class="title">Amateur of Psychedelia</span>&nbsp;<span class="date">(2009)</span></a></li>
+			</ul>
+		</main>
+		<nav class="primary bottom restrict-column">
+			<ul class="primary-nav-list">
+				<li class="primary-nav-item"><a href="#">Index</a></li>
+			</ul>
+		</nav>
+	</div>{# /.content-start #}
 {% endblock %}

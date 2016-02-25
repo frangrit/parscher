@@ -21,7 +21,7 @@
 }
 
 @mixin respond-r1 {
-	@media only screen and (min-width: $respond-r0 + 1) {
+	@media only screen and (min-width: $respond-r1) {
 		@content;
 	}
 }
@@ -39,7 +39,7 @@
 }
 
 @mixin respond-r2 {
-	@media only screen and (min-width: $respond-r1) {
+	@media only screen and (min-width: $respond-r2) {
 		@content;
 	}
 }
@@ -75,7 +75,7 @@
 }
 
 @mixin respond-r4 {
-	@media only screen and (min-width: $respond-r3 + 1) {
+	@media only screen and (min-width: $respond-r4) {
 		@content;
 	}
 }
@@ -93,7 +93,7 @@
 }
 
 @mixin respond-max {
-	@media only screen and (min-width: $respond-r4) {
+	@media only screen and (min-width: $respond-r5) {
 		@content;
 	}
 }
