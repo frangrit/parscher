@@ -31,6 +31,8 @@ body {
 	font-family: $font-body;
 	color: $color-black;
 	margin: $grid $grid $grid * 7 $grid;
+	position: relative;
+	z-index: 0;
 	@include respond-r1 {
 		font-size: 18px;
 	}
@@ -40,11 +42,34 @@ body {
 	}
 }
 
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
 h1 {
 	font-size: 32px;
 	font-family: $font-title;
 	margin: $grid * 5 0;
 	font-weight: 300;
+}
+
+main {
+	position: relative;
+	z-index: 0;
+}
+
+.content-start {
+	position: relative;
+	z-index: 0;
+}
+
+.restrict-column {
+	@include respond-r3 {
+		max-width: 480px;
+		margin-left: auto;
+		margin-right: auto;
+	}
 }
 
 nav.primary {
@@ -62,6 +87,8 @@ nav.secondary {
 	font-family: $font-title;
 	font-size: 95%;
 	position: relative;
+	z-index: 1;
+	width: 100%;
 	a {
 		&:hover {
 			font-family: $font-title;
@@ -76,15 +103,21 @@ nav.secondary {
 		font-family: $font-body;
 		font-size: 100%;
 		position: absolute;
-		width: 92%;
-		width: calc(100% - 80px);
 		margin-top: $grid/2;
 	}
 }
 
-a {
-	text-decoration: none;
-	color: inherit;
+.category-highlight {
+	width: auto;
+	position: absolute;
+	right: 0;
+	top: 0;
+	z-index: -100;
+	img {
+		display: block;
+		width: 100%;
+		height: auto;
+	}
 }
 
 .entry,
@@ -92,6 +125,11 @@ a {
 .secondary-nav-item {
 	padding-bottom: .5em;
 	line-height: 1.2;
+}
+
+.entry-list {
+	z-index: 10;
+	position: relative;
 }
 
 .secondary-nav-item._isActive {
@@ -127,33 +165,11 @@ body.home ._revealOnHome {
 	.hidden { visibility: visible; }
 }
 
-.restrict-column {
-	@include respond-r3 {
-		max-width: 480px;
-		margin-left: auto;
-		margin-right: auto;
-	}
-}
-
-._showOnTriggerHover {
+._showOnSiblingTriggerHover {
 	display: none;
 }
 
-.trigger:hover {
-	._showOnTriggerHover {
-		display: block;
-	}
+.trigger:hover + ._showOnSiblingTriggerHover {
+	display: block;
 }
 
-.test-ani {
-	width: auto;
-	position: absolute;
-	right: 0;
-	top: 0;
-	z-index: -100;
-	img {
-		display: block;
-		width: 100%;
-		height: auto;
-	}
-}
