@@ -165,11 +165,14 @@ body.home ._revealOnHome {
 	.hidden { visibility: visible; }
 }
 
-._showOnSiblingTriggerHover {
-	display: none;
+._fadeOnSiblingTriggerHover {
+	opacity: 0;
+	transition: opacity .3s;
+	z-index: -5;
 }
 
-.trigger:hover + ._showOnSiblingTriggerHover {
-	display: block;
+.trigger:hover + ._fadeOnSiblingTriggerHover {
+	opacity: 1;
+	z-index: -1;
 }
 
