@@ -61,6 +61,7 @@ nav.secondary {
 	margin: $double 0 $grid * 4;
 	font-family: $font-title;
 	font-size: 95%;
+	position: relative;
 	a {
 		&:hover {
 			font-family: $font-title;
@@ -131,5 +132,28 @@ body.home ._revealOnHome {
 		max-width: 480px;
 		margin-left: auto;
 		margin-right: auto;
+	}
+}
+
+._showOnTriggerHover {
+	display: none;
+}
+
+.trigger:hover {
+	._showOnTriggerHover {
+		display: block;
+	}
+}
+
+.test-ani {
+	width: auto;
+	position: absolute;
+	right: 0;
+	top: 0;
+	z-index: -100;
+	img {
+		display: block;
+		width: 100%;
+		height: auto;
 	}
 }
