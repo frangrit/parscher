@@ -23,6 +23,7 @@ $font-title: -apple-system, BlinkMacSystemFont,
 
 $respond-r3: 560px;
 $respond-r4: 984px;
+$respond-r5: 1480px;
 
 @import '_measure-reset.scss';
 
@@ -33,12 +34,17 @@ body {
 	margin: $grid $grid $grid * 7 $grid;
 	position: relative;
 	z-index: 0;
+	max-width: 1400px;	
 	@include respond-r1 {
 		font-size: 18px;
 	}
 	@include respond-r2 { 
 		margin-left: $grid * 5;
 		margin-right: $grid * 5;
+	}
+	@include respond-r5 { 
+		margin-left: auto;
+		margin-right: auto;
 	}
 }
 
@@ -102,8 +108,13 @@ nav.secondary {
 	@include respond-r4 {
 		font-family: $font-body;
 		font-size: 100%;
-		position: absolute;
+		position: fixed;
+		width: 92%;
+		width: calc(100% - 80px);
 		margin-top: $grid/2;
+	}
+	@include respond-r5 {
+		width: 1400px;
 	}
 }
 

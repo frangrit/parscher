@@ -92,6 +92,12 @@
 	}
 }
 
+@mixin respond-r5 {
+	@media only screen and (min-width: $respond-r5) {
+		@content;
+	}
+}
+
 @mixin respond-max {
 	@media only screen and (min-width: $respond-r5) {
 		@content;
