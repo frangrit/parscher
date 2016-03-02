@@ -356,7 +356,7 @@ figure img {
 		@extend .inner-bounded; 
 		padding: $grid * 2 ($width-margin-mobile / 2) 0;
 		@include respond-r3 {
-			padding: $grid * 2 ($width-margin-desktop / 2) 0;
+			padding: $grid * 2 0 0;
 		}
 	}
 }
