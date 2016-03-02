@@ -20,6 +20,10 @@ $font-title: -apple-system, BlinkMacSystemFont,
     "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", 
     "Fira Sans", "Droid Sans", "Helvetica Neue", 
     sans-serif;
+$font-alt: -apple-system, BlinkMacSystemFont, 
+    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", 
+    "Fira Sans", "Droid Sans", "Helvetica Neue", 
+    sans-serif;
 
 $width-max: 1400px;
 $width-margin-desktop: $grid * 5;
@@ -34,10 +38,10 @@ $ui-close-small: 26px;
 @import '_measure-reset.scss';
 
 body {
-	font-size: 16px;
+	font-size: 18px;
 	font-family: $font-body;
 	color: $color-black;
-	margin: $double $double $grid * 10 $double;
+	padding: $grid $double $grid * 10 $double;
 	position: relative;
 	z-index: 0;
 	max-width: 1400px;	
@@ -73,13 +77,24 @@ a {
 	z-index: 100000;
 	&:hover {
 		background-position: -$ui-close-small;
+		@include respond-r3 {
+			background-position: -$ui-close-large;
+		}
+	}
+	@include respond-r3 {
+		background-image: url('/img/ui/ui-close-large.svg'); 
+		background-size: auto $ui-close-large;
+		width: $ui-close-large;
+		height: $ui-close-large;
+		top: $grid * 5;
+		right: $grid * 5;
 	}
 }
 
 h1 {
 	font-size: 32px;
 	font-family: $font-title;
-	margin: $grid * 4 0;
+	margin: $grid * 6 0 ;
 	font-weight: 300;
 	@include respond-r2 {
 		margin: $grid * 8 0;
@@ -104,6 +119,36 @@ main {
 	}
 }
 
+div.body {
+	h2, h3, h4, p, ul, ol {
+		@extend .restrict-column;
+	}
+	p + p {
+		margin-top: 1em;
+	}
+	h2 {
+		@extend h1;
+		font-weight: 600;
+	}
+	p {
+		line-height: 1.4;
+	}
+}
+
+div.meta {
+	p {
+		@extend .restrict-column;
+		margin-top: 2em;
+		font-family: $font-title;
+		font-size: 65%;
+		font-weight: 600;
+	}
+}
+
+div.comments {
+	margin-top: $grid * 7;
+}
+
 nav.primary {
 	font-style: italic;
 	&.top {
@@ -114,6 +159,10 @@ nav.primary {
 		margin-top: $grid * 3;
 		@include respond-r2 { margin-top: $grid * 7; }
 	}
+}
+
+main + nav.primary.bottom {
+	margin-top: $grid * 7;
 }
 
 nav.secondary {
@@ -287,3 +336,13 @@ body.home ._hideMobileHome {
 	}
 }
 
+body.content ._showOnInterior {
+	display: block;
+	@include respond-r3 {
+		display: block;
+	}
+}
+
+// browsersync 
+
+#__bs_notify__ { bottom:0 !important; right: 0 !important; border-radius: 0 !important; opacity: .1; top: auto !important; }

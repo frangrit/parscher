@@ -1,0 +1,71 @@
+{#
+ # Homepage template
+ # ---------------
+ #
+ # When this template gets loaded, it will be because someone has accessed
+ # http://yoursite.com/ (without any URI). Craft checks to see if you have
+ # a Single section set to be the Homepage (as you do, by default), and
+ # loads the section’s Template (this file). A special ‘entry’ variable
+ # will already be set for you, assigned to the Homepage entry.
+ #
+ # It's worth noting that even if you didn't have a Homepage Single section,
+ # as long as this template remains at craft/templates/index.html, it
+ # would still be the one to get loaded when accessing http://yoursite.com/,
+ # albeit without an ‘entry’ variable already set for you.
+ #
+ # See this page for more details on how Craft routes requests:
+ # http://craftcms.com/docs/routing
+ #}
+
+{% extends "_layout" %}
+{% set bodyClass = "content" %}
+
+{% block content %}
+	{% include "_nav-binary-home" %}
+	<div class="content-start">
+		<main id="content" role="main">
+			<div class="body">
+				<h2 class="text-title">Completism</h2>
+				<p>People are reading the encyclopedia, cooking every recipe in The Art of French Cooking, walking the Pacific Coast Trail. They are photographing every alley in New York, walking every street in New York, drawing every building in New York, drawing every person in New York. (I wasn’t so ambitious; I only wanted to photograph every neighborhood in St. Louis.)</p>
+				<p>In doing so, these people are of two minds; they at once are flagpole sitters and pillar-saints. They might have balanced an egg on a spoon for a week, except that they also have some desire to know; that by memorizing their own particular Koran, they will gain a cosmic understanding of their chosen topic, which will (naturally enough) be mirrored in a cosmic understanding of themselves. They will then, kindly enough, descend from the lonely height to preach to the rest of us.
+				<p>Which is not quite the right metaphor, because these people will have, as in the game vernacular, leveled up; they precisely do not go there and back, but through a particular habit live in the world in a heightened way. They are not changed by their chosen endeavor so much as they have added a set of advantages, where an added authority is mirrored by an added peace of mind.</p>
+				<p>Further, they profit in the world; and the book is never far off.</p>
+				<p>This, then, is the form of the pilgrimage; but rather than take an agreed-upon pilgrimage, the completist makes to see a spatial or conceptual formation in terms of a pilgrimage.</p>
+			</div>
+			<div class="meta">
+				<p class="date">(October 2015)</p>
+			</div>
+		</main>
+		<nav class="primary bottom restrict-column">
+			<ul class="primary-nav-list">
+				<li class="primary-nav-item"><a href="index.html">Contents</a></li>
+				<li class="primary-nav-item"><a href="#">About</a></li>
+				<li class="primary-nav-item"><a href="#">Index</a></li>
+			</ul>
+		</nav>
+		<div class="comments restrict-column">
+			<div id="disqus_thread"></div>
+			<script>
+			/**
+			* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+			* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+			*/
+			/*
+			var disqus_config = function () {
+			this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+			this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+			};
+			*/
+			(function() { // DON'T EDIT BELOW THIS LINE
+			var d = document, s = d.createElement('script');
+			
+			s.src = '//rhymepaysage.disqus.com/embed.js';
+			
+			s.setAttribute('data-timestamp', +new Date());
+			(d.head || d.body).appendChild(s);
+			})();
+			</script>
+			<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+		</div>
+	</div>{# /.content-start #}
+{% endblock %}

@@ -21,9 +21,7 @@
 {% set bodyClass = "all" %}
 
 {% block content %}
-	<nav class="binary">
-		<a href="index.html" class="ui-close go-home _showOnMobile">Return home</a>
-	</nav>
+	{% include "_nav-binary-home" %}
 	<div class="content-start">
 		<main id="content" role="main">
 			{% include "_nav-secondary" %}
