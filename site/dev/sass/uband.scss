@@ -42,6 +42,7 @@ $ui-close-large: 34px;
 $ui-close-small: 26px;
 
 $time-long: 300s;
+$color-trans-whispergray: rgba(0,0,0,.02);
 
 // - - - - - - -
 
@@ -78,6 +79,7 @@ body {
 		padding-left: $grid * 5;
 		padding-right: $grid * 5;
 	}
+	&.content { padding-bottom: 0; }
 }
 
 a {
@@ -337,6 +339,16 @@ figure img {
 	p.common-caption { @extend .inner-bounded; }
 }
 
+div.comments {
+	background-color: $color-trans-whispergray;
+	padding: $grid * 3 $double $grid * 7;
+	margin: $grid * 7 $grid * -3 0 $grid * -2;
+	width: auto;
+	@include respond-r3 {
+		margin: $grid * 8 $grid * -5 0 $grid * -5;
+		padding: $grid * 8 $grid * 5 $grid * 8;
+	}
+}
 
 // - - - - 
 
