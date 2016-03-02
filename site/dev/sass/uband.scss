@@ -62,7 +62,7 @@ a {
 .ui-close {
 	position: fixed;
 	top: $double;
-	right: $double;
+	right: 10px;
 	display: block;
 	background: transparent url('/img/ui/ui-close-small.svg') no-repeat left top;
 	background-size: auto $ui-close-small;
