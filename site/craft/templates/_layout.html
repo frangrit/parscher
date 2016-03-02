@@ -17,12 +17,13 @@
 		<link rel="home" href="{{ siteUrl }}" />
 		{# <style>{{ source('css/uband.css') }}</style> #}
 		<link rel="stylesheet" href="/css/uband.css"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	</head>
 	
 	<body class="{{ bodyClass }}">
 		<div id="container">
 			<header id="header" class="restrict-column">
-				<h1><a href="{{ siteUrl }}" class="_revealOnHover _revealOnHome">R<span class="hidden">hyme</span> P<span class="hidden">aysage</span></a></h1>
+				<h1><a href="{{ siteUrl }}" class="">Rhyme Paysage</a></h1>
 			</header>
 			{% block content %}
 			{% endblock %}

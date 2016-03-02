@@ -18,9 +18,12 @@
  #}
 
 {% extends "_layout" %}
-{% set bodyClass = "home" %}
+{% set bodyClass = "all" %}
 
 {% block content %}
+	<nav class="binary">
+		<a href="index.html" class="ui-close go-home _showOnMobile">Return home</a>
+	</nav>
 	<div class="content-start">
 		<main id="content" role="main">
 			{% include "_nav-secondary" %}

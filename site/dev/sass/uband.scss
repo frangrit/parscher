@@ -28,13 +28,16 @@ $respond-r3: 560px;
 $respond-r4: 984px;
 $respond-r5: $width-max + ($width-margin-desktop * 2);
 
+$ui-close-large: 34px;
+$ui-close-small: 26px;
+
 @import '_measure-reset.scss';
 
 body {
 	font-size: 16px;
 	font-family: $font-body;
 	color: $color-black;
-	margin: $grid $grid $grid * 10 $grid;
+	margin: $double $double $grid * 10 $double;
 	position: relative;
 	z-index: 0;
 	max-width: 1400px;	
@@ -56,11 +59,31 @@ a {
 	color: inherit;
 }
 
+.ui-close {
+	position: fixed;
+	top: $double;
+	right: $double;
+	display: block;
+	background: transparent url('/img/ui/ui-close-small.svg') no-repeat left top;
+	background-size: auto $ui-close-small;
+	width: $ui-close-small;
+	height: $ui-close-small;
+	text-indent: -10000px;
+	overflow: hidden;
+	z-index: 100000;
+	&:hover {
+		background-position: -$ui-close-small;
+	}
+}
+
 h1 {
 	font-size: 32px;
 	font-family: $font-title;
-	margin: $grid * 8 0;
+	margin: $grid * 4 0;
 	font-weight: 300;
+	@include respond-r2 {
+		margin: $grid * 8 0;
+	}
 }
 
 main {
@@ -84,10 +107,12 @@ main {
 nav.primary {
 	font-style: italic;
 	&.top {
-		margin-bottom: $grid * 5;
+		margin-bottom: $grid * 4;
+		@include respond-r2 { margin-top: $grid * 5; }
 	}
 	&.bottom {
-		margin-top: $grid * 7;
+		margin-top: $grid * 3;
+		@include respond-r2 { margin-top: $grid * 7; }
 	}
 }
 
@@ -146,11 +171,6 @@ nav.secondary {
 	position: relative;
 }
 
-.secondary-nav-item._isActive {
-	font-family: $font-title;
-	font-weight: bold;
-}
-
 span.title,
 nav.primary a {
 	box-shadow: inset 0 -2px 0 white, inset 0 -3px 0 $color-black;
@@ -196,5 +216,74 @@ body.home ._revealOnHome {
 .trigger:hover + ._fadeOnSiblingTriggerHover {
 	opacity: 1;
 	z-index: -1;
+}
+
+// - - - - 
+
+body.all .secondary-nav-item._activeOn.all, 
+body.essays .secondary-nav-item._activeOn.essays, 
+body.projects .secondary-nav-item._activeOn.projects, 
+body.landscapes .secondary-nav-item._activeOn.landscapes, 
+body.backyards .secondary-nav-item._activeOn.backyards {
+	font-family: $font-title;
+	font-weight: bold;
+}
+
+body.home .secondary-nav-item._activeOn { display: block; visibility: visible; }
+
+body.all .secondary-nav-item._activeOn.all, 
+body.essays .secondary-nav-item._activeOn.essays, 
+body.projects .secondary-nav-item._activeOn.projects, 
+body.landscapes .secondary-nav-item._activeOn.landscapes, 
+body.backyards .secondary-nav-item._activeOn.backyards {
+	visibility: visible;
+}
+
+// - - - - 
+
+._showOn {
+	display: none;
+	@include respond-r2 { 
+		display: block;
+		visibility: hidden; 
+	}
+}
+
+body.essays .entry._showOn.essays,
+body.projects .entry._showOn.projects,
+body.landscapes .entry._showOn.landscapes,
+body.backyards .entry._showOn.backyards,
+body.home .entry._showOn,
+body.all .entry._showOn { 
+	display: block;
+	@include respond-r2 { visibility: visible; }
+}
+
+body.home ._hideMobileHome {
+	display: none;
+	@include respond-r3 { display: block; }
+}
+
+// - - - - 
+
+._hideOnMobile {
+	display: none;
+	@include respond-r3 {
+		display: block;
+	}
+}
+
+._invisibleOnMobile {
+	visibility: hidden;
+	@include respond-r3 {
+		visibility: visible;
+	}
+}
+
+._showOnMobile {
+	display: block;
+	@include respond-r3 {
+		display: none;
+	}
 }
 
