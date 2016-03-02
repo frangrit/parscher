@@ -26,8 +26,13 @@ $font-alt: -apple-system, BlinkMacSystemFont,
     "Fira Sans", "Droid Sans", "Helvetica Neue", 
     sans-serif;
 
+$color-black: #222;
+
 $width-max: 1400px;
 $width-margin-desktop: $grid * 5;
+$width-inner-bounded: $grid * 60;
+$width-outer-column: $grid * 22;
+$width-outer-bounded: $width-inner-bounded + (2 * ($width-outer-column + $width-margin-desktop));
 
 $respond-r3: 560px;
 $respond-r4: 984px;
@@ -35,6 +40,26 @@ $respond-r5: $width-max + ($width-margin-desktop * 2);
 
 $ui-close-large: 34px;
 $ui-close-small: 26px;
+
+$time-long: 300s;
+
+// - - - - - - -
+
+@keyframes ani-fadeOut {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+
+@keyframes ani-blackOut {
+    from {background-color: white;}
+    to {background-color: $color-black;}
+}
+
+@keyframes ani-clearOut {
+    from {color: $color-black;}
+    to {color: rgba(0,0,0,0);}
+}
+
 
 // - - - - - - -
 
@@ -45,17 +70,13 @@ body {
 	padding: $grid $grid * 3 $grid * 10 $double;
 	position: relative;
 	z-index: 0;
-	max-width: 1400px;	
+	// animation: ani-blackOut $time-long linear forwards, ani-clearOut $time-long linear forwards;	
 	@include respond-r1 {
 		font-size: 18px;
 	}
 	@include respond-r2 { 
-		margin-left: $grid * 5;
-		margin-right: $grid * 5;
-	}
-	@include respond-r5 { 
-		margin-left: auto;
-		margin-right: auto;
+		padding-left: $grid * 5;
+		padding-right: $grid * 5;
 	}
 }
 
@@ -112,24 +133,64 @@ main {
 	z-index: 0;
 }
 
-.restrict-column {
+.unbounded {
+	width: 100%;
+}
+
+.inner-bounded {
 	@include respond-r3 {
-		max-width: 480px;
+		max-width: $width-inner-bounded;
 		margin-left: auto;
 		margin-right: auto;
 	}
 }
 
+.outer-bounded {
+	@include respond-r3 {
+		max-width: $width-outer-bounded;
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+
+.max-bounded {
+	@include respond-r3 {
+		max-width: $width-max;
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+
+
 div.body {
+	.body-main {
+		margin-top: $grid * 6;
+		@include respond-r3 { margin-top: $grid * 8 	}
+	}
 	h2, h3, h4, p, ul, ol {
-		@extend .restrict-column;
+		@extend .inner-bounded;
 	}
 	p + p {
 		margin-top: 1em;
 	}
 	h2 {
 		@extend h1;
+		margin-bottom: 0;
 		font-weight: 600;
+	}
+	h3 {
+		font-family: $font-alt;
+		font-weight: 700;
+		font-size: 80%;
+		text-transform: uppercase;
+		letter-spacing: .1em;
+		margin-top: 2.5em;
+		margin-bottom: .75em;
+	}
+	p.text-subtitle {
+		font-style: italic;
+		margin-top: $grid;
+		i, em, cite { font-style: normal; }
 	}
 	p {
 		line-height: 1.4;
@@ -138,7 +199,7 @@ div.body {
 
 div.meta {
 	p {
-		@extend .restrict-column;
+		@extend .inner-bounded;
 		margin-top: 2em;
 		font-family: $font-title;
 		font-size: 65%;
@@ -236,6 +297,44 @@ span.date {
 	font-family: $font-title;
 	font-weight: bold;
 }
+
+figure img {
+	display: block;
+	max-width: 100%;
+	width: 100%;
+	height: auto;
+}
+
+.container {
+	margin: $grid * 6 auto;
+	h3.figure-title {
+		margin-top: 0;
+	}
+	.row {
+		margin: 0 ($width-margin-desktop / -2);
+		overflow: auto;
+	}
+	overflow: auto;
+	figure {
+		padding: 0 $width-margin-desktop / 2;
+		float: left;
+	}
+	.single figure { width: 100%; }
+	.two-across figure { width: 50%; }
+	.three-across figure { width: 33.333333%; }
+	.four-across figure { width: 25%; }
+	figcaption { 
+		clear: both; 
+		margin-top: $grid * 2;
+		font-family: $font-alt;
+		font-weight: 700;
+		font-size: 60%;
+		padding-bottom: .2em;
+	}
+}
+
+
+// - - - - 
 
 .hidden {
 	transition: opacity .3s;
