@@ -309,6 +309,7 @@ figure img {
 	margin: $grid * 6 auto;
 	h3.figure-title {
 		margin-top: 0;
+		margin-bottom: $grid * 3;
 	}
 	.row {
 		margin: 0 ($width-margin-desktop / -2);
@@ -323,14 +324,17 @@ figure img {
 	.two-across figure { width: 50%; }
 	.three-across figure { width: 33.333333%; }
 	.four-across figure { width: 25%; }
-	figcaption { 
+	figcaption, 
+	p.common-caption { 
 		clear: both; 
-		margin-top: $grid * 2;
+		padding-top: $grid * 2;
 		font-family: $font-alt;
 		font-weight: 700;
 		font-size: 60%;
+		line-height: 1.4;
 		padding-bottom: .2em;
 	}
+	p.common-caption { @extend .inner-bounded; }
 }
 
 
