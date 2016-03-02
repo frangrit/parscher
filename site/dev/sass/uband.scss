@@ -14,6 +14,7 @@
 	uBand (micro bandwidth) Styles
 	Critical CSS for inline	*/
 
+@import '_measure-reset.scss';
 @import '_measure-defaults.scss';
 
 $font-title: -apple-system, BlinkMacSystemFont, 
@@ -35,7 +36,7 @@ $respond-r5: $width-max + ($width-margin-desktop * 2);
 $ui-close-large: 34px;
 $ui-close-small: 26px;
 
-@import '_measure-reset.scss';
+// - - - - - - -
 
 body {
 	font-size: 18px;
@@ -68,7 +69,7 @@ a {
 	top: $double;
 	right: 10px;
 	display: block;
-	background: transparent url('/img/ui/ui-close-small.svg') no-repeat left top;
+	background: transparent url('/img/ui/ui-close-small.svg') repeat-x right top;
 	background-size: auto $ui-close-small;
 	width: $ui-close-small;
 	height: $ui-close-small;
@@ -76,9 +77,9 @@ a {
 	overflow: hidden;
 	z-index: 100000;
 	&:hover {
-		background-position: -$ui-close-small;
+		background-position: 0;
 		@include respond-r3 {
-			background-position: -$ui-close-large;
+			background-position: 0;
 		}
 	}
 	@include respond-r3 {
