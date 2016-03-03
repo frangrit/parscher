@@ -36,6 +36,9 @@ $width-outer-column: $grid * 22;
 $width-outer-edge: $width-outer-column + $width-margin-desktop;
 $width-outer-bounded: $width-inner-bounded + (2 * ($width-outer-column + $width-margin-desktop));
 
+$width-outer-calc: ($width-inner-bounded / 2) + $width-margin-desktop;
+$width-outer-margin-calc: $width-outer-calc + $width-outer-column ;
+
 $respond-r3: 560px;
 $respond-r4: 984px;
 $respond-r5: $width-max + ($width-margin-desktop * 2);
@@ -189,6 +192,17 @@ main {
 	}
 }
 
+.hanging {
+    width: calc(50% - #{$width-outer-calc});
+    position: absolute;
+	display: block;
+	&.hang-right { 
+		right: 0;	
+	}
+	&.hang-left { 
+		left: 0;	
+	}
+}
 
 div.body {
 	.body-main {
@@ -197,7 +211,6 @@ div.body {
 	}
 	h2, h3, h4, p, ul, ol {
 		@extend .inner-bounded;
-		position: relative;
 	}
 	p + p {
 		margin-top: 1em;
@@ -227,23 +240,6 @@ div.body {
 	p {
 		line-height: 1.4;
 	}
-}
-
-.margin-note {
-	font-family: $font-alt;
-	font-weight: 700;
-	font-size: 60%;
-	display: block;
-    width: $width-outer-column;
-    position: absolute;
-}
-
-.margin-note.hang-right {
-    right: -$width-outer-edge;
-}
-
-.margin-note.hang-left {
-    left: -$width-outer-edge;
 }
 
 div.meta {
@@ -360,6 +356,9 @@ figure img {
 	@include respond-r3 {
 		margin: $grid * 6 auto;
 	}
+	&.hanging {
+		margin: $grid 0 0;
+	}
 	h3.figure-title {
 		margin-top: 0;
 		margin-bottom: $grid * 3;
@@ -385,6 +384,26 @@ figure img {
 		@include respond-r3 {
 			padding: 0 ($width-margin-desktop / 2);
 		}
+		&.hoverable { 
+			position: relative;
+			.hoverable-display {
+			}
+			.hoverable-onHover {
+				position: absolute;
+				top: 0;
+				left: 0;
+				display: none;
+				padding: 0 $width-margin-mobile / 2;
+				@include respond-r3 {
+					padding: 0 ($width-margin-desktop / 2);
+				}
+			}
+			&:hover {
+				.hoverable-onHover {
+					display: block;
+				}
+			}
+		}
 	}
 	.single figure { width: 100%; }
 	.two-across figure { width: 50%; }
@@ -408,6 +427,30 @@ figure img {
 		}
 	}
 }
+
+.note {
+	font-family: $font-alt;
+	font-weight: 700;
+	font-size: 60%;
+	&.hanging {
+		width: $width-outer-column;
+		&.hang-left {
+			margin-left: calc(50% - #{$width-outer-margin-calc});
+		}
+		&.hang-right {
+			margin-right: calc(50% - #{$width-outer-margin-calc});
+		}
+	}
+}
+
+.margin-note.hang-right {
+    right: 0;
+}
+
+.margin-note.hang-left {
+    left: 0;
+}
+
 
 div.comments {
 	padding: $grid * 3 $double $grid * 7;
