@@ -1,0 +1,35 @@
+{
+  "name": "rhyme-paysage-site",
+  "version": "0.0.0",
+  "description": "Craft website for Justin Parscher's Rhyme Paysage site.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frangrit/parscher.git"
+  },
+  "author": "Dan O. Williams, Measure",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/frangrit/parscher/issues"
+  },
+  "homepage": "https://github.com/frangrit/parscher#readme",
+  "devDependencies": {
+    "browser-sync": "^2.11.1",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-clean": "^0.3.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-cssnano": "^2.1.1",
+    "gulp-jshint": "^2.0.0",
+    "gulp-minify-css": "^1.2.3",
+    "gulp-notify": "^2.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.2.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.2",
+    "jshint": "^2.9.1"
+  }
+}

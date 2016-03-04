@@ -1,0 +1,44 @@
+// Measure
+// Dan O. Williams
+// Basic SCSS Variables
+// _measure-vars.scss
+
+
+
+// grid
+$grid: 8px;
+$spacer: $grid * 2;
+$double: $grid * 2;
+$width-mobile: $grid * 40; //320px;
+$width-tablet: $grid * 80; //640px;
+
+$width-max: $grid * 140; //1120px;
+$width-column: $width-mobile;
+$width-sidebar: $grid * 22; //172px;
+
+// respond
+$respond-r0: 320px;
+$respond-r1: 480px;
+$respond-r2: 768px;
+$respond-r3: 1024px;
+$respond-r4: 1400px;
+
+// typography
+$font-display: Georgia, serif;
+$font-body: Georgia, serif;
+$font-reading: Georgia, serif;
+$font-actions: helvetica, sans-serif;
+$font-alt: helvetica, sans-serif;
+
+$size-xxlarge: 1.7rem;
+$size-xlarge: 1.6rem;
+$size-xbody: 1.222222rem;
+$size-small: .85rem;
+
+// colors
+$color-black: #333;
+$color-background: white;
+$color-highlight: red;
+$color-trans-lightgray: rgba(0,0,0,.1);
+$color-trans-gray: rgba(0,0,0,.4);
+$color-trans-black: rgba(0,0,0,.95);

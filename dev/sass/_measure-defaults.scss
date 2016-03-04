@@ -1,0 +1,30 @@
+// Measure
+// Dan O. Williams
+// Basic SCSS Defaults
+// _measure-defaults.scss
+
+
+
+// font rendering
+
+html {
+	box-sizing: border-box;
+}
+
+*, *:before, *:after {
+	box-sizing: inherit;
+	text-rendering: optimizeLegibility;
+	-webkit-font-variant-ligatures: common-ligatures;
+	font-variant-ligatures: common-ligatures;
+	-moz-font-feature-settings: "kern=1";
+	-webkit-font-feature-settings: "kern";
+	-moz-font-feature-settings: "kern";
+	font-feature-settings: "kern";
+	font-kerning: normal;
+}
+
+cite, em , i {
+	font-style: italic;
+	cite, em, i { font-style: inherit; }
+}
+
