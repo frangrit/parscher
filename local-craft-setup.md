@@ -133,7 +133,7 @@ git rm --cached ../craft/config/db.php
 
 - update with a new commit
 - push to production
-- manually update db.php with the following:
+- on the server, manually update db.php with the following:
 ```
 <?php
 
