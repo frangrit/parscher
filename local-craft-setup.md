@@ -81,3 +81,41 @@ return array(
 - navigate to http://[project].dev/admin
 - install Craft
 
+## Setup remote production repo on the prod server
+
+First:
+- get ssh access to the prod server's web directory
+
+Then:
+- ssh in and note the project path with `pwd` (like `/home/user/site`)
+- create a new project git repo (this can be anywhere -- files are not uploaded to this git directory)
+```
+mkdir -p [project_name].git
+cd [project_name].git
+```
+
+- tell the git repo what to do when it's pinged
+```
+nano hooks/post-receive
+```
+add:
+```
+#!/bin/sh 
+GIT_WORK_TREE=[project path noted earlier] git checkout -f
+```
+close, then chmod the permissions on this new file:
+```
+chmod +x post-receive
+```
+
+On the local machine:
+- go the the project repo
+- add the new remote:
+```
+git remote add production ssh://[user]@[project ssh host]/path/to/[project_name].git
+```
+
+- setup the new master branch
+```
+
+```

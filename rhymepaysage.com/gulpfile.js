@@ -23,7 +23,7 @@ var gulp = require('gulp');
 // Needs to play well with our MAMP setup and Virtual Host
 
 gulp.task('browser-sync', function() {
-    browserSync.init(['./rhymepaysage\.com/js/**/*.js', './rhymepaysage\.com/css/**/*.css', './craft/templates/**/*.html'], {
+    browserSync.init(['./public/js/**/*.js', './public/css/**/*.css', './craft/templates/**/*.html'], {
         proxy: project.sitename
     });
 });
@@ -64,7 +64,7 @@ gulp.task('sass', function() {
 		.pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
 		.pipe(cssnano())
 		.pipe(sourcemaps.write('./'))
-		.pipe(gulp.dest('./rhymepaysage\.com/css'))
+		.pipe(gulp.dest('./public/css'))
 		.pipe(notify({ message: 'Compiled sass' }));
 });
 
