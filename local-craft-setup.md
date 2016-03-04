@@ -112,10 +112,10 @@ On the local machine:
 - go the the project repo
 - add the new remote:
 ```
-git remote add production ssh://[user]@[project ssh host]/path/to/[project_name].git
+git remote add production ssh://[user]@[project ssh host]:/path/to/[project_name].git
 ```
 
 - setup the new master branch
 ```
-
+git push production +master:refs/heads/master
 ```
