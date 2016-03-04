@@ -1,0 +1,2196 @@
+-- phpMyAdmin SQL Dump
+-- version 4.4.10
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost:3306
+-- Generation Time: Mar 04, 2016 at 11:49 PM
+-- Server version: 5.5.42
+-- PHP Version: 7.0.0
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Database: `rhymepaysage_craft`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_assetfiles`
+--
+
+CREATE TABLE `craft_assetfiles` (
+  `id` int(11) NOT NULL,
+  `sourceId` int(11) DEFAULT NULL,
+  `folderId` int(11) NOT NULL,
+  `filename` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `kind` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'unknown',
+  `width` int(11) unsigned DEFAULT NULL,
+  `height` int(11) unsigned DEFAULT NULL,
+  `size` int(11) unsigned DEFAULT NULL,
+  `dateModified` datetime DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_assetfolders`
+--
+
+CREATE TABLE `craft_assetfolders` (
+  `id` int(11) NOT NULL,
+  `parentId` int(11) DEFAULT NULL,
+  `sourceId` int(11) DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `path` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_assetindexdata`
+--
+
+CREATE TABLE `craft_assetindexdata` (
+  `id` int(11) NOT NULL,
+  `sessionId` varchar(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `sourceId` int(10) NOT NULL,
+  `offset` int(10) NOT NULL,
+  `uri` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `size` int(10) DEFAULT NULL,
+  `recordId` int(10) DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_assetsources`
+--
+
+CREATE TABLE `craft_assetsources` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `handle` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `type` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `settings` text COLLATE utf8_unicode_ci,
+  `sortOrder` smallint(6) unsigned DEFAULT NULL,
+  `fieldLayoutId` int(10) DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_assettransformindex`
+--
+
+CREATE TABLE `craft_assettransformindex` (
+  `id` int(11) NOT NULL,
+  `fileId` int(11) NOT NULL,
+  `filename` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `format` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `location` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `sourceId` int(11) DEFAULT NULL,
+  `fileExists` tinyint(1) DEFAULT NULL,
+  `inProgress` tinyint(1) DEFAULT NULL,
+  `dateIndexed` datetime DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_assettransforms`
+--
+
+CREATE TABLE `craft_assettransforms` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `handle` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `mode` enum('stretch','fit','crop') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'crop',
+  `position` enum('top-left','top-center','top-right','center-left','center-center','center-right','bottom-left','bottom-center','bottom-right') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'center-center',
+  `height` int(10) DEFAULT NULL,
+  `width` int(10) DEFAULT NULL,
+  `format` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `quality` int(10) DEFAULT NULL,
+  `dimensionChangeTime` datetime DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_categories`
+--
+
+CREATE TABLE `craft_categories` (
+  `id` int(11) NOT NULL,
+  `groupId` int(11) NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_categorygroups`
+--
+
+CREATE TABLE `craft_categorygroups` (
+  `id` int(11) NOT NULL,
+  `structureId` int(11) NOT NULL,
+  `fieldLayoutId` int(11) DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `handle` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `hasUrls` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `template` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_categorygroups_i18n`
+--
+
+CREATE TABLE `craft_categorygroups_i18n` (
+  `id` int(11) NOT NULL,
+  `groupId` int(11) NOT NULL,
+  `locale` char(12) COLLATE utf8_unicode_ci NOT NULL,
+  `urlFormat` text COLLATE utf8_unicode_ci,
+  `nestedUrlFormat` text COLLATE utf8_unicode_ci,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_content`
+--
+
+CREATE TABLE `craft_content` (
+  `id` int(11) NOT NULL,
+  `elementId` int(11) NOT NULL,
+  `locale` char(12) COLLATE utf8_unicode_ci NOT NULL,
+  `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `field_body` text COLLATE utf8_unicode_ci,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `craft_content`
+--
+
+INSERT INTO `craft_content` (`id`, `elementId`, `locale`, `title`, `field_body`, `dateCreated`, `dateUpdated`, `uid`) VALUES
+(1, 1, 'en_us', NULL, NULL, '2016-02-19 01:46:13', '2016-02-19 01:46:13', '9798763d-b90e-4f79-b4f6-36e5d7648c4b'),
+(2, 2, 'en_us', 'Welcome to Rhymepaysage.dev!', '<p>It’s true, this site doesn’t have a whole lot of content yet, but don’t worry. Our web developers have just installed the CMS, and they’re setting things up for the content editors this very moment. Soon Rhymepaysage.dev will be an oasis of fresh perspectives, sharp analyses, and astute opinions that will keep you coming back again and again.</p>', '2016-02-19 01:46:16', '2016-02-19 01:46:16', '338e49a5-7a1f-4343-b5ab-0737b35817ee'),
+(3, 3, 'en_us', 'We just installed Craft!', '<p>Craft is the CMS that’s powering Rhymepaysage.dev. It’s beautiful, powerful, flexible, and easy-to-use, and it’s made by Pixel &amp; Tonic. We can’t wait to dive in and see what it’s capable of!</p><!--pagebreak--><p>This is even more captivating content, which you couldn’t see on the News index page because it was entered after a Page Break, and the News index template only likes to show the content on the first page.</p><p>Craft: a nice alternative to Word, if you’re making a website.</p>', '2016-02-19 01:46:16', '2016-02-19 01:46:16', '0dd75c5a-909d-4069-ac0a-ff6f4325db9b');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_deprecationerrors`
+--
+
+CREATE TABLE `craft_deprecationerrors` (
+  `id` int(11) NOT NULL,
+  `key` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `fingerprint` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `lastOccurrence` datetime NOT NULL,
+  `file` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `line` smallint(6) unsigned NOT NULL,
+  `class` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `method` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `template` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `templateLine` smallint(6) unsigned DEFAULT NULL,
+  `message` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `traces` text COLLATE utf8_unicode_ci,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_elementindexsettings`
+--
+
+CREATE TABLE `craft_elementindexsettings` (
+  `id` int(11) NOT NULL,
+  `type` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `settings` text COLLATE utf8_unicode_ci,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_elements`
+--
+
+CREATE TABLE `craft_elements` (
+  `id` int(11) NOT NULL,
+  `type` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `enabled` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `archived` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `craft_elements`
+--
+
+INSERT INTO `craft_elements` (`id`, `type`, `enabled`, `archived`, `dateCreated`, `dateUpdated`, `uid`) VALUES
+(1, 'User', 1, 0, '2016-02-19 01:46:13', '2016-02-19 01:46:13', 'c48f6ed6-667c-4758-acd9-02a4b1dbd61e'),
+(2, 'Entry', 1, 0, '2016-02-19 01:46:16', '2016-02-19 01:46:16', '75fb9b30-357f-48f1-9a6c-1b3ed022e276'),
+(3, 'Entry', 1, 0, '2016-02-19 01:46:16', '2016-02-19 01:46:16', '08251a55-2bf2-445a-a0fa-229af1706d1a');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_elements_i18n`
+--
+
+CREATE TABLE `craft_elements_i18n` (
+  `id` int(11) NOT NULL,
+  `elementId` int(11) NOT NULL,
+  `locale` char(12) COLLATE utf8_unicode_ci NOT NULL,
+  `slug` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `uri` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `enabled` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `craft_elements_i18n`
+--
+
+INSERT INTO `craft_elements_i18n` (`id`, `elementId`, `locale`, `slug`, `uri`, `enabled`, `dateCreated`, `dateUpdated`, `uid`) VALUES
+(1, 1, 'en_us', '', NULL, 1, '2016-02-19 01:46:13', '2016-02-19 01:46:13', 'c13ca512-5470-42ed-aeb7-95a7dc5c5d9e'),
+(2, 2, 'en_us', 'homepage', '__home__', 1, '2016-02-19 01:46:16', '2016-02-19 01:46:16', 'cc712d2f-1585-4770-9d3c-b59b54d62ed3'),
+(3, 3, 'en_us', 'we-just-installed-craft', 'news/2016/we-just-installed-craft', 1, '2016-02-19 01:46:16', '2016-02-19 01:46:16', 'c40302cb-d779-4058-a056-b5e2af511a53');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_emailmessages`
+--
+
+CREATE TABLE `craft_emailmessages` (
+  `id` int(11) NOT NULL,
+  `key` char(150) COLLATE utf8_unicode_ci NOT NULL,
+  `locale` char(12) COLLATE utf8_unicode_ci NOT NULL,
+  `subject` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
+  `body` text COLLATE utf8_unicode_ci NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_entries`
+--
+
+CREATE TABLE `craft_entries` (
+  `id` int(11) NOT NULL,
+  `sectionId` int(11) NOT NULL,
+  `typeId` int(11) DEFAULT NULL,
+  `authorId` int(11) DEFAULT NULL,
+  `postDate` datetime DEFAULT NULL,
+  `expiryDate` datetime DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `craft_entries`
+--
+
+INSERT INTO `craft_entries` (`id`, `sectionId`, `typeId`, `authorId`, `postDate`, `expiryDate`, `dateCreated`, `dateUpdated`, `uid`) VALUES
+(2, 1, NULL, NULL, '2016-02-19 01:46:16', NULL, '2016-02-19 01:46:16', '2016-02-19 01:46:16', '516f5e7f-7cd7-480f-a412-438b0e057cc7'),
+(3, 2, 2, 1, '2016-02-19 01:46:16', NULL, '2016-02-19 01:46:16', '2016-02-19 01:46:16', 'f4920885-02ba-4a77-b5b4-3d2bcddb0f26');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_entrydrafts`
+--
+
+CREATE TABLE `craft_entrydrafts` (
+  `id` int(11) NOT NULL,
+  `entryId` int(11) NOT NULL,
+  `sectionId` int(11) NOT NULL,
+  `creatorId` int(11) NOT NULL,
+  `locale` char(12) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `notes` tinytext COLLATE utf8_unicode_ci,
+  `data` mediumtext COLLATE utf8_unicode_ci NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_entrytypes`
+--
+
+CREATE TABLE `craft_entrytypes` (
+  `id` int(11) NOT NULL,
+  `sectionId` int(11) NOT NULL,
+  `fieldLayoutId` int(11) DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `handle` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `hasTitleField` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `titleLabel` varchar(255) COLLATE utf8_unicode_ci DEFAULT 'Title',
+  `titleFormat` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `sortOrder` smallint(6) unsigned DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `craft_entrytypes`
+--
+
+INSERT INTO `craft_entrytypes` (`id`, `sectionId`, `fieldLayoutId`, `name`, `handle`, `hasTitleField`, `titleLabel`, `titleFormat`, `sortOrder`, `dateCreated`, `dateUpdated`, `uid`) VALUES
+(1, 1, 3, 'Homepage', 'homepage', 1, 'Title', NULL, NULL, '2016-02-19 01:46:16', '2016-02-19 01:46:16', '6fff9b6a-b12c-448a-9af7-6cb5153393a6'),
+(2, 2, 5, 'News', 'news', 1, 'Title', NULL, NULL, '2016-02-19 01:46:16', '2016-02-19 01:46:16', '18b5f794-bb6d-4acd-9ab0-f210aee13931');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_entryversions`
+--
+
+CREATE TABLE `craft_entryversions` (
+  `id` int(11) NOT NULL,
+  `entryId` int(11) NOT NULL,
+  `sectionId` int(11) NOT NULL,
+  `creatorId` int(11) DEFAULT NULL,
+  `locale` char(12) COLLATE utf8_unicode_ci NOT NULL,
+  `num` smallint(6) unsigned NOT NULL,
+  `notes` tinytext COLLATE utf8_unicode_ci,
+  `data` mediumtext COLLATE utf8_unicode_ci NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `craft_entryversions`
+--
+
+INSERT INTO `craft_entryversions` (`id`, `entryId`, `sectionId`, `creatorId`, `locale`, `num`, `notes`, `data`, `dateCreated`, `dateUpdated`, `uid`) VALUES
+(1, 2, 1, 1, 'en_us', 1, NULL, '{"typeId":"1","authorId":null,"title":"Homepage","slug":"homepage","postDate":1455846376,"expiryDate":null,"enabled":1,"parentId":null,"fields":[]}', '2016-02-19 01:46:16', '2016-02-19 01:46:16', '6a966c0c-0cdf-4c50-8b3b-b535019068ee'),
+(2, 2, 1, 1, 'en_us', 2, NULL, '{"typeId":null,"authorId":null,"title":"Welcome to Rhymepaysage.dev!","slug":"homepage","postDate":1455846376,"expiryDate":null,"enabled":"1","parentId":null,"fields":{"1":"<p>It\\u2019s true, this site doesn\\u2019t have a whole lot of content yet, but don\\u2019t worry. Our web developers have just installed the CMS, and they\\u2019re setting things up for the content editors this very moment. Soon Rhymepaysage.dev will be an oasis of fresh perspectives, sharp analyses, and astute opinions that will keep you coming back again and again.<\\/p>"}}', '2016-02-19 01:46:16', '2016-02-19 01:46:16', '6fbe3c25-df92-4c6b-aa6c-19f4aa859289'),
+(3, 3, 2, 1, 'en_us', 1, NULL, '{"typeId":"2","authorId":"1","title":"We just installed Craft!","slug":"we-just-installed-craft","postDate":1455846376,"expiryDate":null,"enabled":1,"parentId":null,"fields":[]}', '2016-02-19 01:46:16', '2016-02-19 01:46:16', 'efc48d8a-3499-46ab-90f3-226a20924f07');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_fieldgroups`
+--
+
+CREATE TABLE `craft_fieldgroups` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `craft_fieldgroups`
+--
+
+INSERT INTO `craft_fieldgroups` (`id`, `name`, `dateCreated`, `dateUpdated`, `uid`) VALUES
+(1, 'Default', '2016-02-19 01:46:16', '2016-02-19 01:46:16', '1b191c47-bcbe-4fac-ad73-45da38b59188');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_fieldlayoutfields`
+--
+
+CREATE TABLE `craft_fieldlayoutfields` (
+  `id` int(11) NOT NULL,
+  `layoutId` int(11) NOT NULL,
+  `tabId` int(11) NOT NULL,
+  `fieldId` int(11) NOT NULL,
+  `required` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `sortOrder` smallint(6) unsigned DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `craft_fieldlayoutfields`
+--
+
+INSERT INTO `craft_fieldlayoutfields` (`id`, `layoutId`, `tabId`, `fieldId`, `required`, `sortOrder`, `dateCreated`, `dateUpdated`, `uid`) VALUES
+(1, 3, 1, 1, 1, 1, '2016-02-19 01:46:16', '2016-02-19 01:46:16', '57c4bcda-c5e7-4a22-bce7-bfb048b41a6c'),
+(2, 5, 2, 1, 1, 1, '2016-02-19 01:46:16', '2016-02-19 01:46:16', 'c4291b02-10a5-4fdc-86b4-9c9eb3420d1f'),
+(3, 5, 2, 2, 0, 2, '2016-02-19 01:46:16', '2016-02-19 01:46:16', '46bac78d-c93e-42b2-b039-373c5b539663');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_fieldlayouts`
+--
+
+CREATE TABLE `craft_fieldlayouts` (
+  `id` int(11) NOT NULL,
+  `type` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `craft_fieldlayouts`
+--
+
+INSERT INTO `craft_fieldlayouts` (`id`, `type`, `dateCreated`, `dateUpdated`, `uid`) VALUES
+(1, 'Tag', '2016-02-19 01:46:16', '2016-02-19 01:46:16', '9c6d5921-d201-4bcc-9e1d-8ce3f754bd37'),
+(3, 'Entry', '2016-02-19 01:46:16', '2016-02-19 01:46:16', 'c4aec7ae-880e-4c7b-8c75-7224eb1647d2'),
+(5, 'Entry', '2016-02-19 01:46:16', '2016-02-19 01:46:16', 'b582062e-4ea9-45c7-aa78-d519e1c74207');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_fieldlayouttabs`
+--
+
+CREATE TABLE `craft_fieldlayouttabs` (
+  `id` int(11) NOT NULL,
+  `layoutId` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `sortOrder` smallint(6) unsigned DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `craft_fieldlayouttabs`
+--
+
+INSERT INTO `craft_fieldlayouttabs` (`id`, `layoutId`, `name`, `sortOrder`, `dateCreated`, `dateUpdated`, `uid`) VALUES
+(1, 3, 'Content', 1, '2016-02-19 01:46:16', '2016-02-19 01:46:16', '3f266aee-704c-4652-b237-3c8500dcab3d'),
+(2, 5, 'Content', 1, '2016-02-19 01:46:16', '2016-02-19 01:46:16', '887dca00-ba71-4c1f-8562-5285522a4995');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_fields`
+--
+
+CREATE TABLE `craft_fields` (
+  `id` int(11) NOT NULL,
+  `groupId` int(11) DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `handle` varchar(58) COLLATE utf8_unicode_ci NOT NULL,
+  `context` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'global',
+  `instructions` text COLLATE utf8_unicode_ci,
+  `translatable` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `type` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `settings` text COLLATE utf8_unicode_ci,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `craft_fields`
+--
+
+INSERT INTO `craft_fields` (`id`, `groupId`, `name`, `handle`, `context`, `instructions`, `translatable`, `type`, `settings`, `dateCreated`, `dateUpdated`, `uid`) VALUES
+(1, 1, 'Body', 'body', 'global', NULL, 1, 'RichText', '{"configFile":"Standard.json","columnType":"text"}', '2016-02-19 01:46:16', '2016-02-19 01:46:16', '24ab6a62-d292-4f5c-a6dd-e98e24ad0c61'),
+(2, 1, 'Tags', 'tags', 'global', NULL, 0, 'Tags', '{"source":"taggroup:1"}', '2016-02-19 01:46:16', '2016-02-19 01:46:16', '3d3f28b7-8227-4cac-882f-8d5991300247');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_globalsets`
+--
+
+CREATE TABLE `craft_globalsets` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `handle` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `fieldLayoutId` int(10) DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_info`
+--
+
+CREATE TABLE `craft_info` (
+  `id` int(11) NOT NULL,
+  `version` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `build` int(11) unsigned NOT NULL,
+  `schemaVersion` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `releaseDate` datetime NOT NULL,
+  `edition` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `siteName` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `siteUrl` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `timezone` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `on` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `maintenance` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `track` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `craft_info`
+--
+
+INSERT INTO `craft_info` (`id`, `version`, `build`, `schemaVersion`, `releaseDate`, `edition`, `siteName`, `siteUrl`, `timezone`, `on`, `maintenance`, `track`, `dateCreated`, `dateUpdated`, `uid`) VALUES
+(1, '2.5', 2767, '2.5.12', '2016-02-24 20:48:05', 0, 'Rhyme Paysage', 'http://rhymepaysage.dev', 'UTC', 1, 0, 'stable', '2016-02-19 01:46:09', '2016-02-24 21:56:19', '9f15177e-2e38-47f5-bc5f-820c41dd4edf');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_locales`
+--
+
+CREATE TABLE `craft_locales` (
+  `locale` char(12) COLLATE utf8_unicode_ci NOT NULL,
+  `sortOrder` smallint(6) unsigned DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `craft_locales`
+--
+
+INSERT INTO `craft_locales` (`locale`, `sortOrder`, `dateCreated`, `dateUpdated`, `uid`) VALUES
+('en_us', 1, '2016-02-19 01:46:10', '2016-02-19 01:46:10', '3058520d-9667-4963-a023-f0ed589c301b');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_matrixblocks`
+--
+
+CREATE TABLE `craft_matrixblocks` (
+  `id` int(11) NOT NULL,
+  `ownerId` int(11) NOT NULL,
+  `fieldId` int(11) NOT NULL,
+  `typeId` int(11) DEFAULT NULL,
+  `sortOrder` smallint(6) unsigned DEFAULT NULL,
+  `ownerLocale` char(12) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_matrixblocktypes`
+--
+
+CREATE TABLE `craft_matrixblocktypes` (
+  `id` int(11) NOT NULL,
+  `fieldId` int(11) NOT NULL,
+  `fieldLayoutId` int(11) DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `handle` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `sortOrder` smallint(6) unsigned DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_migrations`
+--
+
+CREATE TABLE `craft_migrations` (
+  `id` int(11) NOT NULL,
+  `pluginId` int(11) DEFAULT NULL,
+  `version` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `applyTime` datetime NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `craft_migrations`
+--
+
+INSERT INTO `craft_migrations` (`id`, `pluginId`, `version`, `applyTime`, `dateCreated`, `dateUpdated`, `uid`) VALUES
+(1, NULL, 'm000000_000000_base', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '78e84e30-edbc-4ecb-9559-7ce8db591e70'),
+(2, NULL, 'm140730_000001_add_filename_and_format_to_transformindex', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '870826cc-54fc-434e-8faf-718f9b6c0733'),
+(3, NULL, 'm140815_000001_add_format_to_transforms', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '754c33da-caa5-4946-8536-fa809221f170'),
+(4, NULL, 'm140822_000001_allow_more_than_128_items_per_field', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '2016-02-19 01:46:10', 'a296ebd4-be5c-4a41-bb2a-7031f2d8028c'),
+(5, NULL, 'm140829_000001_single_title_formats', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '05c986fc-e2a0-4869-a3fb-958178437c75'),
+(6, NULL, 'm140831_000001_extended_cache_keys', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '1a55ee40-7198-4754-b2e2-ffac87ac33da'),
+(7, NULL, 'm140922_000001_delete_orphaned_matrix_blocks', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '064407a6-5667-4b55-9ad3-7c93d6833f86'),
+(8, NULL, 'm141008_000001_elements_index_tune', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '5466ba7f-4a56-4776-b287-cf2182f5db6c'),
+(9, NULL, 'm141009_000001_assets_source_handle', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '2016-02-19 01:46:10', 'e7dced2e-a25c-4510-a30d-bf3f606c784f'),
+(10, NULL, 'm141024_000001_field_layout_tabs', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '2016-02-19 01:46:10', 'c503b037-8915-438c-923c-0a61f62d2bc4'),
+(11, NULL, 'm141030_000000_plugin_schema_versions', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '123fcf65-c7dc-4d85-bcb5-2922f604f7d0'),
+(12, NULL, 'm141030_000001_drop_structure_move_permission', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '8f3565f7-6d28-4c30-81c4-1b5de9e78f1f'),
+(13, NULL, 'm141103_000001_tag_titles', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '2016-02-19 01:46:10', 'cced0960-5c93-49e1-9982-fe519a3fbf2b'),
+(14, NULL, 'm141109_000001_user_status_shuffle', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '2016-02-19 01:46:10', 'b4b15e22-9a0e-4e17-97ec-c12729683c15'),
+(15, NULL, 'm141126_000001_user_week_start_day', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '37e8b48d-4370-445d-9b6e-f9666fd06d08'),
+(16, NULL, 'm150210_000001_adjust_user_photo_size', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '2016-02-19 01:46:10', 'e0532b84-2534-454b-9c6a-b6b71f035e92'),
+(17, NULL, 'm150724_000001_adjust_quality_settings', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '811f8a0d-cc6e-4e3f-9165-cd0820c8812a'),
+(18, NULL, 'm150827_000000_element_index_settings', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '2016-02-19 01:46:10', 'bcb23d07-1151-4966-ac53-e9fbb4283843'),
+(19, NULL, 'm150918_000001_add_colspan_to_widgets', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '274a37ae-c66e-4544-bef2-5bbc9aa63ddb'),
+(20, NULL, 'm151007_000000_clear_asset_caches', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '3ecfe89a-aba6-40f5-8cbd-041a087d2d24'),
+(21, NULL, 'm151109_000000_text_url_formats', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '24095eca-d402-49c4-9bda-076455fd6803'),
+(22, NULL, 'm151110_000000_move_logo', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '5619a0d8-f86e-4899-b0b3-ea3fb379c22a'),
+(23, NULL, 'm151117_000000_adjust_image_widthheight', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '61bb9e5d-dccb-4cb9-a764-af068b7db61c'),
+(24, NULL, 'm151127_000000_clear_license_key_status', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '5cfb413c-bb90-4f97-8e64-e4d23795a620'),
+(25, NULL, 'm151127_000000_plugin_license_keys', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '2016-02-19 01:46:10', 'dc41c9b9-5985-4a26-a98e-36e8c36b20bc'),
+(26, NULL, 'm151130_000000_update_pt_widget_feeds', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '2016-02-19 01:46:10', '6a34f564-9c58-4b65-add9-1abe8f199010'),
+(27, NULL, 'm160223_000000_sortorder_to_smallint', '2016-02-24 21:56:19', '2016-02-24 21:56:19', '2016-02-24 21:56:19', '4279afcc-2d17-419f-8ba3-cf72b43a2040');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_plugins`
+--
+
+CREATE TABLE `craft_plugins` (
+  `id` int(11) NOT NULL,
+  `class` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `version` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `schemaVersion` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `licenseKey` char(24) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `licenseKeyStatus` enum('valid','invalid','mismatched','unknown') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'unknown',
+  `enabled` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `settings` text COLLATE utf8_unicode_ci,
+  `installDate` datetime NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_rackspaceaccess`
+--
+
+CREATE TABLE `craft_rackspaceaccess` (
+  `id` int(11) NOT NULL,
+  `connectionKey` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `storageUrl` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `cdnUrl` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_relations`
+--
+
+CREATE TABLE `craft_relations` (
+  `id` int(11) NOT NULL,
+  `fieldId` int(11) NOT NULL,
+  `sourceId` int(11) NOT NULL,
+  `sourceLocale` char(12) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `targetId` int(11) NOT NULL,
+  `sortOrder` smallint(6) DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_routes`
+--
+
+CREATE TABLE `craft_routes` (
+  `id` int(11) NOT NULL,
+  `locale` char(12) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `urlParts` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `urlPattern` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `template` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `sortOrder` smallint(6) unsigned DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_searchindex`
+--
+
+CREATE TABLE `craft_searchindex` (
+  `elementId` int(11) NOT NULL,
+  `attribute` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
+  `fieldId` int(11) NOT NULL,
+  `locale` char(12) COLLATE utf8_unicode_ci NOT NULL,
+  `keywords` text COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `craft_searchindex`
+--
+
+INSERT INTO `craft_searchindex` (`elementId`, `attribute`, `fieldId`, `locale`, `keywords`) VALUES
+(1, 'username', 0, 'en_us', ' dano '),
+(1, 'firstname', 0, 'en_us', ''),
+(1, 'lastname', 0, 'en_us', ''),
+(1, 'fullname', 0, 'en_us', ''),
+(1, 'email', 0, 'en_us', ' dan o williams gmail com '),
+(1, 'slug', 0, 'en_us', ''),
+(2, 'slug', 0, 'en_us', ' homepage '),
+(2, 'title', 0, 'en_us', ' welcome to rhymepaysage dev '),
+(2, 'field', 1, 'en_us', ' it s true this site doesn t have a whole lot of content yet but don t worry our web developers have just installed the cms and they re setting things up for the content editors this very moment soon rhymepaysage dev will be an oasis of fresh perspectives sharp analyses and astute opinions that will keep you coming back again and again '),
+(3, 'field', 1, 'en_us', ' craft is the cms that s powering rhymepaysage dev it s beautiful powerful flexible and easy to use and it s made by pixel tonic we can t wait to dive in and see what it s capable of this is even more captivating content which you couldn t see on the news index page because it was entered after a page break and the news index template only likes to show the content on the first page craft a nice alternative to word if you re making a website '),
+(3, 'field', 2, 'en_us', ''),
+(3, 'slug', 0, 'en_us', ''),
+(3, 'title', 0, 'en_us', ' we just installed craft ');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_sections`
+--
+
+CREATE TABLE `craft_sections` (
+  `id` int(11) NOT NULL,
+  `structureId` int(11) DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `handle` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `type` enum('single','channel','structure') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'channel',
+  `hasUrls` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `template` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `enableVersioning` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `craft_sections`
+--
+
+INSERT INTO `craft_sections` (`id`, `structureId`, `name`, `handle`, `type`, `hasUrls`, `template`, `enableVersioning`, `dateCreated`, `dateUpdated`, `uid`) VALUES
+(1, NULL, 'Homepage', 'homepage', 'single', 1, 'index', 1, '2016-02-19 01:46:16', '2016-02-19 01:46:16', '7cdb2520-9b6a-4083-8b6c-e3d63361f11b'),
+(2, NULL, 'News', 'news', 'channel', 1, 'news/_entry', 1, '2016-02-19 01:46:16', '2016-02-19 01:46:16', 'a4f22303-44e9-4257-982e-0eb118bf6436');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_sections_i18n`
+--
+
+CREATE TABLE `craft_sections_i18n` (
+  `id` int(11) NOT NULL,
+  `sectionId` int(11) NOT NULL,
+  `locale` char(12) COLLATE utf8_unicode_ci NOT NULL,
+  `enabledByDefault` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `urlFormat` text COLLATE utf8_unicode_ci,
+  `nestedUrlFormat` text COLLATE utf8_unicode_ci,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `craft_sections_i18n`
+--
+
+INSERT INTO `craft_sections_i18n` (`id`, `sectionId`, `locale`, `enabledByDefault`, `urlFormat`, `nestedUrlFormat`, `dateCreated`, `dateUpdated`, `uid`) VALUES
+(1, 1, 'en_us', 1, '__home__', NULL, '2016-02-19 01:46:16', '2016-02-19 01:46:16', '64e77dc3-91d9-426c-bc87-5adbf8b7f777'),
+(2, 2, 'en_us', 1, 'news/{postDate.year}/{slug}', NULL, '2016-02-19 01:46:16', '2016-02-19 01:46:16', '8943e389-dd80-4cc3-a0a7-a95567a421a4');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_sessions`
+--
+
+CREATE TABLE `craft_sessions` (
+  `id` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `token` char(100) COLLATE utf8_unicode_ci NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `craft_sessions`
+--
+
+INSERT INTO `craft_sessions` (`id`, `userId`, `token`, `dateCreated`, `dateUpdated`, `uid`) VALUES
+(1, 1, '9fe338997bd023dbf0fd97600792a8d3b0cff1adczozMjoiV2VLREthX0t0WXo4YVlvSE1ZMHhqRHpKaHB3X0p2UzgiOw==', '2016-02-19 01:46:16', '2016-02-19 01:46:16', 'cfdc136f-e865-4be8-aca9-8db076932c4e'),
+(2, 1, 'b504a862b1b439fa35ca317f538e97de0cee6751czozMjoiZ3QxVkxJTFZyaVd6YWlZaGJsMWdUb0hZWmZDfmNEbEQiOw==', '2016-03-04 17:58:14', '2016-03-04 17:58:14', '99614fb2-bcf2-4d48-83e6-0d1da27f4412'),
+(3, 1, '2268f41d31b36305103fdfc0eaf27d0d0be15071czozMjoiYWEwbDk3eXRoSXo4cGwyNXVffk9ZZn5YZkJCVTdvaXQiOw==', '2016-03-04 19:04:25', '2016-03-04 19:04:25', '259412bb-e510-410f-ae60-9229fb0e2e88');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_shunnedmessages`
+--
+
+CREATE TABLE `craft_shunnedmessages` (
+  `id` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `message` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `expiryDate` datetime DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_structureelements`
+--
+
+CREATE TABLE `craft_structureelements` (
+  `id` int(11) NOT NULL,
+  `structureId` int(11) NOT NULL,
+  `elementId` int(11) DEFAULT NULL,
+  `root` int(11) unsigned DEFAULT NULL,
+  `lft` int(11) unsigned NOT NULL,
+  `rgt` int(11) unsigned NOT NULL,
+  `level` smallint(6) unsigned NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_structures`
+--
+
+CREATE TABLE `craft_structures` (
+  `id` int(11) NOT NULL,
+  `maxLevels` smallint(6) unsigned DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_systemsettings`
+--
+
+CREATE TABLE `craft_systemsettings` (
+  `id` int(11) NOT NULL,
+  `category` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `settings` text COLLATE utf8_unicode_ci,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `craft_systemsettings`
+--
+
+INSERT INTO `craft_systemsettings` (`id`, `category`, `settings`, `dateCreated`, `dateUpdated`, `uid`) VALUES
+(1, 'email', '{"protocol":"php","emailAddress":"dan.o.williams@gmail.com","senderName":"Rhyme Paysage"}', '2016-02-19 01:46:16', '2016-02-19 01:46:16', '4042cbaa-73b2-425e-a1d7-3c19b09e8b76');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_taggroups`
+--
+
+CREATE TABLE `craft_taggroups` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `handle` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `fieldLayoutId` int(10) DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `craft_taggroups`
+--
+
+INSERT INTO `craft_taggroups` (`id`, `name`, `handle`, `fieldLayoutId`, `dateCreated`, `dateUpdated`, `uid`) VALUES
+(1, 'Default', 'default', 1, '2016-02-19 01:46:16', '2016-02-19 01:46:16', 'a3cdd1e7-0d43-4f33-a74c-77b63c6a2e5c');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_tags`
+--
+
+CREATE TABLE `craft_tags` (
+  `id` int(11) NOT NULL,
+  `groupId` int(11) NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_tasks`
+--
+
+CREATE TABLE `craft_tasks` (
+  `id` int(11) NOT NULL,
+  `root` int(11) unsigned DEFAULT NULL,
+  `lft` int(11) unsigned NOT NULL,
+  `rgt` int(11) unsigned NOT NULL,
+  `level` smallint(6) unsigned NOT NULL,
+  `currentStep` int(11) unsigned DEFAULT NULL,
+  `totalSteps` int(11) unsigned DEFAULT NULL,
+  `status` enum('pending','error','running') COLLATE utf8_unicode_ci DEFAULT NULL,
+  `type` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `settings` text COLLATE utf8_unicode_ci,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_templatecachecriteria`
+--
+
+CREATE TABLE `craft_templatecachecriteria` (
+  `id` int(11) NOT NULL,
+  `cacheId` int(11) NOT NULL,
+  `type` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `criteria` text COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_templatecacheelements`
+--
+
+CREATE TABLE `craft_templatecacheelements` (
+  `cacheId` int(11) NOT NULL,
+  `elementId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_templatecaches`
+--
+
+CREATE TABLE `craft_templatecaches` (
+  `id` int(11) NOT NULL,
+  `cacheKey` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `locale` char(12) COLLATE utf8_unicode_ci NOT NULL,
+  `path` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `expiryDate` datetime NOT NULL,
+  `body` mediumtext COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_tokens`
+--
+
+CREATE TABLE `craft_tokens` (
+  `id` int(11) NOT NULL,
+  `token` char(32) COLLATE utf8_unicode_ci NOT NULL,
+  `route` text COLLATE utf8_unicode_ci,
+  `usageLimit` tinyint(3) unsigned DEFAULT NULL,
+  `usageCount` tinyint(3) unsigned DEFAULT NULL,
+  `expiryDate` datetime NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_usergroups`
+--
+
+CREATE TABLE `craft_usergroups` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `handle` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_usergroups_users`
+--
+
+CREATE TABLE `craft_usergroups_users` (
+  `id` int(11) NOT NULL,
+  `groupId` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_userpermissions`
+--
+
+CREATE TABLE `craft_userpermissions` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_userpermissions_usergroups`
+--
+
+CREATE TABLE `craft_userpermissions_usergroups` (
+  `id` int(11) NOT NULL,
+  `permissionId` int(11) NOT NULL,
+  `groupId` int(11) NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_userpermissions_users`
+--
+
+CREATE TABLE `craft_userpermissions_users` (
+  `id` int(11) NOT NULL,
+  `permissionId` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_users`
+--
+
+CREATE TABLE `craft_users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `photo` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `firstName` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `lastName` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `password` char(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `preferredLocale` char(12) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `weekStartDay` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `admin` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `client` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `locked` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `suspended` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `pending` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `archived` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `lastLoginDate` datetime DEFAULT NULL,
+  `lastLoginAttemptIPAddress` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `invalidLoginWindowStart` datetime DEFAULT NULL,
+  `invalidLoginCount` tinyint(4) unsigned DEFAULT NULL,
+  `lastInvalidLoginDate` datetime DEFAULT NULL,
+  `lockoutDate` datetime DEFAULT NULL,
+  `verificationCode` char(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `verificationCodeIssuedDate` datetime DEFAULT NULL,
+  `unverifiedEmail` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `passwordResetRequired` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `lastPasswordChangeDate` datetime DEFAULT NULL,
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `craft_users`
+--
+
+INSERT INTO `craft_users` (`id`, `username`, `photo`, `firstName`, `lastName`, `email`, `password`, `preferredLocale`, `weekStartDay`, `admin`, `client`, `locked`, `suspended`, `pending`, `archived`, `lastLoginDate`, `lastLoginAttemptIPAddress`, `invalidLoginWindowStart`, `invalidLoginCount`, `lastInvalidLoginDate`, `lockoutDate`, `verificationCode`, `verificationCodeIssuedDate`, `unverifiedEmail`, `passwordResetRequired`, `lastPasswordChangeDate`, `dateCreated`, `dateUpdated`, `uid`) VALUES
+(1, 'dano', NULL, NULL, NULL, 'dan.o.williams@gmail.com', '$2y$13$.OjUp5U8agHgKJpXnQg34ONSvBQWvxHhf3dx1NFn0fME7fcK9pfNu', NULL, 0, 1, 0, 0, 0, 0, 0, '2016-03-04 19:04:25', '127.0.0.1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2016-02-19 01:46:13', '2016-02-19 01:46:13', '2016-03-04 19:04:25', '7b811335-aee6-445e-8d2b-7bb535304db6');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `craft_widgets`
+--
+
+CREATE TABLE `craft_widgets` (
+  `id` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `type` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `sortOrder` smallint(6) unsigned DEFAULT NULL,
+  `colspan` tinyint(4) unsigned DEFAULT NULL,
+  `settings` text COLLATE utf8_unicode_ci,
+  `enabled` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `dateCreated` datetime NOT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `uid` char(36) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `craft_widgets`
+--
+
+INSERT INTO `craft_widgets` (`id`, `userId`, `type`, `sortOrder`, `colspan`, `settings`, `enabled`, `dateCreated`, `dateUpdated`, `uid`) VALUES
+(1, 1, 'RecentEntries', 1, NULL, NULL, 1, '2016-02-19 01:46:31', '2016-02-19 01:46:31', 'd5f12daa-3873-4875-babe-36669066d2b1'),
+(2, 1, 'GetHelp', 2, NULL, NULL, 1, '2016-02-19 01:46:31', '2016-02-19 01:46:31', 'c099bc8c-8ded-4a5c-afab-cd01fb1d3e93'),
+(3, 1, 'Updates', 3, NULL, NULL, 1, '2016-02-19 01:46:31', '2016-02-19 01:46:31', '81c758c5-dc62-465b-af74-705d04ad8a8d'),
+(4, 1, 'Feed', 4, NULL, '{"url":"https:\\/\\/craftcms.com\\/news.rss","title":"Craft News"}', 1, '2016-02-19 01:46:31', '2016-02-19 01:46:31', '68f12f6a-3642-4c01-b192-e3918f4163d9');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `craft_assetfiles`
+--
+ALTER TABLE `craft_assetfiles`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `craft_assetfiles_filename_folderId_unq_idx` (`filename`,`folderId`),
+  ADD KEY `craft_assetfiles_sourceId_fk` (`sourceId`),
+  ADD KEY `craft_assetfiles_folderId_fk` (`folderId`);
+
+--
+-- Indexes for table `craft_assetfolders`
+--
+ALTER TABLE `craft_assetfolders`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `craft_assetfolders_name_parentId_sourceId_unq_idx` (`name`,`parentId`,`sourceId`),
+  ADD KEY `craft_assetfolders_parentId_fk` (`parentId`),
+  ADD KEY `craft_assetfolders_sourceId_fk` (`sourceId`);
+
+--
+-- Indexes for table `craft_assetindexdata`
+--
+ALTER TABLE `craft_assetindexdata`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `craft_assetindexdata_sessionId_sourceId_offset_unq_idx` (`sessionId`,`sourceId`,`offset`),
+  ADD KEY `craft_assetindexdata_sourceId_fk` (`sourceId`);
+
+--
+-- Indexes for table `craft_assetsources`
+--
+ALTER TABLE `craft_assetsources`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `craft_assetsources_name_unq_idx` (`name`),
+  ADD UNIQUE KEY `craft_assetsources_handle_unq_idx` (`handle`),
+  ADD KEY `craft_assetsources_fieldLayoutId_fk` (`fieldLayoutId`);
+
+--
+-- Indexes for table `craft_assettransformindex`
+--
+ALTER TABLE `craft_assettransformindex`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `craft_assettransformindex_sourceId_fileId_location_idx` (`sourceId`,`fileId`,`location`);
+
+--
+-- Indexes for table `craft_assettransforms`
+--
+ALTER TABLE `craft_assettransforms`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `craft_assettransforms_name_unq_idx` (`name`),
+  ADD UNIQUE KEY `craft_assettransforms_handle_unq_idx` (`handle`);
+
+--
+-- Indexes for table `craft_categories`
+--
+ALTER TABLE `craft_categories`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `craft_categories_groupId_fk` (`groupId`);
+
+--
+-- Indexes for table `craft_categorygroups`
+--
+ALTER TABLE `craft_categorygroups`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `craft_categorygroups_name_unq_idx` (`name`),
+  ADD UNIQUE KEY `craft_categorygroups_handle_unq_idx` (`handle`),
+  ADD KEY `craft_categorygroups_structureId_fk` (`structureId`),
+  ADD KEY `craft_categorygroups_fieldLayoutId_fk` (`fieldLayoutId`);
+
+--
+-- Indexes for table `craft_categorygroups_i18n`
+--
+ALTER TABLE `craft_categorygroups_i18n`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `craft_categorygroups_i18n_groupId_locale_unq_idx` (`groupId`,`locale`),
+  ADD KEY `craft_categorygroups_i18n_locale_fk` (`locale`);
+
+--
+-- Indexes for table `craft_content`
+--
+ALTER TABLE `craft_content`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `craft_content_elementId_locale_unq_idx` (`elementId`,`locale`),
+  ADD KEY `craft_content_title_idx` (`title`),
+  ADD KEY `craft_content_locale_fk` (`locale`);
+
+--
+-- Indexes for table `craft_deprecationerrors`
+--
+ALTER TABLE `craft_deprecationerrors`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `craft_deprecationerrors_key_fingerprint_unq_idx` (`key`,`fingerprint`);
+
+--
+-- Indexes for table `craft_elementindexsettings`
+--
+ALTER TABLE `craft_elementindexsettings`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `craft_elementindexsettings_type_unq_idx` (`type`);
+
+--
+-- Indexes for table `craft_elements`
+--
+ALTER TABLE `craft_elements`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `craft_elements_type_idx` (`type`),
+  ADD KEY `craft_elements_enabled_idx` (`enabled`),
+  ADD KEY `craft_elements_archived_dateCreated_idx` (`archived`,`dateCreated`);
+
+--
+-- Indexes for table `craft_elements_i18n`
+--
+ALTER TABLE `craft_elements_i18n`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `craft_elements_i18n_elementId_locale_unq_idx` (`elementId`,`locale`),
+  ADD UNIQUE KEY `craft_elements_i18n_uri_locale_unq_idx` (`uri`,`locale`),
+  ADD KEY `craft_elements_i18n_slug_locale_idx` (`slug`,`locale`),
+  ADD KEY `craft_elements_i18n_enabled_idx` (`enabled`),
+  ADD KEY `craft_elements_i18n_locale_fk` (`locale`);
+
+--
+-- Indexes for table `craft_emailmessages`
+--
+ALTER TABLE `craft_emailmessages`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `craft_emailmessages_key_locale_unq_idx` (`key`,`locale`),
+  ADD KEY `craft_emailmessages_locale_fk` (`locale`);
+
+--
+-- Indexes for table `craft_entries`
+--
+ALTER TABLE `craft_entries`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `craft_entries_sectionId_idx` (`sectionId`),
+  ADD KEY `craft_entries_typeId_idx` (`typeId`),
+  ADD KEY `craft_entries_postDate_idx` (`postDate`),
+  ADD KEY `craft_entries_expiryDate_idx` (`expiryDate`),
+  ADD KEY `craft_entries_authorId_fk` (`authorId`);
+
+--
+-- Indexes for table `craft_entrydrafts`
+--
+ALTER TABLE `craft_entrydrafts`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `craft_entrydrafts_entryId_locale_idx` (`entryId`,`locale`),
+  ADD KEY `craft_entrydrafts_sectionId_fk` (`sectionId`),
+  ADD KEY `craft_entrydrafts_creatorId_fk` (`creatorId`),
+  ADD KEY `craft_entrydrafts_locale_fk` (`locale`);
+
+--
+-- Indexes for table `craft_entrytypes`
+--
+ALTER TABLE `craft_entrytypes`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `craft_entrytypes_name_sectionId_unq_idx` (`name`,`sectionId`),
+  ADD UNIQUE KEY `craft_entrytypes_handle_sectionId_unq_idx` (`handle`,`sectionId`),
+  ADD KEY `craft_entrytypes_sectionId_fk` (`sectionId`),
+  ADD KEY `craft_entrytypes_fieldLayoutId_fk` (`fieldLayoutId`);
+
+--
+-- Indexes for table `craft_entryversions`
+--
+ALTER TABLE `craft_entryversions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `craft_entryversions_entryId_locale_idx` (`entryId`,`locale`),
+  ADD KEY `craft_entryversions_sectionId_fk` (`sectionId`),
+  ADD KEY `craft_entryversions_creatorId_fk` (`creatorId`),
+  ADD KEY `craft_entryversions_locale_fk` (`locale`);
+
+--
+-- Indexes for table `craft_fieldgroups`
+--
+ALTER TABLE `craft_fieldgroups`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `craft_fieldgroups_name_unq_idx` (`name`);
+
+--
+-- Indexes for table `craft_fieldlayoutfields`
+--
+ALTER TABLE `craft_fieldlayoutfields`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `craft_fieldlayoutfields_layoutId_fieldId_unq_idx` (`layoutId`,`fieldId`),
+  ADD KEY `craft_fieldlayoutfields_sortOrder_idx` (`sortOrder`),
+  ADD KEY `craft_fieldlayoutfields_tabId_fk` (`tabId`),
+  ADD KEY `craft_fieldlayoutfields_fieldId_fk` (`fieldId`);
+
+--
+-- Indexes for table `craft_fieldlayouts`
+--
+ALTER TABLE `craft_fieldlayouts`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `craft_fieldlayouts_type_idx` (`type`);
+
+--
+-- Indexes for table `craft_fieldlayouttabs`
+--
+ALTER TABLE `craft_fieldlayouttabs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `craft_fieldlayouttabs_sortOrder_idx` (`sortOrder`),
+  ADD KEY `craft_fieldlayouttabs_layoutId_fk` (`layoutId`);
+
+--
+-- Indexes for table `craft_fields`
+--
+ALTER TABLE `craft_fields`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `craft_fields_handle_context_unq_idx` (`handle`,`context`),
+  ADD KEY `craft_fields_context_idx` (`context`),
+  ADD KEY `craft_fields_groupId_fk` (`groupId`);
+
+--
+-- Indexes for table `craft_globalsets`
+--
+ALTER TABLE `craft_globalsets`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `craft_globalsets_name_unq_idx` (`name`),
+  ADD UNIQUE KEY `craft_globalsets_handle_unq_idx` (`handle`),
+  ADD KEY `craft_globalsets_fieldLayoutId_fk` (`fieldLayoutId`);
+
+--
+-- Indexes for table `craft_info`
+--
+ALTER TABLE `craft_info`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `craft_locales`
+--
+ALTER TABLE `craft_locales`
+  ADD PRIMARY KEY (`locale`),
+  ADD KEY `craft_locales_sortOrder_idx` (`sortOrder`);
+
+--
+-- Indexes for table `craft_matrixblocks`
+--
+ALTER TABLE `craft_matrixblocks`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `craft_matrixblocks_ownerId_idx` (`ownerId`),
+  ADD KEY `craft_matrixblocks_fieldId_idx` (`fieldId`),
+  ADD KEY `craft_matrixblocks_typeId_idx` (`typeId`),
+  ADD KEY `craft_matrixblocks_sortOrder_idx` (`sortOrder`),
+  ADD KEY `craft_matrixblocks_ownerLocale_fk` (`ownerLocale`);
+
+--
+-- Indexes for table `craft_matrixblocktypes`
+--
+ALTER TABLE `craft_matrixblocktypes`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `craft_matrixblocktypes_name_fieldId_unq_idx` (`name`,`fieldId`),
+  ADD UNIQUE KEY `craft_matrixblocktypes_handle_fieldId_unq_idx` (`handle`,`fieldId`),
+  ADD KEY `craft_matrixblocktypes_fieldId_fk` (`fieldId`),
+  ADD KEY `craft_matrixblocktypes_fieldLayoutId_fk` (`fieldLayoutId`);
+
+--
+-- Indexes for table `craft_migrations`
+--
+ALTER TABLE `craft_migrations`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `craft_migrations_version_unq_idx` (`version`),
+  ADD KEY `craft_migrations_pluginId_fk` (`pluginId`);
+
+--
+-- Indexes for table `craft_plugins`
+--
+ALTER TABLE `craft_plugins`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `craft_rackspaceaccess`
+--
+ALTER TABLE `craft_rackspaceaccess`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `craft_rackspaceaccess_connectionKey_unq_idx` (`connectionKey`);
+
+--
+-- Indexes for table `craft_relations`
+--
+ALTER TABLE `craft_relations`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `craft_relations_fieldId_sourceId_sourceLocale_targetId_unq_idx` (`fieldId`,`sourceId`,`sourceLocale`,`targetId`),
+  ADD KEY `craft_relations_sourceId_fk` (`sourceId`),
+  ADD KEY `craft_relations_sourceLocale_fk` (`sourceLocale`),
+  ADD KEY `craft_relations_targetId_fk` (`targetId`);
+
+--
+-- Indexes for table `craft_routes`
+--
+ALTER TABLE `craft_routes`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `craft_routes_urlPattern_unq_idx` (`urlPattern`),
+  ADD KEY `craft_routes_locale_idx` (`locale`);
+
+--
+-- Indexes for table `craft_searchindex`
+--
+ALTER TABLE `craft_searchindex`
+  ADD PRIMARY KEY (`elementId`,`attribute`,`fieldId`,`locale`),
+  ADD FULLTEXT KEY `craft_searchindex_keywords_idx` (`keywords`);
+
+--
+-- Indexes for table `craft_sections`
+--
+ALTER TABLE `craft_sections`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `craft_sections_name_unq_idx` (`name`),
+  ADD UNIQUE KEY `craft_sections_handle_unq_idx` (`handle`),
+  ADD KEY `craft_sections_structureId_fk` (`structureId`);
+
+--
+-- Indexes for table `craft_sections_i18n`
+--
+ALTER TABLE `craft_sections_i18n`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `craft_sections_i18n_sectionId_locale_unq_idx` (`sectionId`,`locale`),
+  ADD KEY `craft_sections_i18n_locale_fk` (`locale`);
+
+--
+-- Indexes for table `craft_sessions`
+--
+ALTER TABLE `craft_sessions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `craft_sessions_uid_idx` (`uid`),
+  ADD KEY `craft_sessions_token_idx` (`token`),
+  ADD KEY `craft_sessions_dateUpdated_idx` (`dateUpdated`),
+  ADD KEY `craft_sessions_userId_fk` (`userId`);
+
+--
+-- Indexes for table `craft_shunnedmessages`
+--
+ALTER TABLE `craft_shunnedmessages`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `craft_shunnedmessages_userId_message_unq_idx` (`userId`,`message`);
+
+--
+-- Indexes for table `craft_structureelements`
+--
+ALTER TABLE `craft_structureelements`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `craft_structureelements_structureId_elementId_unq_idx` (`structureId`,`elementId`),
+  ADD KEY `craft_structureelements_root_idx` (`root`),
+  ADD KEY `craft_structureelements_lft_idx` (`lft`),
+  ADD KEY `craft_structureelements_rgt_idx` (`rgt`),
+  ADD KEY `craft_structureelements_level_idx` (`level`),
+  ADD KEY `craft_structureelements_elementId_fk` (`elementId`);
+
+--
+-- Indexes for table `craft_structures`
+--
+ALTER TABLE `craft_structures`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `craft_systemsettings`
+--
+ALTER TABLE `craft_systemsettings`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `craft_systemsettings_category_unq_idx` (`category`);
+
+--
+-- Indexes for table `craft_taggroups`
+--
+ALTER TABLE `craft_taggroups`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `craft_taggroups_name_unq_idx` (`name`),
+  ADD UNIQUE KEY `craft_taggroups_handle_unq_idx` (`handle`),
+  ADD KEY `craft_taggroups_fieldLayoutId_fk` (`fieldLayoutId`);
+
+--
+-- Indexes for table `craft_tags`
+--
+ALTER TABLE `craft_tags`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `craft_tags_groupId_fk` (`groupId`);
+
+--
+-- Indexes for table `craft_tasks`
+--
+ALTER TABLE `craft_tasks`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `craft_tasks_root_idx` (`root`),
+  ADD KEY `craft_tasks_lft_idx` (`lft`),
+  ADD KEY `craft_tasks_rgt_idx` (`rgt`),
+  ADD KEY `craft_tasks_level_idx` (`level`);
+
+--
+-- Indexes for table `craft_templatecachecriteria`
+--
+ALTER TABLE `craft_templatecachecriteria`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `craft_templatecachecriteria_cacheId_fk` (`cacheId`),
+  ADD KEY `craft_templatecachecriteria_type_idx` (`type`);
+
+--
+-- Indexes for table `craft_templatecacheelements`
+--
+ALTER TABLE `craft_templatecacheelements`
+  ADD KEY `craft_templatecacheelements_cacheId_fk` (`cacheId`),
+  ADD KEY `craft_templatecacheelements_elementId_fk` (`elementId`);
+
+--
+-- Indexes for table `craft_templatecaches`
+--
+ALTER TABLE `craft_templatecaches`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `craft_templatecaches_expiryDate_cacheKey_locale_path_idx` (`expiryDate`,`cacheKey`,`locale`,`path`),
+  ADD KEY `craft_templatecaches_locale_fk` (`locale`);
+
+--
+-- Indexes for table `craft_tokens`
+--
+ALTER TABLE `craft_tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `craft_tokens_token_unq_idx` (`token`),
+  ADD KEY `craft_tokens_expiryDate_idx` (`expiryDate`);
+
+--
+-- Indexes for table `craft_usergroups`
+--
+ALTER TABLE `craft_usergroups`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `craft_usergroups_users`
+--
+ALTER TABLE `craft_usergroups_users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `craft_usergroups_users_groupId_userId_unq_idx` (`groupId`,`userId`),
+  ADD KEY `craft_usergroups_users_userId_fk` (`userId`);
+
+--
+-- Indexes for table `craft_userpermissions`
+--
+ALTER TABLE `craft_userpermissions`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `craft_userpermissions_name_unq_idx` (`name`);
+
+--
+-- Indexes for table `craft_userpermissions_usergroups`
+--
+ALTER TABLE `craft_userpermissions_usergroups`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `craft_userpermissions_usergroups_permissionId_groupId_unq_idx` (`permissionId`,`groupId`),
+  ADD KEY `craft_userpermissions_usergroups_groupId_fk` (`groupId`);
+
+--
+-- Indexes for table `craft_userpermissions_users`
+--
+ALTER TABLE `craft_userpermissions_users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `craft_userpermissions_users_permissionId_userId_unq_idx` (`permissionId`,`userId`),
+  ADD KEY `craft_userpermissions_users_userId_fk` (`userId`);
+
+--
+-- Indexes for table `craft_users`
+--
+ALTER TABLE `craft_users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `craft_users_username_unq_idx` (`username`),
+  ADD UNIQUE KEY `craft_users_email_unq_idx` (`email`),
+  ADD KEY `craft_users_verificationCode_idx` (`verificationCode`),
+  ADD KEY `craft_users_uid_idx` (`uid`),
+  ADD KEY `craft_users_preferredLocale_fk` (`preferredLocale`);
+
+--
+-- Indexes for table `craft_widgets`
+--
+ALTER TABLE `craft_widgets`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `craft_widgets_userId_fk` (`userId`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `craft_assetfolders`
+--
+ALTER TABLE `craft_assetfolders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `craft_assetindexdata`
+--
+ALTER TABLE `craft_assetindexdata`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `craft_assetsources`
+--
+ALTER TABLE `craft_assetsources`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `craft_assettransformindex`
+--
+ALTER TABLE `craft_assettransformindex`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `craft_assettransforms`
+--
+ALTER TABLE `craft_assettransforms`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `craft_categorygroups`
+--
+ALTER TABLE `craft_categorygroups`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `craft_categorygroups_i18n`
+--
+ALTER TABLE `craft_categorygroups_i18n`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `craft_content`
+--
+ALTER TABLE `craft_content`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `craft_deprecationerrors`
+--
+ALTER TABLE `craft_deprecationerrors`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `craft_elementindexsettings`
+--
+ALTER TABLE `craft_elementindexsettings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `craft_elements`
+--
+ALTER TABLE `craft_elements`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `craft_elements_i18n`
+--
+ALTER TABLE `craft_elements_i18n`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `craft_emailmessages`
+--
+ALTER TABLE `craft_emailmessages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `craft_entrydrafts`
+--
+ALTER TABLE `craft_entrydrafts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `craft_entrytypes`
+--
+ALTER TABLE `craft_entrytypes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `craft_entryversions`
+--
+ALTER TABLE `craft_entryversions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `craft_fieldgroups`
+--
+ALTER TABLE `craft_fieldgroups`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `craft_fieldlayoutfields`
+--
+ALTER TABLE `craft_fieldlayoutfields`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `craft_fieldlayouts`
+--
+ALTER TABLE `craft_fieldlayouts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `craft_fieldlayouttabs`
+--
+ALTER TABLE `craft_fieldlayouttabs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `craft_fields`
+--
+ALTER TABLE `craft_fields`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `craft_info`
+--
+ALTER TABLE `craft_info`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `craft_matrixblocktypes`
+--
+ALTER TABLE `craft_matrixblocktypes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `craft_migrations`
+--
+ALTER TABLE `craft_migrations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=28;
+--
+-- AUTO_INCREMENT for table `craft_plugins`
+--
+ALTER TABLE `craft_plugins`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `craft_rackspaceaccess`
+--
+ALTER TABLE `craft_rackspaceaccess`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `craft_relations`
+--
+ALTER TABLE `craft_relations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `craft_routes`
+--
+ALTER TABLE `craft_routes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `craft_sections`
+--
+ALTER TABLE `craft_sections`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `craft_sections_i18n`
+--
+ALTER TABLE `craft_sections_i18n`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `craft_sessions`
+--
+ALTER TABLE `craft_sessions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `craft_shunnedmessages`
+--
+ALTER TABLE `craft_shunnedmessages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `craft_structureelements`
+--
+ALTER TABLE `craft_structureelements`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `craft_structures`
+--
+ALTER TABLE `craft_structures`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `craft_systemsettings`
+--
+ALTER TABLE `craft_systemsettings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `craft_taggroups`
+--
+ALTER TABLE `craft_taggroups`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `craft_tasks`
+--
+ALTER TABLE `craft_tasks`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `craft_templatecachecriteria`
+--
+ALTER TABLE `craft_templatecachecriteria`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `craft_templatecaches`
+--
+ALTER TABLE `craft_templatecaches`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `craft_tokens`
+--
+ALTER TABLE `craft_tokens`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `craft_usergroups`
+--
+ALTER TABLE `craft_usergroups`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `craft_usergroups_users`
+--
+ALTER TABLE `craft_usergroups_users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `craft_userpermissions`
+--
+ALTER TABLE `craft_userpermissions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `craft_userpermissions_usergroups`
+--
+ALTER TABLE `craft_userpermissions_usergroups`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `craft_userpermissions_users`
+--
+ALTER TABLE `craft_userpermissions_users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `craft_widgets`
+--
+ALTER TABLE `craft_widgets`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `craft_assetfiles`
+--
+ALTER TABLE `craft_assetfiles`
+  ADD CONSTRAINT `craft_assetfiles_folderId_fk` FOREIGN KEY (`folderId`) REFERENCES `craft_assetfolders` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `craft_assetfiles_id_fk` FOREIGN KEY (`id`) REFERENCES `craft_elements` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `craft_assetfiles_sourceId_fk` FOREIGN KEY (`sourceId`) REFERENCES `craft_assetsources` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `craft_assetfolders`
+--
+ALTER TABLE `craft_assetfolders`
+  ADD CONSTRAINT `craft_assetfolders_parentId_fk` FOREIGN KEY (`parentId`) REFERENCES `craft_assetfolders` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `craft_assetfolders_sourceId_fk` FOREIGN KEY (`sourceId`) REFERENCES `craft_assetsources` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `craft_assetindexdata`
+--
+ALTER TABLE `craft_assetindexdata`
+  ADD CONSTRAINT `craft_assetindexdata_sourceId_fk` FOREIGN KEY (`sourceId`) REFERENCES `craft_assetsources` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `craft_assetsources`
+--
+ALTER TABLE `craft_assetsources`
+  ADD CONSTRAINT `craft_assetsources_fieldLayoutId_fk` FOREIGN KEY (`fieldLayoutId`) REFERENCES `craft_fieldlayouts` (`id`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `craft_categories`
+--
+ALTER TABLE `craft_categories`
+  ADD CONSTRAINT `craft_categories_groupId_fk` FOREIGN KEY (`groupId`) REFERENCES `craft_categorygroups` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `craft_categories_id_fk` FOREIGN KEY (`id`) REFERENCES `craft_elements` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `craft_categorygroups`
+--
+ALTER TABLE `craft_categorygroups`
+  ADD CONSTRAINT `craft_categorygroups_fieldLayoutId_fk` FOREIGN KEY (`fieldLayoutId`) REFERENCES `craft_fieldlayouts` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `craft_categorygroups_structureId_fk` FOREIGN KEY (`structureId`) REFERENCES `craft_structures` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `craft_categorygroups_i18n`
+--
+ALTER TABLE `craft_categorygroups_i18n`
+  ADD CONSTRAINT `craft_categorygroups_i18n_groupId_fk` FOREIGN KEY (`groupId`) REFERENCES `craft_categorygroups` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `craft_categorygroups_i18n_locale_fk` FOREIGN KEY (`locale`) REFERENCES `craft_locales` (`locale`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `craft_content`
+--
+ALTER TABLE `craft_content`
+  ADD CONSTRAINT `craft_content_elementId_fk` FOREIGN KEY (`elementId`) REFERENCES `craft_elements` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `craft_content_locale_fk` FOREIGN KEY (`locale`) REFERENCES `craft_locales` (`locale`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `craft_elements_i18n`
+--
+ALTER TABLE `craft_elements_i18n`
+  ADD CONSTRAINT `craft_elements_i18n_elementId_fk` FOREIGN KEY (`elementId`) REFERENCES `craft_elements` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `craft_elements_i18n_locale_fk` FOREIGN KEY (`locale`) REFERENCES `craft_locales` (`locale`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `craft_emailmessages`
+--
+ALTER TABLE `craft_emailmessages`
+  ADD CONSTRAINT `craft_emailmessages_locale_fk` FOREIGN KEY (`locale`) REFERENCES `craft_locales` (`locale`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `craft_entries`
+--
+ALTER TABLE `craft_entries`
+  ADD CONSTRAINT `craft_entries_authorId_fk` FOREIGN KEY (`authorId`) REFERENCES `craft_users` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `craft_entries_id_fk` FOREIGN KEY (`id`) REFERENCES `craft_elements` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `craft_entries_sectionId_fk` FOREIGN KEY (`sectionId`) REFERENCES `craft_sections` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `craft_entries_typeId_fk` FOREIGN KEY (`typeId`) REFERENCES `craft_entrytypes` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `craft_entrydrafts`
+--
+ALTER TABLE `craft_entrydrafts`
+  ADD CONSTRAINT `craft_entrydrafts_creatorId_fk` FOREIGN KEY (`creatorId`) REFERENCES `craft_users` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `craft_entrydrafts_entryId_fk` FOREIGN KEY (`entryId`) REFERENCES `craft_entries` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `craft_entrydrafts_locale_fk` FOREIGN KEY (`locale`) REFERENCES `craft_locales` (`locale`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `craft_entrydrafts_sectionId_fk` FOREIGN KEY (`sectionId`) REFERENCES `craft_sections` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `craft_entrytypes`
+--
+ALTER TABLE `craft_entrytypes`
+  ADD CONSTRAINT `craft_entrytypes_fieldLayoutId_fk` FOREIGN KEY (`fieldLayoutId`) REFERENCES `craft_fieldlayouts` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `craft_entrytypes_sectionId_fk` FOREIGN KEY (`sectionId`) REFERENCES `craft_sections` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `craft_entryversions`
+--
+ALTER TABLE `craft_entryversions`
+  ADD CONSTRAINT `craft_entryversions_creatorId_fk` FOREIGN KEY (`creatorId`) REFERENCES `craft_users` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `craft_entryversions_entryId_fk` FOREIGN KEY (`entryId`) REFERENCES `craft_entries` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `craft_entryversions_locale_fk` FOREIGN KEY (`locale`) REFERENCES `craft_locales` (`locale`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `craft_entryversions_sectionId_fk` FOREIGN KEY (`sectionId`) REFERENCES `craft_sections` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `craft_fieldlayoutfields`
+--
+ALTER TABLE `craft_fieldlayoutfields`
+  ADD CONSTRAINT `craft_fieldlayoutfields_fieldId_fk` FOREIGN KEY (`fieldId`) REFERENCES `craft_fields` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `craft_fieldlayoutfields_layoutId_fk` FOREIGN KEY (`layoutId`) REFERENCES `craft_fieldlayouts` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `craft_fieldlayoutfields_tabId_fk` FOREIGN KEY (`tabId`) REFERENCES `craft_fieldlayouttabs` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `craft_fieldlayouttabs`
+--
+ALTER TABLE `craft_fieldlayouttabs`
+  ADD CONSTRAINT `craft_fieldlayouttabs_layoutId_fk` FOREIGN KEY (`layoutId`) REFERENCES `craft_fieldlayouts` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `craft_fields`
+--
+ALTER TABLE `craft_fields`
+  ADD CONSTRAINT `craft_fields_groupId_fk` FOREIGN KEY (`groupId`) REFERENCES `craft_fieldgroups` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `craft_globalsets`
+--
+ALTER TABLE `craft_globalsets`
+  ADD CONSTRAINT `craft_globalsets_fieldLayoutId_fk` FOREIGN KEY (`fieldLayoutId`) REFERENCES `craft_fieldlayouts` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `craft_globalsets_id_fk` FOREIGN KEY (`id`) REFERENCES `craft_elements` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `craft_matrixblocks`
+--
+ALTER TABLE `craft_matrixblocks`
+  ADD CONSTRAINT `craft_matrixblocks_fieldId_fk` FOREIGN KEY (`fieldId`) REFERENCES `craft_fields` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `craft_matrixblocks_id_fk` FOREIGN KEY (`id`) REFERENCES `craft_elements` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `craft_matrixblocks_ownerId_fk` FOREIGN KEY (`ownerId`) REFERENCES `craft_elements` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `craft_matrixblocks_ownerLocale_fk` FOREIGN KEY (`ownerLocale`) REFERENCES `craft_locales` (`locale`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `craft_matrixblocks_typeId_fk` FOREIGN KEY (`typeId`) REFERENCES `craft_matrixblocktypes` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `craft_matrixblocktypes`
+--
+ALTER TABLE `craft_matrixblocktypes`
+  ADD CONSTRAINT `craft_matrixblocktypes_fieldId_fk` FOREIGN KEY (`fieldId`) REFERENCES `craft_fields` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `craft_matrixblocktypes_fieldLayoutId_fk` FOREIGN KEY (`fieldLayoutId`) REFERENCES `craft_fieldlayouts` (`id`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `craft_migrations`
+--
+ALTER TABLE `craft_migrations`
+  ADD CONSTRAINT `craft_migrations_pluginId_fk` FOREIGN KEY (`pluginId`) REFERENCES `craft_plugins` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `craft_relations`
+--
+ALTER TABLE `craft_relations`
+  ADD CONSTRAINT `craft_relations_fieldId_fk` FOREIGN KEY (`fieldId`) REFERENCES `craft_fields` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `craft_relations_sourceId_fk` FOREIGN KEY (`sourceId`) REFERENCES `craft_elements` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `craft_relations_sourceLocale_fk` FOREIGN KEY (`sourceLocale`) REFERENCES `craft_locales` (`locale`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `craft_relations_targetId_fk` FOREIGN KEY (`targetId`) REFERENCES `craft_elements` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `craft_routes`
+--
+ALTER TABLE `craft_routes`
+  ADD CONSTRAINT `craft_routes_locale_fk` FOREIGN KEY (`locale`) REFERENCES `craft_locales` (`locale`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `craft_sections`
+--
+ALTER TABLE `craft_sections`
+  ADD CONSTRAINT `craft_sections_structureId_fk` FOREIGN KEY (`structureId`) REFERENCES `craft_structures` (`id`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `craft_sections_i18n`
+--
+ALTER TABLE `craft_sections_i18n`
+  ADD CONSTRAINT `craft_sections_i18n_locale_fk` FOREIGN KEY (`locale`) REFERENCES `craft_locales` (`locale`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `craft_sections_i18n_sectionId_fk` FOREIGN KEY (`sectionId`) REFERENCES `craft_sections` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `craft_sessions`
+--
+ALTER TABLE `craft_sessions`
+  ADD CONSTRAINT `craft_sessions_userId_fk` FOREIGN KEY (`userId`) REFERENCES `craft_users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `craft_shunnedmessages`
+--
+ALTER TABLE `craft_shunnedmessages`
+  ADD CONSTRAINT `craft_shunnedmessages_userId_fk` FOREIGN KEY (`userId`) REFERENCES `craft_users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `craft_structureelements`
+--
+ALTER TABLE `craft_structureelements`
+  ADD CONSTRAINT `craft_structureelements_elementId_fk` FOREIGN KEY (`elementId`) REFERENCES `craft_elements` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `craft_structureelements_structureId_fk` FOREIGN KEY (`structureId`) REFERENCES `craft_structures` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `craft_taggroups`
+--
+ALTER TABLE `craft_taggroups`
+  ADD CONSTRAINT `craft_taggroups_fieldLayoutId_fk` FOREIGN KEY (`fieldLayoutId`) REFERENCES `craft_fieldlayouts` (`id`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `craft_tags`
+--
+ALTER TABLE `craft_tags`
+  ADD CONSTRAINT `craft_tags_groupId_fk` FOREIGN KEY (`groupId`) REFERENCES `craft_taggroups` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `craft_tags_id_fk` FOREIGN KEY (`id`) REFERENCES `craft_elements` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `craft_templatecachecriteria`
+--
+ALTER TABLE `craft_templatecachecriteria`
+  ADD CONSTRAINT `craft_templatecachecriteria_cacheId_fk` FOREIGN KEY (`cacheId`) REFERENCES `craft_templatecaches` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `craft_templatecacheelements`
+--
+ALTER TABLE `craft_templatecacheelements`
+  ADD CONSTRAINT `craft_templatecacheelements_cacheId_fk` FOREIGN KEY (`cacheId`) REFERENCES `craft_templatecaches` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `craft_templatecacheelements_elementId_fk` FOREIGN KEY (`elementId`) REFERENCES `craft_elements` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `craft_templatecaches`
+--
+ALTER TABLE `craft_templatecaches`
+  ADD CONSTRAINT `craft_templatecaches_locale_fk` FOREIGN KEY (`locale`) REFERENCES `craft_locales` (`locale`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `craft_usergroups_users`
+--
+ALTER TABLE `craft_usergroups_users`
+  ADD CONSTRAINT `craft_usergroups_users_groupId_fk` FOREIGN KEY (`groupId`) REFERENCES `craft_usergroups` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `craft_usergroups_users_userId_fk` FOREIGN KEY (`userId`) REFERENCES `craft_users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `craft_userpermissions_usergroups`
+--
+ALTER TABLE `craft_userpermissions_usergroups`
+  ADD CONSTRAINT `craft_userpermissions_usergroups_groupId_fk` FOREIGN KEY (`groupId`) REFERENCES `craft_usergroups` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `craft_userpermissions_usergroups_permissionId_fk` FOREIGN KEY (`permissionId`) REFERENCES `craft_userpermissions` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `craft_userpermissions_users`
+--
+ALTER TABLE `craft_userpermissions_users`
+  ADD CONSTRAINT `craft_userpermissions_users_permissionId_fk` FOREIGN KEY (`permissionId`) REFERENCES `craft_userpermissions` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `craft_userpermissions_users_userId_fk` FOREIGN KEY (`userId`) REFERENCES `craft_users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `craft_users`
+--
+ALTER TABLE `craft_users`
+  ADD CONSTRAINT `craft_users_id_fk` FOREIGN KEY (`id`) REFERENCES `craft_elements` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `craft_users_preferredLocale_fk` FOREIGN KEY (`preferredLocale`) REFERENCES `craft_locales` (`locale`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Constraints for table `craft_widgets`
+--
+ALTER TABLE `craft_widgets`
+  ADD CONSTRAINT `craft_widgets_userId_fk` FOREIGN KEY (`userId`) REFERENCES `craft_users` (`id`) ON DELETE CASCADE;
+
