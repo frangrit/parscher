@@ -7,6 +7,10 @@
 .access
 *.access
 
+# Private craft file
+# -------------------------------------
+/craft/config/db.php
+
 # Craft / Runtime and backups folders
 # -------------------------------------
 /craft/storage/runtime/*
