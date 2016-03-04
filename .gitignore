@@ -9,7 +9,7 @@
 
 # Private craft file
 # -------------------------------------
-/craft/config/db.php
+db.php
 
 # Craft / Runtime and backups folders
 # -------------------------------------
