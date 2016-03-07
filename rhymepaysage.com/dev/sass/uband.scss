@@ -598,7 +598,8 @@ body.home ._hideMobileHome {
 	}
 }
 
-body:not(.home) {	display: block;
+body:not(.home) ._showOnInterior {
+	display: block;
 	@include respond-r3 {
 		display: block;
 	}
