@@ -338,7 +338,7 @@ nav.primary a,
 	}
 }
 
-.strong {
+strong, .strong {
 	font-family: $font-alt;
 	font-size: 95%;
 	font-weight: 700;
@@ -375,6 +375,10 @@ figure img {
 	height: auto;
 }
 
+p + .container.hanging {
+	margin-top: 1.5em;
+}
+
 .container {
 	margin: $grid * 6 $grid * -1 $grid * 6 0;
 	overflow: hidden;
@@ -383,6 +387,9 @@ figure img {
 	}
 	&.hanging {
 		margin: $grid 0 0;
+		& + p,
+		& + ul, 
+		& + ol { margin-top: 1em; }
 	}
 	h3.figure-title {
 		margin-top: 0;
