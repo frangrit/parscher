@@ -83,7 +83,6 @@ body {
 	padding: $grid $grid * 3 $grid * 10 $double;
 	position: relative;
 	z-index: 0;
-	//animation: ani-blackOut ease-in-out $time-short infinite alternate;
 	@include respond-r1 {
 		font-size: 18px;
 	}
@@ -316,6 +315,7 @@ nav.secondary {
 }
 
 .entry,
+.index-entry,
 .primary-nav-item,
 .secondary-nav-item {
 	padding-bottom: .5em;
@@ -328,12 +328,37 @@ nav.secondary {
 }
 
 span.title,
-nav.primary a {
+nav.primary a,
+.index-entry a {
 	box-shadow: inset 0 -2px 0 white, inset 0 -3px 0 $color-black;
 	padding-bottom: 1px;
 	&:hover {
 		text-decoration: none;
 		box-shadow: inset 0 -1px 0 white, inset 0 -3px 0 $color-black;
+	}
+}
+
+.strong {
+	font-family: $font-alt;
+	font-size: 95%;
+	font-weight: 700;
+}
+
+.index-multiples {
+	display: inline;
+	padding-left: .5em;
+	.index-multiple-entry {
+		display: inline;
+		padding-right: .25em;
+		&:after {
+			content: ',';
+		}
+		&:last-child {
+			padding-right: 0;
+		}
+		&:last-child::after {
+			content: none;
+		}
 	}
 }
 
@@ -566,8 +591,7 @@ body.home ._hideMobileHome {
 	}
 }
 
-body.content ._showOnInterior {
-	display: block;
+body:not(.home) {	display: block;
 	@include respond-r3 {
 		display: block;
 	}
