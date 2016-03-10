@@ -1,3 +1,37 @@
-.redactor-editor h1 {
-	font-size: 24px !important;
+body .redactor-editor {
+	font-family: -apple-system, BlinkMacSystemFont, 
+    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", 
+    "Fira Sans", "Droid Sans", "Helvetica Neue", 
+    sans-serif !important;
 }
+
+body .redactor-editor h2 {
+	font-size: 17px;
+    line-height: 32px;
+    display: inline-block;
+    border-bottom: 3px solid;
+    border-radius: 0;
+	margin-bottom: 1em;
+}
+
+body .redactor-editor p {
+	font-size: 16px;
+    line-height: 1.5;
+}
+
+body .redactor-dropdown-body-h2 span {
+	font-size: 17px;
+    line-height: 32px;
+    display: inline-block;
+    border-bottom: 3px solid;
+    border-radius: 0;
+    padding: 5px 0 0;
+    margin: 0 3px;
+    font-weight: 700;
+}
+
+body .redactor-dropdown-body-blockquote {
+	font-style: italic;
+	color: rgba(0,0,0,.6);
+}
+

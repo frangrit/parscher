@@ -1,23 +1,19 @@
 {
 	plugins: ['source','fullscreen'],
-	buttons: ['format','h2','bold','italic','lists','link','file'],
-	formatting: ['p', 'blockquote', 'h2'],
+	buttons: ['format','bold','italic','lists','link','file'],
+	formatting: [],
 	formattingAdd: {
-	    'red-p-add': {
-		    title: 'Red Block Add',
-		    args: ['p', 'class', 'red-styled']
-	    },
-	    'red-p-remove': {
-		    title: 'Red Block Remove',
-		    args: ['p', 'class', 'red-styled', 'remove']
-	    },            
-	    'blue-heading': {
-		    title: 'Blue Heading',
-		    args: ['h3', 'class', 'blue-styled', 'toggle']
+	    'body-h2': {
+		    title: 'Subhed (h2)',
+		    args: ['h2', 'toggle']
 	    },    
-	    'add-attr': {
-		    title: 'Set attributes',
-		    args: ['p', { 'data-toggle': 'modal', 'class': 'red-styled' }, 'toggle']
+	    'body-p': {
+		    title: 'Plain Text (p)',
+		    args: ['p', 'toggle']
+	    },
+	    'body-blockquote': {
+		    title: 'Block Quote (blockquote)',
+		    args: ['blockquote', 'toggle']
 	    }
 	}
 }
