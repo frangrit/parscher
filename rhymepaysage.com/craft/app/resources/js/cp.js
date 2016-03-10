@@ -66,7 +66,7 @@ Craft.CP = Garnish.Base.extend(
 	trackTaskProgressTimeout: null,
 	taskProgressIcon: null,
 
-	$upgradePromo: null,
+	$edition: null,
 	upgradeModal: null,
 
 	checkingForUpdates: false,
@@ -98,7 +98,7 @@ Craft.CP = Garnish.Base.extend(
 		this.$main = $('#main');
 		this.$content = $('#content');
 		this.$collapsibleTables = $('table.collapsible');
-		this.$upgradePromo = $('#upgradepromo > a');
+		this.$edition = $('#edition');
 
 		// global sidebar
 		this.addListener(Garnish.$win, 'touchend', 'updateResponsiveGlobalSidebar');
@@ -247,13 +247,9 @@ Craft.CP = Garnish.Base.extend(
 			}
 		}, this));
 
-		this.addListener(this.$upgradePromo, 'click', 'showUpgradeModal');
-
-		var $wrongEditionModalContainer = $('#wrongedition-modal');
-
-		if ($wrongEditionModalContainer.length)
+		if (this.$edition.hasClass('hot'))
 		{
-			new Craft.WrongEditionModal($wrongEditionModalContainer);
+			this.addListener(this.$edition, 'click', 'showUpgradeModal');
 		}
 	},
 
