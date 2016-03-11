@@ -3,16 +3,18 @@
 		{% for category in craft.categories %}
 			<li class="secondary-nav-item _activeOn {{ category.slug }}">
 				<a href="{{ category.url }}" class="trigger" id="{{ category.slug }}">{{ category.title|title }}</a>
-				{% if category.primaryImage|length %}
-					{% set thisAsset = category.primaryImage.first() %}
-					{% if thisAsset.kind == 'video' %}
-						<video class="category-highlight _fadeOnSiblingTriggerHover" autoplay loop>
-							<source src="{{ thisAsset.url }}" type="{{ thisAsset.mimeType }}" />
-						</video>
-					{% else %}
-						<figure class="category-highlight _fadeOnSiblingTriggerHover">
-							<source src="{{ thisAsset.url }}" type="{{ thisAsset.mimeType }}" />
-						</figure>
+				{% if not craft.request.isMobileBrowser %}
+					{% if category.primaryImage|length %}
+						{% set thisAsset = category.primaryImage.first() %}
+						{% if thisAsset.kind == 'video' %}
+							<video class="category-highlight _fadeOnSiblingTriggerHover" autoplay loop>
+								<source src="{{ thisAsset.url }}" type="{{ thisAsset.mimeType }}" />
+							</video>
+						{% else %}
+							<figure class="category-highlight _fadeOnSiblingTriggerHover">
+								<source src="{{ thisAsset.url }}" type="{{ thisAsset.mimeType }}" />
+							</figure>
+						{% endif %}
 					{% endif %}
 				{% endif %}
 			</li>
