@@ -556,7 +556,9 @@ body.backyards .secondary-nav-item._activeOn.backyards {
 	display: none;
 	@include respond-r2 { 
 		display: block;
-		visibility: hidden; 
+		visibility: hidden;
+		opacity: 0;
+		transition: opacity .1s, visibility .12s;
 	}
 }
 
@@ -567,7 +569,10 @@ body.backyards .entry._showOn.backyards,
 body.home .entry._showOn,
 body.all .entry._showOn { 
 	display: block;
-	@include respond-r2 { visibility: visible; }
+	@include respond-r2 { 
+		visibility: visible; 
+		opacity: 1;
+	}
 }
 
 body.home ._hideMobileHome {

@@ -1,8 +1,8 @@
-<nav class="secondary">
+<nav class="secondary" id="nav-secondary">
 	<ul class="secondary-nav-list">
 		{% for category in craft.categories %}
 			<li class="secondary-nav-item _activeOn {{ category.slug }}">
-				<a href="{{ category.url }}" class="trigger">{{ category.title|title }}</a>
+				<a href="{{ category.url }}" class="trigger" id="{{ category.slug }}">{{ category.title|title }}</a>
 				{% if category.primaryImage|length %}
 					{% set thisAsset = category.primaryImage.first() %}
 					{% if thisAsset.kind == 'video' %}
