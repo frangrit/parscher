@@ -1,0 +1,14 @@
+
+{% extends "_layout" %}
+{% set bodyClass = category.slug %}
+
+{% block content %}
+	{% include "_nav-binary-home" %}
+	<div class="content-start">
+		<main id="content" class="max-bounded" role="main">
+			{% include "_nav-secondary" %}
+			{% include "_entry-list" %}
+		</main>
+		{% include "_content-foot" %}
+	</div>{# /.content-start #}
+{% endblock %}
