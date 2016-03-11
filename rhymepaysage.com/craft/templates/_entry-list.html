@@ -1,4 +1,18 @@
 <ul class="entry-list inner-bounded _hideMobileHome">
+	{% for entry in craft.entries.section( 'texts' ).order('postDate desc').limit(null) %}
+		{% set posted = entry.postDate|date('Y') %}
+		{% if entry.dateStarted|length %}
+			{% set started = entry.dateStarted|date('Y') %}
+			{% if started == posted %}
+				{% set displayDate = posted %}
+			{% else %}
+				{% set displayDate = [started, posted]|filter|join('–') %}
+			{% endif %}
+		{% else %}
+			{% set displayDate = posted %}
+		{% endif %}
+		<li class="entry _showOn{% for category in entry.textCategory %} {{ category.slug }}{% endfor %}"><a href="{{ entry.url }}"><span class="title">{{ entry.title }}</span>&nbsp;<span class="date">({{ displayDate }})</span></a></li>
+	{% endfor  %}
 	<li class="entry _showOn essays"><a href="completism.html"><span class="title">Completism</span>&nbsp;<span class="date">(2016)</span></a></li>
 	<li class="entry _showOn projects"><a href="#"><span class="title">Fiction for Spatial Design</span>&nbsp;<span class="date">(2016)</span></a></li>
 	<li class="entry _showOn essays"><a href="#"><span class="title">Introduction to <i>The Principles of Landscape Criticism</i></span>&nbsp;<span class="date">(2016)</span></a></li>
