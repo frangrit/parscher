@@ -6,10 +6,10 @@ var project = {
 
 // Modules 
 var gulp = require('gulp'); 
-//    uglify = require('gulp-uglify'),
+	uglify = require('gulp-uglify'),
 //    rename = require('gulp-rename'),
 //    clean = require('gulp-clean'),
-//    concat = require('gulp-concat'),
+	concat = require('gulp-concat'),
     sass = require('gulp-sass'),
     autoprefixer = require('gulp-autoprefixer'),
     cssnano = require('gulp-cssnano'),
@@ -39,17 +39,14 @@ gulp.task('lint', function() {
 
 // Concatenate & Minify JS
 
-//gulp.task('scripts', function() {
-//    return gulp.src('js/*.js')
-//	    .pipe(concat('site-all.js'))
-//	    .pipe(gulp.dest('js'))
-//	    .pipe(rename({suffix: '.min'}))
-//	    .pipe(uglify())
-//	    .pipe(gulp.dest('js/dist'))
-//	    .pipe(gulp.dest('_site/js/dist'))
-//		.pipe(browserSync.stream())
-//	    .pipe(notify({ message: 'Scripts complete' }));
-//});
+gulp.task('scripts', function() {
+    return gulp.src('./dev/js/**/*')
+	    .pipe(concat('rp-app.js'))
+	    .pipe(gulp.dest('./public/js'))
+	    .pipe(uglify())
+	    .pipe(gulp.dest('./public/js'))
+	    .pipe(notify({ message: 'Scripts complete' }));
+});
 
 
 // Compile Our Sass
@@ -72,11 +69,11 @@ gulp.task('sass', function() {
 // Watch for changes
 
 gulp.task('watch', function() {
-    gulp.watch('./dev/js/**/*', ['lint']);
+    gulp.watch('./dev/js/**/*', ['lint', 'scripts']);
     gulp.watch('./dev/sass/**/*', ['sass']);
 });
 
 
 // Default Task
 
-gulp.task('default', ['browser-sync', 'lint', 'sass', 'watch']);
+gulp.task('default', ['browser-sync', 'lint', 'scripts', 'sass', 'watch']);

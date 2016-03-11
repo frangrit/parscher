@@ -1,5 +1,6 @@
 
-{% extends "_layout" %}
+{% extends (craft.request.isAjax and not craft.request.isLivePreview) ? "_ajax-layout" : "_layout" %}
+
 {% set bodyClass = category.slug %}
 
 {% block content %}
