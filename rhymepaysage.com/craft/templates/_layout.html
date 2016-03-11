@@ -36,9 +36,11 @@
 	
 	<body class="{{ bodyClass }}">
 		<div id="container">
+			{% cache %}
 			<header id="header" class="inner-bounded">
 				<h1><a href="{{ siteUrl }}" class="">{{ siteName }}</a></h1>
 			</header>
+			{% endcache %}
 			{% block content %}
 			{% endblock %}
 		</div>{# /#container #}
