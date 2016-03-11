@@ -1,0 +1,1 @@
+$(document).ready(function(){$("#container").size()>0&&(document.createStyleSheet?document.createStyleSheet("/css/rp-app.css"):$("head").append($("<link rel='stylesheet' href='/css/rp-app.css' type='text/css' media='screen' />")))});
