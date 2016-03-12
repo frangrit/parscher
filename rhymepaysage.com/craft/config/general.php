@@ -14,12 +14,21 @@ return array(
 	    'omitScriptNameInUrls' => true,
     ),
 
-    '.dev' => array(
+    'rhymepaysage.dev' => array(
         'devMode' => true,
 		'siteUrl' => 'http://rhymepaysage.dev/',
         'environmentVariables' => array(
             'basePath' => '/Users/dano/code/parscher/rhymepaysage.com/public/',
             'baseUrl'  => 'http://rhymepaysage.dev/',
+        )
+    ),
+
+    'rhymepaysage-greenleaf.dev' => array(
+        'devMode' => true,
+		'siteUrl' => 'http://rhymepaysage-greenleaf.dev/',
+        'environmentVariables' => array(
+            'basePath' => '/Users/dano/code/parscher/rhymepaysage.com/public/',
+            'baseUrl'  => 'http://rhymepaysage-greenleaf.dev/',
         )
     ),
 
