@@ -40,8 +40,8 @@
 - password: root (or other database pw)
 
 ## Create virtual host
-- add `127.0.0.1       [project][-localSlug].dev` to /etc/hosts
-- uncomment the include in /Applications/MAMP/conf/apache
+- add `127.0.0.1       [project][-localSlug].dev` to /etc/hosts (or /private/etc/hosts)
+- uncomment the include in /Applications/MAMP/conf/apache//httpd.conf
 ```
 # Virtual Hosts
 # Include /Applications/MAMP/conf/apache/extra/httpd-vhosts.conf
