@@ -40,8 +40,8 @@
 - password: root (or other database pw)
 
 ## Create virtual host
-- add `127.0.0.1       [project].dev` to /etc/hosts
-- uncomment the include in /Applications/MAMP/conf/apache
+- add `127.0.0.1       [project][-localSlug].dev` to /etc/hosts (or /private/etc/hosts)
+- uncomment the include in /Applications/MAMP/conf/apache//httpd.conf
 ```
 # Virtual Hosts
 # Include /Applications/MAMP/conf/apache/extra/httpd-vhosts.conf
@@ -57,7 +57,7 @@
 
 <VirtualHost *:80>
     DocumentRoot "[site html root]"
-    ServerName [project].dev
+    ServerName [project][-localSlug].dev
     <Directory "[site html root]">
         AllowOverride All
         Order allow,deny
@@ -71,11 +71,47 @@
 - restart MAMP
 
 ## Install Craft
-- include the following lines in craft/config/general.php :
+- include the following lines in craft/config/general.php (filling in [project], [-localSlug], [localPath], and [projectPath]):
 ```
+<?php
+
+/**
+ * General Configuration
+ *
+ * All of your system's general configuration settings go in here.
+ * You can see a list of the default settings in craft/app/etc/config/defaults/general.php
+ */
+
+
 return array(
-    'usePathInfo' => true,
-    'omitScriptNameInUrls' => true,
+    '*' => array(
+        'usePathInfo' => true,
+	    'omitScriptNameInUrls' => true,
+    ),
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* add a copy of this section for each local development env */
+
+    '[project][-localSlug].dev' => array(
+        'devMode' => true,
+		'siteUrl' => 'http://[project][-localSlug].dev/',
+        'environmentVariables' => array(
+            'basePath' => '[localPath]',
+            'baseUrl'  => 'http://[project][-localSlug].dev/',
+        )
+    ),
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+    '.com' => array(
+        'cooldownDuration' => 0,
+		'siteUrl' => 'http://[project].com/',
+        'environmentVariables' => array(
+            'basePath' => '[projectPath]',
+            'baseUrl'  => 'http://[project].com/',
+        )
+    )    
+    
 );
 ```
 - navigate to http://[project].dev/admin
