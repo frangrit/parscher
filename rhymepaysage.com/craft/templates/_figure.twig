@@ -1,0 +1,84 @@
+{#	
+	Common figure loader for common figure types
+	This will probably need to change for hover images!
+#}
+
+
+{# set local variables #}
+{% if block.containerBound != 'unbounded' %}
+	{% set M = 1 %}
+		{% else %}
+	{% set M = 0 %}
+{% endif %}
+
+{% switch block.containerBound %}
+	{% case 'inner-bounded' %}
+		{% set boundWidth = innerWidth %}
+	{% case 'outer-bounded' %}
+		{% set boundWidth = outerWidth %}
+	{% case 'max-bounded' %}
+		{% set boundWidth = maxWidth %}
+{% endswitch %}
+
+{# find the total images in the container #}
+{% set imgCount = block.images | length %}
+
+{# calculate the outerMargin #}
+{% set sizeMobM = marginGlobalMobileOuter * M %}
+{% set sizeM = marginGlobalOuter * M %}
+
+{# calculate the gutter #}
+{% set gutterCount = imgCount - 1 %}
+{% set gutterTotal = gutterWidth * gutterCount %}
+
+{# build the _sizes_ attribute #}
+{% if block.containerBound != 'unbounded' %}
+	{% set imgWidth = ( boundWidth - gutterTotal ) / imgCount %}
+	{% set sizeDefault = '100vw - #{sizeMobM}px' %}
+	{% set sizeBreakMob = '(min-width: #{breakMob}px) 100vw - #{sizeM}px' %}
+	{% set sizeBreakBound = '(min-width: #{thisbound}px) #{imgWidth}px' %}
+	{% set thisSizes = '#{sizeBreakBound}, #{sizeBreakMob}, #{sizeDefault}' %}
+		{% else %}
+	{% set imgWidth = '(100vw - #{gutterTotal}px) / #{imgCount}' %}
+	{% set sizeBreakTab = '(min-width: #{breakInner}px) #{imgWidth}' %}
+	{% set thisSizes = '#{sizeBreakTab}, 100vw' %}
+{% endif %}
+
+{# set the row class based on total images #}
+{% switch imgCount %}
+	{% case '1' %}
+		{% set rowClass = 'single' %}
+	{% case '2' %}
+		{% set rowClass = 'two-across' %}
+	{% case '3' %}
+		{% set rowClass = 'three-across' %}
+	{% case '4' %}
+		{% set rowClass = 'four-across' %}
+{% endswitch %}
+
+<div class="container {{ block.containerBound }}">
+	{% if block.figureTitle | length %}
+		<h3 class="figure-title">{{ block.figureTitle | raw }}</h3>
+	{% endif %}
+	<div class="row {{ rowClass }}">
+		{% for image in block.images %}
+			<figure>
+				<img
+					sizes="{{ thisSizes }}"
+					srcset="	{{ image.url('fit400w') }} 400w,
+					        	{{ image.url('fit800w') }} 800w,
+					        	{{ image.url('fit1200w') }} 1200w,
+					        	{{ image.url('fit1600w') }} 1600w,
+								{{ image.url('fit2000w') }} 2000w"
+					src="		{{ image.url }}"
+					{% if image.imageAlt | length %}
+					alt="{{ image.imageAlt }}">
+					{% endif %}
+				{% if image.imageCaption | length %}<figcaption>{{ image.imageCaption }}</figcaption>{% endif %}
+			</figure>
+		{% endfor %}
+		{% if block.commonCaption | length %}
+			<p class="common-caption">{{ block.commonCaption }}</p>
+		{% endif %}
+	</div>
+</div>

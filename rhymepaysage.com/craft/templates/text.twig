@@ -22,40 +22,8 @@
 						    	<section>
 							        {{ block.bodyText }}
 						    	</section>
-						    {% case "blockFigureOneAcross" %}
-						    	{% set imageOne = block.imageOneAcross.first() %}
-						    	{% set gridMultiplier = 1 %}
-						    	{% switch block.figureWidth %}
-						    		{% case 'inner-bounded' %}
-						    			{% set mobileWidth = '100vw - #{width_outerMarginMobile}px'%}
-						    			{% set standardWidth = '#{width_innerBounded}px'%}
-						    		{% case 'outer-bounded' %}
-						    			{% set mobileWidth = '#{width_innerBounded}px'%}
-						    			{% set standardWidth = '#{width_innerBounded}px'%}
-						    		{% case 'max-bounded' %}
-						    			{% set mobileWidth = '#{width_innerBounded}px'%}
-						    			{% set standardWidth = '#{width_innerBounded}px'%}
-						    		{% case 'unbounded' %}
-						    			{% set mobileWidth = '#{width_innerBounded}px'%}
-						    			{% set standardWidth = '100vw - #{width_marginDesktop}px'%}
-						    	{% endswitch %}
-		    					<div class="container {{ block.figureWidth }}">
-									{% if block.figureTitle | length %}<h3 class="figure-title">{{ block.figureTitle | raw }}</h3>{% endif %}
-									<div class="row single">
-										<figure>
-											<img
-												sizes="	(min-width: {{ respond_r3 }}px) {{ standardWidth }}, {{ mobileWidth }}"
-												srcset="	{{ imageOne.url('fit400w') }} 400w,
-												        	{{ imageOne.url('fit800w') }} 800w,
-												        	{{ imageOne.url('fit1200w') }} 1200w,
-												        	{{ imageOne.url('fit1600w') }} 1600w,
-															{{ imageOne.url('fit2000w') }} 2000w"
-												src="		{{ imageOne.url }}"
-												alt="…">
-											{% if block.figureCaption | length %}<figcaption>{{ block.figureCaption }}</figcaption>{% endif %}
-										</figure>
-									</div>
-								</div>
+						    {% case "blockFigures" %}
+								{% include "_figure" %}
 						    {% default %}
 						        <p>A font walks into a bar.</p>
 						        <p>The bartender says, “Hey, we don’t serve your type in here!”</p>
@@ -69,7 +37,7 @@
 						<div class="row single">
 							<figure>
 								<img
-									sizes="	(min-width: {{ respond_r3 }}px) {{ width_innerBounded }}px, 100vw - {{ width_marginMobile }}px"
+									sizes="	(min-width: {{ respond_r3 }}px) {{ innerWidth }}px, 100vw - {{ marginGlobalMobile }}px"
 									srcset="	/img/placeholders/3-2.svg 375w,
 									        	/img/placeholders/3-2.svg 480w,
 												/img/placeholders/3-2.svg 768w"
@@ -84,7 +52,7 @@
 						<div class="row two-across">
 							<figure>
 								<img
-									sizes="(min-width: {{ respond_r3 }}px) {{ (width_innerBounded - (1 * width_marginDesktop)) / 2 }}px, .5 * (100vw - {{ width_marginMobile * 3}}px)"
+									sizes="(min-width: {{ respond_r3 }}px) {{ (innerWidth - (1 * marginGlobal)) / 2 }}px, .5 * (100vw - {{ marginGlobalMobile * 3}}px)"
 									srcset="	/img/placeholders/3-2.svg 375w,
 									        	/img/placeholders/3-2.svg 480w,
 												/img/placeholders/3-2.svg 768w"
@@ -94,7 +62,7 @@
 							</figure>
 							<figure>
 								<img
-									sizes="(min-width: {{ respond_r3 }}px) {{ (width_innerBounded - (1 * width_marginDesktop)) / 2 }}px, .5 * (100vw - {{ width_marginMobile * 3}}px)"
+									sizes="(min-width: {{ respond_r3 }}px) {{ (innerWidth - (1 * marginGlobal)) / 2 }}px, .5 * (100vw - {{ marginGlobalMobile * 3}}px)"
 									srcset="	/img/placeholders/3-2.svg 375w,
 									        	/img/placeholders/3-2.svg 480w,
 												/img/placeholders/3-2.svg 768w"
@@ -109,7 +77,7 @@
 						<div class="row two-across">
 							<figure>
 								<img
-									sizes="(min-width: {{ respond_r3 }}px) {{ (width_innerBounded - (1 * width_marginDesktop)) / 2 }}px, .5 * (100vw - {{ width_marginMobile * 3}}px)"
+									sizes="(min-width: {{ respond_r3 }}px) {{ (innerWidth - (1 * marginGlobal)) / 2 }}px, .5 * (100vw - {{ marginGlobalMobile * 3}}px)"
 									srcset="	/img/placeholders/3-2.svg 375w,
 									        	/img/placeholders/3-2.svg 480w,
 												/img/placeholders/3-2.svg 768w"
@@ -118,7 +86,7 @@
 							</figure>
 							<figure>
 								<img
-									sizes="(min-width: {{ respond_r3 }}px) {{ (width_innerBounded - (1 * width_marginDesktop)) / 2 }}px, .5 * (100vw - {{ width_marginMobile * 3}}px)"
+									sizes="(min-width: {{ respond_r3 }}px) {{ (innerWidth - (1 * marginGlobal)) / 2 }}px, .5 * (100vw - {{ marginGlobalMobile * 3}}px)"
 									srcset="	/img/placeholders/3-2.svg 375w,
 									        	/img/placeholders/3-2.svg 480w,
 												/img/placeholders/3-2.svg 768w"
@@ -137,7 +105,7 @@
 						<div class="row single">
 							<figure>
 								<img
-									sizes="	(min-width: {{ respond_r3 }}px) {{ width_outerBounded }}px, 100vw - {{ width_marginMobile }}px"
+									sizes="	(min-width: {{ respond_r3 }}px) {{ outerWidth }}px, 100vw - {{ marginGlobalMobile }}px"
 									srcset="	/img/placeholders/3-2.svg 375w,
 									        	/img/placeholders/3-2.svg 480w,
 												/img/placeholders/3-2.svg 768w"
@@ -152,7 +120,7 @@
 						<div class="row two-across">
 							<figure>
 								<img
-									sizes="(min-width: {{ respond_r3 }}px) {{ (width_outerBounded - (1 * width_marginDesktop)) / 2 }}px, .5 * (100vw - {{ width_marginMobile * 3}}px)"
+									sizes="(min-width: {{ respond_r3 }}px) {{ (outerWidth - (1 * marginGlobal)) / 2 }}px, .5 * (100vw - {{ marginGlobalMobile * 3}}px)"
 									srcset="	/img/placeholders/3-2.svg 375w,
 									        	/img/placeholders/3-2.svg 480w,
 												/img/placeholders/3-2.svg 768w"
@@ -161,7 +129,7 @@
 							</figure>
 							<figure>
 								<img
-									sizes="(min-width: {{ respond_r3 }}px) {{ (width_outerBounded - (1 * width_marginDesktop)) / 2 }}px, .5 * (100vw - {{ width_marginMobile * 3}}px)"
+									sizes="(min-width: {{ respond_r3 }}px) {{ (outerWidth - (1 * marginGlobal)) / 2 }}px, .5 * (100vw - {{ marginGlobalMobile * 3}}px)"
 									srcset="	/img/placeholders/3-2.svg 375w,
 									        	/img/placeholders/3-2.svg 480w,
 												/img/placeholders/3-2.svg 768w"
@@ -176,7 +144,7 @@
 						<div class="row three-across">
 							<figure>
 								<img
-									sizes="(min-width: {{ respond_r3 }}px) {{ (width_outerBounded - (2 * width_marginDesktop)) / 3 }}px, .3333333 * (100vw - {{ width_marginMobile * 4}}px)"
+									sizes="(min-width: {{ respond_r3 }}px) {{ (outerWidth - (2 * marginGlobal)) / 3 }}px, .3333333 * (100vw - {{ marginGlobalMobile * 4}}px)"
 									srcset="/img/placeholders/3-2.svg 375w,
 									        	/img/placeholders/3-2.svg 480w,
 												/img/placeholders/3-2.svg 768w"
@@ -185,7 +153,7 @@
 							</figure>
 							<figure>
 								<img
-									sizes="(min-width: {{ respond_r3 }}px) {{ (width_outerBounded - (2 * width_marginDesktop)) / 3 }}px, .3333333 * (100vw - {{ width_marginMobile * 4}}px)"
+									sizes="(min-width: {{ respond_r3 }}px) {{ (outerWidth - (2 * marginGlobal)) / 3 }}px, .3333333 * (100vw - {{ marginGlobalMobile * 4}}px)"
 									srcset="/img/placeholders/3-2.svg 375w,
 									        	/img/placeholders/3-2.svg 480w,
 												/img/placeholders/3-2.svg 768w"
@@ -194,7 +162,7 @@
 							</figure>
 							<figure>
 								<img
-									sizes="(min-width: {{ respond_r3 }}px) {{ (width_outerBounded - (2 * width_marginDesktop)) / 3 }}px, .3333333 * (100vw - {{ width_marginMobile * 4}}px)"
+									sizes="(min-width: {{ respond_r3 }}px) {{ (outerWidth - (2 * marginGlobal)) / 3 }}px, .3333333 * (100vw - {{ marginGlobalMobile * 4}}px)"
 									srcset="/img/placeholders/3-2.svg 375w,
 									        	/img/placeholders/3-2.svg 480w,
 												/img/placeholders/3-2.svg 768w"
@@ -212,7 +180,7 @@
 						<div class="row single">
 							<figure>
 								<img
-									sizes="	(min-width: {{ respond_r3 }}) {{ width_outerBounded }}, 100vw - {{ width_marginMobile }}"
+									sizes="	(min-width: {{ respond_r3 }}) {{ outerWidth }}, 100vw - {{ marginGlobalMobile }}"
 									srcset="	/img/placeholders/16-9.svg 375w,
 									        	/img/placeholders/16-9.svg 480w,
 												/img/placeholders/16-9.svg 768w"
@@ -228,7 +196,7 @@
 						<div class="row four-across">
 							<figure>
 								<img
-									sizes="(min-width: {{ respond_r5 }}px) {{ (width_max - (3 * width_marginDesktop)) / 4 }}px, (min-width: {{ respond_r3 }}px) 100vw - {{ (3 * width_marginDesktop) / 4 }}px, .25 * (100vw - {{ width_marginMobile * 4}}px)"
+									sizes="(min-width: {{ respond_r5 }}px) {{ (maxWidth - (3 * marginGlobal)) / 4 }}px, (min-width: {{ respond_r3 }}px) 100vw - {{ (3 * marginGlobal) / 4 }}px, .25 * (100vw - {{ marginGlobalMobile * 4}}px)"
 									srcset="/img/placeholders/3-2.svg 375w,
 									        	/img/placeholders/3-2.svg 480w,
 												/img/placeholders/3-2.svg 768w"
@@ -237,7 +205,7 @@
 							</figure>
 							<figure>
 								<img
-									sizes="(min-width: {{ respond_r5 }}px) {{ (width_max - (3 * width_marginDesktop)) / 4 }}px, (min-width: {{ respond_r3 }}px) 100vw - {{ (3 * width_marginDesktop) / 4 }}px, .25 * (100vw - {{ width_marginMobile * 4}}px)"
+									sizes="(min-width: {{ respond_r5 }}px) {{ (maxWidth - (3 * marginGlobal)) / 4 }}px, (min-width: {{ respond_r3 }}px) 100vw - {{ (3 * marginGlobal) / 4 }}px, .25 * (100vw - {{ marginGlobalMobile * 4}}px)"
 									srcset="/img/placeholders/3-2.svg 375w,
 									        	/img/placeholders/3-2.svg 480w,
 												/img/placeholders/3-2.svg 768w"
@@ -246,7 +214,7 @@
 							</figure>
 							<figure>
 								<img
-									sizes="(min-width: {{ respond_r5 }}px) {{ (width_max - (3 * width_marginDesktop)) / 4 }}px, (min-width: {{ respond_r3 }}px) 100vw - {{ (3 * width_marginDesktop) / 4 }}px, .25 * (100vw - {{ width_marginMobile * 4}}px)"
+									sizes="(min-width: {{ respond_r5 }}px) {{ (maxWidth - (3 * marginGlobal)) / 4 }}px, (min-width: {{ respond_r3 }}px) 100vw - {{ (3 * marginGlobal) / 4 }}px, .25 * (100vw - {{ marginGlobalMobile * 4}}px)"
 									srcset="/img/placeholders/3-2.svg 375w,
 									        	/img/placeholders/3-2.svg 480w,
 												/img/placeholders/3-2.svg 768w"
@@ -255,7 +223,7 @@
 							</figure>
 							<figure>
 								<img
-									sizes="(min-width: {{ respond_r5 }}px) {{ (width_max - (3 * width_marginDesktop)) / 4 }}px, (min-width: {{ respond_r3 }}px) 100vw - {{ (3 * width_marginDesktop) / 4 }}px, .25 * (100vw - {{ width_marginMobile * 4}}px)"
+									sizes="(min-width: {{ respond_r5 }}px) {{ (maxWidth - (3 * marginGlobal)) / 4 }}px, (min-width: {{ respond_r3 }}px) 100vw - {{ (3 * marginGlobal) / 4 }}px, .25 * (100vw - {{ marginGlobalMobile * 4}}px)"
 									srcset="/img/placeholders/3-2.svg 375w,
 									        	/img/placeholders/3-2.svg 480w,
 												/img/placeholders/3-2.svg 768w"
@@ -271,7 +239,7 @@
 						<div class="row four-across">
 							<figure>
 								<img
-									sizes="(min-width: {{ respond_r5 }}px) {{ (width_max - (3 * width_marginDesktop)) / 4 }}px, (min-width: {{ respond_r3 }}px) 100vw - {{ (3 * width_marginDesktop) / 4 }}px, .25 * (100vw - {{ width_marginMobile * 4}}px)"
+									sizes="(min-width: {{ respond_r5 }}px) {{ (maxWidth - (3 * marginGlobal)) / 4 }}px, (min-width: {{ respond_r3 }}px) 100vw - {{ (3 * marginGlobal) / 4 }}px, .25 * (100vw - {{ marginGlobalMobile * 4}}px)"
 									srcset="/img/placeholders/3-2.svg 375w,
 									        	/img/placeholders/3-2.svg 480w,
 												/img/placeholders/3-2.svg 768w"
@@ -280,7 +248,7 @@
 							</figure>
 							<figure>
 								<img
-									sizes="(min-width: {{ respond_r5 }}px) {{ (width_max - (3 * width_marginDesktop)) / 4 }}px, (min-width: {{ respond_r3 }}px) 100vw - {{ (3 * width_marginDesktop) / 4 }}px, .25 * (100vw - {{ width_marginMobile * 4}}px)"
+									sizes="(min-width: {{ respond_r5 }}px) {{ (maxWidth - (3 * marginGlobal)) / 4 }}px, (min-width: {{ respond_r3 }}px) 100vw - {{ (3 * marginGlobal) / 4 }}px, .25 * (100vw - {{ marginGlobalMobile * 4}}px)"
 									srcset="/img/placeholders/3-2.svg 375w,
 									        	/img/placeholders/3-2.svg 480w,
 												/img/placeholders/3-2.svg 768w"
@@ -289,7 +257,7 @@
 							</figure>
 							<figure>
 								<img
-									sizes="(min-width: {{ respond_r5 }}px) {{ (width_max - (3 * width_marginDesktop)) / 4 }}px, (min-width: {{ respond_r3 }}px) 100vw - {{ (3 * width_marginDesktop) / 4 }}px, .25 * (100vw - {{ width_marginMobile * 4}}px)"
+									sizes="(min-width: {{ respond_r5 }}px) {{ (maxWidth - (3 * marginGlobal)) / 4 }}px, (min-width: {{ respond_r3 }}px) 100vw - {{ (3 * marginGlobal) / 4 }}px, .25 * (100vw - {{ marginGlobalMobile * 4}}px)"
 									srcset="/img/placeholders/3-2.svg 375w,
 									        	/img/placeholders/3-2.svg 480w,
 												/img/placeholders/3-2.svg 768w"
@@ -298,45 +266,7 @@
 							</figure>
 							<figure>
 								<img
-									sizes="(min-width: {{ respond_r5 }}px) {{ (width_max - (3 * width_marginDesktop)) / 4 }}px, (min-width: {{ respond_r3 }}px) 100vw - {{ (3 * width_marginDesktop) / 4 }}px, .25 * (100vw - {{ width_marginMobile * 4}}px)"
-									srcset="/img/placeholders/3-2.svg 375w,
-									        	/img/placeholders/3-2.svg 480w,
-												/img/placeholders/3-2.svg 768w"
-									src="/img/placeholders/3-2.svg"
-									alt="…">
-							</figure>
-						</div>
-						<div class="row four-across">
-							<figure>
-								<img
-									sizes="(min-width: {{ respond_r5 }}px) {{ (width_max - (3 * width_marginDesktop)) / 4 }}px, (min-width: {{ respond_r3 }}px) 100vw - {{ (3 * width_marginDesktop) / 4 }}px, .25 * (100vw - {{ width_marginMobile * 4}}px)"
-									srcset="/img/placeholders/3-2.svg 375w,
-									        	/img/placeholders/3-2.svg 480w,
-												/img/placeholders/3-2.svg 768w"
-									src="/img/placeholders/3-2.svg"
-									alt="…">
-							</figure>
-							<figure>
-								<img
-									sizes="(min-width: {{ respond_r5 }}px) {{ (width_max - (3 * width_marginDesktop)) / 4 }}px, (min-width: {{ respond_r3 }}px) 100vw - {{ (3 * width_marginDesktop) / 4 }}px, .25 * (100vw - {{ width_marginMobile * 4}}px)"
-									srcset="/img/placeholders/3-2.svg 375w,
-									        	/img/placeholders/3-2.svg 480w,
-												/img/placeholders/3-2.svg 768w"
-									src="/img/placeholders/3-2.svg"
-									alt="…">
-							</figure>
-							<figure>
-								<img
-									sizes="(min-width: {{ respond_r5 }}px) {{ (width_max - (3 * width_marginDesktop)) / 4 }}px, (min-width: {{ respond_r3 }}px) 100vw - {{ (3 * width_marginDesktop) / 4 }}px, .25 * (100vw - {{ width_marginMobile * 4}}px)"
-									srcset="/img/placeholders/3-2.svg 375w,
-									        	/img/placeholders/3-2.svg 480w,
-												/img/placeholders/3-2.svg 768w"
-									src="/img/placeholders/3-2.svg"
-									alt="…">
-							</figure>
-							<figure>
-								<img
-									sizes="(min-width: {{ respond_r5 }}px) {{ (width_max - (3 * width_marginDesktop)) / 4 }}px, (min-width: {{ respond_r3 }}px) 100vw - {{ (3 * width_marginDesktop) / 4 }}px, .25 * (100vw - {{ width_marginMobile * 4}}px)"
+									sizes="(min-width: {{ respond_r5 }}px) {{ (maxWidth - (3 * marginGlobal)) / 4 }}px, (min-width: {{ respond_r3 }}px) 100vw - {{ (3 * marginGlobal) / 4 }}px, .25 * (100vw - {{ marginGlobalMobile * 4}}px)"
 									srcset="/img/placeholders/3-2.svg 375w,
 									        	/img/placeholders/3-2.svg 480w,
 												/img/placeholders/3-2.svg 768w"
@@ -347,7 +277,7 @@
 						<div class="row four-across">
 							<figure>
 								<img
-									sizes="(min-width: {{ respond_r5 }}px) {{ (width_max - (3 * width_marginDesktop)) / 4 }}px, (min-width: {{ respond_r3 }}px) 100vw - {{ (3 * width_marginDesktop) / 4 }}px, .25 * (100vw - {{ width_marginMobile * 4}}px)"
+									sizes="(min-width: {{ respond_r5 }}px) {{ (maxWidth - (3 * marginGlobal)) / 4 }}px, (min-width: {{ respond_r3 }}px) 100vw - {{ (3 * marginGlobal) / 4 }}px, .25 * (100vw - {{ marginGlobalMobile * 4}}px)"
 									srcset="/img/placeholders/3-2.svg 375w,
 									        	/img/placeholders/3-2.svg 480w,
 												/img/placeholders/3-2.svg 768w"
@@ -356,7 +286,7 @@
 							</figure>
 							<figure>
 								<img
-									sizes="(min-width: {{ respond_r5 }}px) {{ (width_max - (3 * width_marginDesktop)) / 4 }}px, (min-width: {{ respond_r3 }}px) 100vw - {{ (3 * width_marginDesktop) / 4 }}px, .25 * (100vw - {{ width_marginMobile * 4}}px)"
+									sizes="(min-width: {{ respond_r5 }}px) {{ (maxWidth - (3 * marginGlobal)) / 4 }}px, (min-width: {{ respond_r3 }}px) 100vw - {{ (3 * marginGlobal) / 4 }}px, .25 * (100vw - {{ marginGlobalMobile * 4}}px)"
 									srcset="/img/placeholders/3-2.svg 375w,
 									        	/img/placeholders/3-2.svg 480w,
 												/img/placeholders/3-2.svg 768w"
@@ -365,7 +295,7 @@
 							</figure>
 							<figure>
 								<img
-									sizes="(min-width: {{ respond_r5 }}px) {{ (width_max - (3 * width_marginDesktop)) / 4 }}px, (min-width: {{ respond_r3 }}px) 100vw - {{ (3 * width_marginDesktop) / 4 }}px, .25 * (100vw - {{ width_marginMobile * 4}}px)"
+									sizes="(min-width: {{ respond_r5 }}px) {{ (maxWidth - (3 * marginGlobal)) / 4 }}px, (min-width: {{ respond_r3 }}px) 100vw - {{ (3 * marginGlobal) / 4 }}px, .25 * (100vw - {{ marginGlobalMobile * 4}}px)"
 									srcset="/img/placeholders/3-2.svg 375w,
 									        	/img/placeholders/3-2.svg 480w,
 												/img/placeholders/3-2.svg 768w"
@@ -374,7 +304,45 @@
 							</figure>
 							<figure>
 								<img
-									sizes="(min-width: {{ respond_r5 }}px) {{ (width_max - (3 * width_marginDesktop)) / 4 }}px, (min-width: {{ respond_r3 }}px) 100vw - {{ (3 * width_marginDesktop) / 4 }}px, .25 * (100vw - {{ width_marginMobile * 4}}px)"
+									sizes="(min-width: {{ respond_r5 }}px) {{ (maxWidth - (3 * marginGlobal)) / 4 }}px, (min-width: {{ respond_r3 }}px) 100vw - {{ (3 * marginGlobal) / 4 }}px, .25 * (100vw - {{ marginGlobalMobile * 4}}px)"
+									srcset="/img/placeholders/3-2.svg 375w,
+									        	/img/placeholders/3-2.svg 480w,
+												/img/placeholders/3-2.svg 768w"
+									src="/img/placeholders/3-2.svg"
+									alt="…">
+							</figure>
+						</div>
+						<div class="row four-across">
+							<figure>
+								<img
+									sizes="(min-width: {{ respond_r5 }}px) {{ (maxWidth - (3 * marginGlobal)) / 4 }}px, (min-width: {{ respond_r3 }}px) 100vw - {{ (3 * marginGlobal) / 4 }}px, .25 * (100vw - {{ marginGlobalMobile * 4}}px)"
+									srcset="/img/placeholders/3-2.svg 375w,
+									        	/img/placeholders/3-2.svg 480w,
+												/img/placeholders/3-2.svg 768w"
+									src="/img/placeholders/3-2.svg"
+									alt="…">
+							</figure>
+							<figure>
+								<img
+									sizes="(min-width: {{ respond_r5 }}px) {{ (maxWidth - (3 * marginGlobal)) / 4 }}px, (min-width: {{ respond_r3 }}px) 100vw - {{ (3 * marginGlobal) / 4 }}px, .25 * (100vw - {{ marginGlobalMobile * 4}}px)"
+									srcset="/img/placeholders/3-2.svg 375w,
+									        	/img/placeholders/3-2.svg 480w,
+												/img/placeholders/3-2.svg 768w"
+									src="/img/placeholders/3-2.svg"
+									alt="…">
+							</figure>
+							<figure>
+								<img
+									sizes="(min-width: {{ respond_r5 }}px) {{ (maxWidth - (3 * marginGlobal)) / 4 }}px, (min-width: {{ respond_r3 }}px) 100vw - {{ (3 * marginGlobal) / 4 }}px, .25 * (100vw - {{ marginGlobalMobile * 4}}px)"
+									srcset="/img/placeholders/3-2.svg 375w,
+									        	/img/placeholders/3-2.svg 480w,
+												/img/placeholders/3-2.svg 768w"
+									src="/img/placeholders/3-2.svg"
+									alt="…">
+							</figure>
+							<figure>
+								<img
+									sizes="(min-width: {{ respond_r5 }}px) {{ (maxWidth - (3 * marginGlobal)) / 4 }}px, (min-width: {{ respond_r3 }}px) 100vw - {{ (3 * marginGlobal) / 4 }}px, .25 * (100vw - {{ marginGlobalMobile * 4}}px)"
 									srcset="/img/placeholders/3-2.svg 375w,
 									        	/img/placeholders/3-2.svg 480w,
 												/img/placeholders/3-2.svg 768w"
@@ -411,7 +379,7 @@
 						<div class="row single">
 							<figure>
 								<img
-									sizes="	(min-width: {{ respond_r3 }}px) {{ width_innerBounded }}px, 100vw - {{ width_marginMobile }}px"
+									sizes="	(min-width: {{ respond_r3 }}px) {{ innerWidth }}px, 100vw - {{ marginGlobalMobile }}px"
 									srcset="	/img/placeholders/3-2.svg 375w,
 									        	/img/placeholders/3-2.svg 480w,
 												/img/placeholders/3-2.svg 768w"
@@ -434,7 +402,7 @@
 							<figure class="hoverable">
 								<img
 									class="hoverable-display" 
-									sizes="	(min-width: {{ respond_r3 }}px) {{ width_innerBounded }}px, 100vw - {{ width_marginMobile }}px"
+									sizes="	(min-width: {{ respond_r3 }}px) {{ innerWidth }}px, 100vw - {{ marginGlobalMobile }}px"
 									srcset="	/img/placeholders/3-2.svg 375w,
 									        	/img/placeholders/3-2.svg 480w,
 												/img/placeholders/3-2.svg 768w"
@@ -442,7 +410,7 @@
 									alt="…">
 								<img
 									class="hoverable-onHover" 
-									sizes="	(min-width: {{ respond_r3 }}px) {{ width_innerBounded }}px, 100vw - {{ width_marginMobile }}px"
+									sizes="	(min-width: {{ respond_r3 }}px) {{ innerWidth }}px, 100vw - {{ marginGlobalMobile }}px"
 									srcset="	/img/placeholders/3-2-alt.svg 375w,
 									        	/img/placeholders/3-2-alt.svg 480w,
 												/img/placeholders/3-2-alt.svg 768w"

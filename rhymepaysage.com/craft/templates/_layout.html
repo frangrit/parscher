@@ -9,22 +9,35 @@
  # http://twig.sensiolabs.org/doc/templates.html#template-inheritance
  #}
 
-{% set width_grid = 8 %}
-{% set width_max = 1400 %}
-{% set width_marginMobile = width_grid * 2 %}
-{% set width_marginDesktop = width_grid * 5 %}
-{% set width_outerColumn = width_grid * 22 %}
-{% set width_innerBounded = width_grid * 60 %}
-{% set width_outerBounded = width_innerBounded + (2 * (width_outerColumn + width_marginDesktop)) %}
-{% set width_outerMarginMobile = width_marginMobile * 2 %}
-{% set width_outerMarginDesktop = width_marginDesktop * 2 %}
+{% set grid = 8 %}
+{% set maxWidth = 1400 %}
+{% set marginGlobal = grid * 5 %}
+{% set marginGlobalMobile = grid * 2 %}
+{% set marginGlobalMobileOuter = marginGlobalMobile * 2 %}
+{% set marginGlobalOuter = marginGlobal * 2 %}
+{% set gutterWidth = grid * 2 %}
+{% set innerWidth = grid * 60 %}
+{% set hangWidth = grid * 22 %}
+{% set hangWidthTotal = hangWidth + marginGlobal %}
+{% set outerWidth = innerWidth + (2 * hangWidthTotal) %}
+{% set maxWidth = grid * 175 %}
+
+{% set hangFull = marginGlobal - ( innerWidth / 2 ) %}
+{% set hangFullSize = '50vw - #{hangFull}px' %}
+
+
+{% set breakMob = innerWidth - marginGlobalOuter %}
+{% set breakInner = innerWidth + marginGlobalOuter %}
+{% set breakOuter = outerWidth + marginGlobalOuter %}
+{% set breakMax = outerWidth + marginGlobalOuter %}
+
 
 
 {% set respond_r1 = 0 %}
-{% set respond_r2 = 0 %}
-{% set respond_r3 = 560 %}
-{% set respond_r4 = 984 %}
-{% set respond_r5 = width_max + (width_marginDesktop * 2) %}
+{% set respond_r2 = breakMob %}
+{% set respond_r3 = breakInner %}
+{% set respond_r4 = breakOuter %}
+{% set respond_r5 = breakMax %}
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
