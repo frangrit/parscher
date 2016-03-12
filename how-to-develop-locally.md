@@ -1,16 +1,16 @@
 # How to develop locally from this repo
-1.  Clone the repo to any directory (~/code)
-2.  Install mamp from [mamp.info](http://www.mamp.info)
-3.  Add local dev host to ~/etc/hosts (or /private/etc/hosts)
+-  Clone the repo to any directory (~/code)
+-  Install mamp from [mamp.info](http://www.mamp.info)
+-  Add local dev host to ~/etc/hosts (or /private/etc/hosts)
 ```
 127.0.0.1 [project][-localSlug].dev
 ```
-4. uncomment the include in /Applications/MAMP/conf/apache/httpd.conf:
+-  uncomment the include in /Applications/MAMP/conf/apache/httpd.conf:
 ```
 # Virtual Hosts
 # Include /Applications/MAMP/conf/apache/extra/httpd-vhosts.conf
 ```
-5. Replace the examples in /Applications/MAMP/conf/apache/extra/httpd-vhosts.conf with
+-  Replace the examples in /Applications/MAMP/conf/apache/extra/httpd-vhosts.conf with
 ```
 <VirtualHost *:80>
     DocumentRoot /Applications/MAMP/htdocs
@@ -27,7 +27,7 @@
     </Directory>
 </VirtualHost>
 ```
-6. Add local environment vars to craft/config/general.php:
+-  Add local environment vars to craft/config/general.php:
 ```
     '[project][-localSlug].dev' => array(
         'devMode' => true,
@@ -38,9 +38,9 @@
         )
     ),
 ```
-7. Add production git repo:
+-  Add production git repo:
 ```
 git remote add production ssh://[user]@[project ssh host]:/path/to/[project_name].git
 ```
-6. Start MAMP
+-  Start MAMP
 
