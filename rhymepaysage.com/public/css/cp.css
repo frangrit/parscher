@@ -5,7 +5,7 @@ body .redactor-editor {
     sans-serif !important;
 }
 
-body .redactor-editor h2 {
+body .redactor-editor h3 {
 	font-size: 17px;
     line-height: 32px;
     display: inline-block;
@@ -19,7 +19,7 @@ body .redactor-editor p {
     line-height: 1.5;
 }
 
-body .redactor-dropdown-body-h2 span {
+body .redactor-dropdown-body-h3 span {
 	font-size: 17px;
     line-height: 32px;
     display: inline-block;

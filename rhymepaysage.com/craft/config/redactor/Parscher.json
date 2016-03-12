@@ -3,9 +3,9 @@
 	buttons: ['format','bold','italic','lists','link','file'],
 	formatting: [],
 	formattingAdd: {
-	    'body-h2': {
-		    title: 'Subhed (h2)',
-		    args: ['h2', 'toggle']
+	    'body-h3': {
+		    title: 'Subhed (h3)',
+		    args: ['h3', 'toggle']
 	    },    
 	    'body-p': {
 		    title: 'Plain Text (p)',
