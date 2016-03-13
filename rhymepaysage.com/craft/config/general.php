@@ -12,6 +12,7 @@ return array(
     '*' => array(
         'usePathInfo' => true,
 	    'omitScriptNameInUrls' => true,
+	    'addTrailingSlashesToUrls' => true,
     ),
 
     'rhymepaysage.dev' => array(
@@ -35,6 +36,8 @@ return array(
     '.com' => array(
         'cooldownDuration' => 0,
 		'siteUrl' => 'http://rhymepaysage.com/',
+		'useCompressedJs' => true,
+		'enableTemplateCaching' => true,
         'environmentVariables' => array(
             'basePath' => '/home/rhyme_site/sites/rhymepaysage.com/public/',
             'baseUrl'  => 'http://rhymepaysage.com/',
