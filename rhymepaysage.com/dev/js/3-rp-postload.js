@@ -12,6 +12,8 @@ $(function() {
 
 
 $(document).ready(function(){
+    FastClick.attach(document.body);
+
 	if($("#container").size()>0){
 	    if (document.createStyleSheet){
 	        document.createStyleSheet('/css/rp-app.css');

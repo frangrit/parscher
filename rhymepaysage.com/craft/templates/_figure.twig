@@ -34,14 +34,19 @@
 {# build the _sizes_ attribute #}
 {% if block.containerBound != 'unbounded' %}
 	{% set imgWidth = ( boundWidth - gutterTotal ) / imgCount %}
-	{% set sizeDefault = '100vw - #{sizeMobM}px' %}
-	{% set sizeBreakMob = '(min-width: #{breakMob}px) 100vw - #{sizeM}px' %}
-	{% set sizeBreakBound = '(min-width: #{thisbound}px) #{imgWidth}px' %}
-	{% set thisSizes = '#{sizeBreakBound}, #{sizeBreakMob}, #{sizeDefault}' %}
+	{% set thisBound = boundWidth + marginGlobalOuter %}
+	{% set thisBreakMargins = ( sizeM + gutterTotal ) / imgCount %}
+	{% set thisBreakVw = 100 / imgCount %}
+	{% set sizeDefault = "calc(100vw - #{sizeMobM}px)" %}
+	{% set sizeBreakMob = "(min-width: #{breakMob}px) calc(#{thisBreakVw}vw - #{thisBreakMargins}px)" %}
+	{% set sizeBreakBound = "(min-width: #{thisBound}px) #{imgWidth}px" %}
+	{% set thisSizes = "#{sizeBreakBound}, #{sizeBreakMob}, #{sizeDefault}" %}
 		{% else %}
-	{% set imgWidth = '(100vw - #{gutterTotal}px) / #{imgCount}' %}
-	{% set sizeBreakTab = '(min-width: #{breakInner}px) #{imgWidth}' %}
-	{% set thisSizes = '#{sizeBreakTab}, 100vw' %}
+	{% set thisBreakMargins = ( sizeM + gutterTotal ) / imgCount %}
+	{% set thisBreakVw = 100 / imgCount %}
+	{% set imgWidth = "calc(#{thisBreakVw}vw - #{thisBreakMargins}px)" %}
+	{% set sizeBreakTab = "(min-width: #{breakInner}px) #{imgWidth}" %}
+	{% set thisSizes = "#{sizeBreakTab}, 100vw" %}
 {% endif %}
 
 {# set the row class based on total images #}
@@ -63,17 +68,15 @@
 	<div class="row {{ rowClass }}">
 		{% for image in block.images %}
 			<figure>
-				<img
-					sizes="{{ thisSizes }}"
-					srcset="	{{ image.url('fit400w') }} 400w,
-					        	{{ image.url('fit800w') }} 800w,
-					        	{{ image.url('fit1200w') }} 1200w,
-					        	{{ image.url('fit1600w') }} 1600w,
-								{{ image.url('fit2000w') }} 2000w"
-					src="		{{ image.url }}"
-					{% if image.imageAlt | length %}
-					alt="{{ image.imageAlt }}">
-					{% endif %}
+				<picture>
+					<img
+						sizes="{{ thisSizes }}"
+						srcset="{{ image.url('fit400w') }} 400w, {{ image.url('fit800w') }} 800w, {{ image.url('fit1200w') }} 1200w, {{ image.url('fit1600w') }} 1600w, {{ image.url('fit2000w') }} 2000w"
+						{# src="{{ image.url }}" #}
+						{% if image.imageAlt | length %}
+						alt="{{ image.imageAlt }}">
+						{% endif %}
+				</picture>
 				{% if image.imageCaption | length %}<figcaption>{{ image.imageCaption }}</figcaption>{% endif %}
 			</figure>
 		{% endfor %}

@@ -31,6 +31,7 @@ $color-black: #222;
 $width-max: 1400px;
 $width-margin-mobile: $double;
 $width-margin-desktop: $grid * 5;
+$width-gutter: $grid * 2;
 $width-inner-bounded: $grid * 60;
 $width-outer-column: $grid * 22;
 $width-outer-edge: $width-outer-column + $width-margin-desktop;
@@ -396,26 +397,17 @@ p + .container.hanging {
 		margin-bottom: $grid * 3;
 	}
 	.row {
-		margin: 0 ($width-margin-mobile / -2);
+		margin: 0 ($width-gutter / -2);
 		overflow: auto;
-		@include respond-r3 {
-			margin: 0 ($width-margin-desktop / -2);
-		}
 	}
 	.row + .row {
 		figure {
 			margin-top: $width-margin-mobile;
-			@include respond-r3 {
-				margin-top: $width-margin-desktop;
-			}
 		}
 	}
 	figure {
-		padding: 0 $width-margin-mobile / 2;
+		padding: 0 $width-gutter / 2;
 		float: left;
-		@include respond-r3 {
-			padding: 0 ($width-margin-desktop / 2);
-		}
 		&.hoverable { 
 			position: relative;
 			.hoverable-display {
@@ -425,10 +417,7 @@ p + .container.hanging {
 				top: 0;
 				left: 0;
 				display: none;
-				padding: 0 $width-margin-mobile / 2;
-				@include respond-r3 {
-					padding: 0 ($width-margin-desktop / 2);
-				}
+				padding: 0 $width-gutter / 2;
 			}
 			&:hover {
 				.hoverable-onHover {
