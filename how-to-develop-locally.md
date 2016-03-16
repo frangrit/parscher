@@ -75,5 +75,5 @@ git remote add production ssh://[user]@[project ssh host]:/path/to/[project_name
 -  Start MAMP
 -  change preferences/ports to :80 and :3306
 -  Start MAMP servers
--  
+-  `npm install` from the project folder to install the dependencies
 
