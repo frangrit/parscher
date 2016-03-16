@@ -76,4 +76,5 @@ git remote add production ssh://[user]@[project ssh host]:/path/to/[project_name
 -  change preferences/ports to :80 and :3306
 -  Start MAMP servers
 -  `npm install` from the project folder to install the dependencies
+-  run `gulp --dev [devEnv]` where `devEnv` is the local development env (e.g. greenleaf) to start gulp
 
