@@ -18,6 +18,7 @@ This creates the package.json file in the site directory.
 ## Add the dev dependencies
 Add all these packages for a MAMP/Gulp workflow:
 - gulp
+- yargs
 - gulp-sass
 - gulp-autoprefixer
 - gulp-cssnano
@@ -35,7 +36,7 @@ Add all these packages for a MAMP/Gulp workflow:
 In the site folder:
 - `npm install -g gulp` [unless already installed globally]
 - `npm install -g jshint` [unless already installed globally] 
-- `npm install --save-dev gulp gulp-sass gulp-autoprefixer gulp-cssnano browser-sync gulp-notify gulp-sourcemaps jshint gulp-jshint gulp-concat gulp-clean gulp-rename gulp-uglify`
+- `npm install --save-dev gulp yargs gulp-sass gulp-autoprefixer gulp-cssnano browser-sync gulp-notify gulp-sourcemaps jshint gulp-jshint gulp-concat gulp-clean gulp-rename gulp-uglify`
 
 package.json should now end with a devDependencies section that looks something like this:
 ```
@@ -59,20 +60,24 @@ package.json should now end with a devDependencies section that looks something 
 
 ## Add the gulpfile
 - in the sites folder, add `gulpfile.js`
-- add the following, updating the `project.sitename` var:
+- add the following, updating the `siteHost` var:
 ```
+// Environment variables
+// use `gulp --dev [local environment name]` (e.g. greenleaf)
+var argv = require('yargs').argv;
+
+
 // Project variables
 
-var project = {
-	sitename: '[project].dev'
-};
+var siteHost = '[site host]';
+var devHost = (argv.dev == null) ? siteHost + '.dev': siteHost + '-' + argv.dev + '.dev' ;
 
 // Modules 
 var gulp = require('gulp'); 
-//    uglify = require('gulp-uglify'),
+	uglify = require('gulp-uglify'),
 //    rename = require('gulp-rename'),
 //    clean = require('gulp-clean'),
-//    concat = require('gulp-concat'),
+	concat = require('gulp-concat'),
     sass = require('gulp-sass'),
     autoprefixer = require('gulp-autoprefixer'),
     cssnano = require('gulp-cssnano'),
@@ -83,11 +88,11 @@ var gulp = require('gulp');
 
 
 // BrowserSync
-// Needs to play well with our MAMP setup and Virtual Host
+// Needs to play well with our MAMP setup and [site host]-[local env].dev Virtual Host
 
 gulp.task('browser-sync', function() {
     browserSync.init(['./public/js/**/*.js', './public/css/**/*.css', './craft/templates/**/*.html'], {
-        proxy: project.sitename
+        proxy: devHost
     });
 });
 
@@ -102,17 +107,14 @@ gulp.task('lint', function() {
 
 // Concatenate & Minify JS
 
-//gulp.task('scripts', function() {
-//    return gulp.src('js/*.js')
-//	    .pipe(concat('site-all.js'))
-//	    .pipe(gulp.dest('js'))
-//	    .pipe(rename({suffix: '.min'}))
-//	    .pipe(uglify())
-//	    .pipe(gulp.dest('js/dist'))
-//	    .pipe(gulp.dest('_site/js/dist'))
-//		.pipe(browserSync.stream())
-//	    .pipe(notify({ message: 'Scripts complete' }));
-//});
+gulp.task('scripts', function() {
+    return gulp.src('./dev/js/**/*')
+	    .pipe(concat('rp-app.js'))
+	    .pipe(gulp.dest('./public/js'))
+	    .pipe(uglify())
+	    .pipe(gulp.dest('./public/js'))
+	    .pipe(notify({ message: 'Scripts complete' }));
+});
 
 
 // Compile Our Sass
@@ -135,14 +137,14 @@ gulp.task('sass', function() {
 // Watch for changes
 
 gulp.task('watch', function() {
-    gulp.watch('./dev/js/**/*', ['lint']);
+    gulp.watch('./dev/js/**/*', ['lint', 'scripts']);
     gulp.watch('./dev/sass/**/*', ['sass']);
 });
 
 
 // Default Task
 
-gulp.task('default', ['browser-sync', 'lint', 'sass', 'watch']);
+gulp.task('default', ['browser-sync', 'lint', 'scripts', 'sass', 'watch']);
 ```
 
 - from the sites folder, run `gulp` from the command line
