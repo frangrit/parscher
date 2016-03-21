@@ -408,6 +408,10 @@ p + .container.hanging {
 	figure {
 		padding: 0 $width-gutter / 2;
 		float: left;
+		& + figure {
+			padding-top: $grid * 2; 
+			@include respond-r3 { padding-top: 0; }
+		}
 		&.hoverable { 
 			position: relative;
 			.hoverable-display {
@@ -427,9 +431,9 @@ p + .container.hanging {
 		}
 	}
 	.single figure { width: 100%; }
-	.two-across figure { width: 50%; }
-	.three-across figure { width: 33.333333%; }
-	.four-across figure { width: 25%; }
+	.two-across figure { @include respond-r3 { width: 50%; } }
+	.three-across figure { @include respond-r3 { width: 33.333333%; } }
+	.four-across figure { @include respond-r3 { width: 50%; } @include respond-r4 { width: 25%; } } 
 	figcaption, 
 	p.common-caption { 
 		clear: both; 
