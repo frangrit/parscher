@@ -92,20 +92,23 @@
 			{% set rowClass = 'two-across' %}
 		{% case '3' %}
 			{% set rowClass = 'three-across' %}
-		{% case '4' %}
+		{% default %}
 			{% set rowClass = 'four-across' %}
 	{% endswitch %}
 {% endif %}
 
 <div class="container {{ block.containerBound }} {{ containerType }}">
 
-	{% if block.figureTitle | length and isHanging == false %}
+	{% if block.figureTitle | length %}
 		<h3 class="figure-title">{{ block.figureTitle | raw }}</h3>
 	{% endif %}
 	<div class="row {{ rowClass }}">
-		{% if isHanging == false %}
+		{% if isHanging == false and block.imageBlockType != "slideshow" %}
+			{# only founr images total for non-slideshow images #}
+			{% set theseImages = block.images|slice(0,4) %}
+		{% elseif isHanging == false and block.imageBlockType == "slideshow" %}
 			{% set theseImages = block.images %}
-			{% else %}
+		{% else %}
 			{# only a single image in Hangs #}
 			{% set theseImages = block.images|slice(0,1) %}
 		{% endif %}
