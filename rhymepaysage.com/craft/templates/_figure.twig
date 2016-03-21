@@ -11,6 +11,23 @@
 	{% set M = 0 %}
 {% endif %}
 
+{% set containerType = null %}
+{% set isHanging = false %}
+
+{% switch block.imageBlockType %}
+	{% case 'center' %}
+		{% set containerType = "center" %}
+	{% case 'hangLeft' %}
+		{% set containerType = "hanging hang-left" %}
+		{% set isHanging = true %}
+	{% case 'hangRight' %}
+		{% set containerType = "hanging hang-right" %}
+		{% set isHanging = true %}
+	{% case 'slideshow' %}
+		{% set containerType = "slideshow" %}
+{% endswitch %}
+
+
 {% switch block.containerBound %}
 	{% case 'inner-bounded' %}
 		{% set boundWidth = innerWidth %}
@@ -32,41 +49,67 @@
 {% set gutterTotal = gutterWidth * gutterCount %}
 
 {# build the _sizes_ attribute #}
-{% if block.containerBound != 'unbounded' %}
-	{% set imgWidth = ( boundWidth - gutterTotal ) / imgCount %}
+{% set thisBreakMargins = ( sizeM + gutterTotal ) / imgCount %}
+{% if isHanging == true %}
+	{% set boundWidth = outerWidth %}
 	{% set thisBound = boundWidth + marginGlobalOuter %}
-	{% set thisBreakMargins = ( sizeM + gutterTotal ) / imgCount %}
-	{% set thisBreakVw = 100 / imgCount %}
 	{% set sizeDefault = "calc(100vw - #{sizeMobM}px)" %}
-	{% set sizeBreakMob = "(min-width: #{breakMob}px) calc(#{thisBreakVw}vw - #{thisBreakMargins}px)" %}
-	{% set sizeBreakBound = "(min-width: #{thisBound}px) #{imgWidth}px" %}
-	{% set thisSizes = "#{sizeBreakBound}, #{sizeBreakMob}, #{sizeDefault}" %}
-		{% else %}
-	{% set thisBreakMargins = ( sizeM + gutterTotal ) / imgCount %}
-	{% set thisBreakVw = 100 / imgCount %}
-	{% set imgWidth = "calc(#{thisBreakVw}vw - #{thisBreakMargins}px)" %}
-	{% set sizeBreakTab = "(min-width: #{breakInner}px) #{imgWidth}" %}
-	{% set thisSizes = "#{sizeBreakTab}, 100vw" %}
+	{% switch block.containerBound %}
+		{% case 'unbounded' %}
+			{% set sizeDefault = "100vw" %}
+			{% set imgWidth = "calc(50vw - #{halfInnerWidth}px - #{marginGlobal}px)" %}
+		{% case 'max-bounded' %}
+			{% set imgWidth = "calc(50vw - #{halfInnerWidth}px - #{marginGlobalOuter}px)" %}
+		{% default %}
+			{% set imgWidth = "#{hangWidth}px" %}
+	{% endswitch %}
+	{% set sizeBreakBound = "(min-width: #{thisBound}px) #{imgWidth}" %}
+	{% set thisSizes = "#{sizeBreakBound}, #{sizeDefault}" %}
+	{% else %}
+	{% if block.containerBound != 'unbounded' %}
+		{% set imgWidth = ( boundWidth - gutterTotal ) / imgCount %}
+		{% set thisBound = boundWidth + marginGlobalOuter %}
+		{% set thisBreakVw = 100 / imgCount %}
+		{% set sizeDefault = "calc(100vw - #{sizeMobM}px)" %}
+		{% set sizeBreakMob = "(min-width: #{breakMob}px) calc(#{thisBreakVw}vw - #{thisBreakMargins}px)" %}
+		{% set sizeBreakBound = "(min-width: #{thisBound}px) #{imgWidth}px" %}
+		{% set thisSizes = "#{sizeBreakBound}, #{sizeBreakMob}, #{sizeDefault}" %}
+			{% else %}
+		{% set thisBreakVw = 100 / imgCount %}
+		{% set imgWidth = "calc(#{thisBreakVw}vw - #{thisBreakMargins}px)" %}
+		{% set sizeBreakTab = "(min-width: #{breakInner}px) #{imgWidth}" %}
+		{% set thisSizes = "#{sizeBreakTab}, 100vw" %}
+	{% endif %}
 {% endif %}
 
 {# set the row class based on total images #}
-{% switch imgCount %}
-	{% case '1' %}
-		{% set rowClass = 'single' %}
-	{% case '2' %}
-		{% set rowClass = 'two-across' %}
-	{% case '3' %}
-		{% set rowClass = 'three-across' %}
-	{% case '4' %}
-		{% set rowClass = 'four-across' %}
-{% endswitch %}
+{% set rowClass = null %}
+{% if block.imageBlockType == "center" %}
+	{% switch imgCount %}
+		{% case '1' %}
+			{% set rowClass = 'single' %}
+		{% case '2' %}
+			{% set rowClass = 'two-across' %}
+		{% case '3' %}
+			{% set rowClass = 'three-across' %}
+		{% case '4' %}
+			{% set rowClass = 'four-across' %}
+	{% endswitch %}
+{% endif %}
 
-<div class="container {{ block.containerBound }}">
-	{% if block.figureTitle | length %}
+<div class="container {{ block.containerBound }} {{ containerType }}">
+
+	{% if block.figureTitle | length and isHanging == false %}
 		<h3 class="figure-title">{{ block.figureTitle | raw }}</h3>
 	{% endif %}
 	<div class="row {{ rowClass }}">
-		{% for image in block.images %}
+		{% if isHanging == false %}
+			{% set theseImages = block.images %}
+			{% else %}
+			{# only a single image in Hangs #}
+			{% set theseImages = block.images|slice(0,1) %}
+		{% endif %}
+		{% for image in theseImages %}
 			<figure>
 				<picture>
 					<img
@@ -80,7 +123,7 @@
 				{% if image.imageCaption | length %}<figcaption>{{ image.imageCaption }}</figcaption>{% endif %}
 			</figure>
 		{% endfor %}
-		{% if block.commonCaption | length %}
+		{% if block.commonCaption | length and isHanging == false %}
 			<p class="common-caption">{{ block.commonCaption }}</p>
 		{% endif %}
 	</div>
