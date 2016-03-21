@@ -113,15 +113,29 @@
 			{% set theseImages = block.images|slice(0,1) %}
 		{% endif %}
 		{% for image in theseImages %}
-			<figure>
+			{% set isHoverable = false %}
+			{% if image.imageHover | length %} {% set isHoverable = true %}{% endif %}
+			<figure{% if isHoverable %} class="hoverable"{% endif %}>
 				<picture>
-					<img
+					<img{% if isHoverable %}
+						class="hoverable-display" {% endif %}
 						sizes="{{ thisSizes }}"
 						srcset="{{ image.url('fit200w') }} 200w, {{ image.url('fit400w') }} 400w, {{ image.url('fit800w') }} 800w, {{ image.url('fit1200w') }} 1200w, {{ image.url('fit1600w') }} 1600w, {{ image.url('fit2000w') }} 2000w"
 						{# src="{{ image.url }}" #}
 						{% if image.imageAlt | length %}
 						alt="{{ image.imageAlt }}">
 						{% endif %}
+					{% if isHoverable %}
+						{% set hover = image.imageHover.first() %}
+						<img
+							class="hoverable-onHover {{ hover }}" 
+							sizes="{{ thisSizes }}"
+							srcset="{{ hover.url('fit200w') }} 200w, {{ hover.url('fit400w') }} 400w, {{ hover.url('fit800w') }} 800w, {{ hover.url('fit1200w') }} 1200w, {{ hover.url('fit1600w') }} 1600w, {{ hover.url('fit2000w') }} 2000w"
+							{# src="{{ hover.url }}" #}
+							{% if hover.imageAlt | length %}
+							alt="{{ hover.imageAlt }}">
+							{% endif %}
+					{% endif %}	
 				</picture>
 				{% if image.imageCaption | length %}<figcaption>{{ image.imageCaption }}</figcaption>{% endif %}
 			</figure>
