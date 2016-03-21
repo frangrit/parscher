@@ -1,8 +1,12 @@
+// Environment variables
+// use `gulp --dev [local environment name]` (e.g. greenleaf)
+var argv = require('yargs').argv;
+
+
 // Project variables
 
-var project = {
-	sitename: 'rhymepaysage.dev'
-};
+var siteHost = 'rhymepaysage';
+var devHost = (argv.dev == null) ? siteHost + '.dev': siteHost + '-' + argv.dev + '.dev' ;
 
 // Modules 
 var gulp = require('gulp'); 
@@ -23,8 +27,8 @@ var gulp = require('gulp');
 // Needs to play well with our MAMP setup and Virtual Host
 
 gulp.task('browser-sync', function() {
-    browserSync.init(['./public/js/**/*.js', './public/css/**/*.css', './craft/templates/**/*.html'], {
-        proxy: project.sitename
+    browserSync.init(['./public/js/**/*.js', './public/css/**/*.css', './craft/templates/**/*.html', './craft/templates/**/*.twig'], {
+        proxy: devHost
     });
 });
 

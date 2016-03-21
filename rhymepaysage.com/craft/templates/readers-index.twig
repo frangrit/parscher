@@ -28,6 +28,26 @@
 				<h2 class="text-title">Index</h2>
 				<div class="body-main">
 					<ul class="site-index">
+						{% for tag in craft.tags.group('indexTags')%}
+							{% set taggedEntries = craft.entries.section('texts').relatedTo(tag) %}
+							{% if taggedEntries | length %}
+								{% if taggedEntries | length == 1 %}
+									{% set taggedEntry = taggedEntries.first() %}
+									<li class="index-entry"><a href="{{ taggedEntry.url }}">{{ tag.title }}</a></li>
+									{% else %}
+										<li class="index-entry"><strong>{{ tag.title }}</strong>
+											<ul class="index-multiples">
+												{% for taggedEntry in taggedEntries %}
+												<li class="index-multiple-entry"><a href="{{ taggedEntry.url }}">{{ loop.index }}</a></li>
+												{% endfor %}
+											</ul>
+										</li>
+								{% endif %}
+							{% endif %}
+						{% endfor %}
+					</ul>
+					<h3>Static Index Items (for design review only)</h3>
+					<ul class="site-index">
 						<li class="index-entry"><a class="#">aerodynamic impulse</a></li>
 						<li class="index-entry"><a class="#">aerologic flow</a></li>
 						<li class="index-entry"><a class="#">Alamo, the</a></li>

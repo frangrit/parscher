@@ -127,28 +127,11 @@ a {
 	}
 }
 
-body.content {
-	h1 {
-		color: white;
-		animation: ani-fadeOut ease-in-out $time-long forwards;
-		transition: color .3s;
-		&:hover {
-			color: $color-black;
-			animation: none;
-		}
-	}
-}
-
 h1 {
 	font-size: 32px;
 	font-family: $font-title;
 	margin: $grid * 6 0 ;
 	font-weight: 300;
-	transition: opacity .3s;
-	&:hover { 
-		animation: none; 
-		opacity: 1; 
-	}
 	@include respond-r2 {
 		margin: $grid * 8 0;
 	}
