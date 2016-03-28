@@ -14,79 +14,22 @@
 	uBand (micro bandwidth) Styles
 	Critical CSS for inline	*/
 
-@import '_measure-reset.scss';
-@import '_measure-defaults.scss';
-
-$font-title: -apple-system, BlinkMacSystemFont, 
-    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", 
-    "Fira Sans", "Droid Sans", "Helvetica Neue", 
-    sans-serif;
-$font-alt: -apple-system, BlinkMacSystemFont, 
-    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", 
-    "Fira Sans", "Droid Sans", "Helvetica Neue", 
-    sans-serif;
-
-$color-black: #222;
-
-$width-max: 1400px;
-$width-margin-mobile: $double;
-$width-margin-desktop: $grid * 5;
-$width-gutter: $grid * 2;
-$width-inner-bounded: $grid * 60;
-$width-outer-column: $grid * 22;
-$width-outer-edge: $width-outer-column + $width-margin-desktop;
-$width-outer-bounded: $width-inner-bounded + (2 * ($width-outer-column + $width-margin-desktop));
-
-$width-outer-calc: ($width-inner-bounded / 2) + $width-margin-desktop;
-$width-outer-margin-calc: $width-outer-calc + $width-outer-column ;
-
-$respond-r3: 560px;
-$respond-r4: 984px;
-$respond-r5: $width-max + ($width-margin-desktop * 2);
-
-$ui-close-large: 34px;
-$ui-close-small: 26px;
-
-$time-xlong: 25s;
-$time-long: 10s;
-$time-short: 4s;
-$color-trans-whispergray: rgba(0,0,0,.02);
-
-// - - - - - - -
-
-@keyframes ani-fadeOut {
-    from {color: $color-black;}
-    to {color: white;}
-}
-
-@keyframes ani-blackOut {
-    from {background-color: white;}
-    to {background-color: $color-trans-whispergray;}
-}
-
-@keyframes ani-clearOut {
-    from {color: $color-black;}
-    to {color: rgba(0,0,0,0);}
-}
-
-@keyframes ani-commentsBg {
-    from {background-color: $color-trans-whispergray;}
-    to {background-color: #dbe6d5;}
-}
+@import '_measure-reset';
+@import '_measure-defaults';
+@import '_parscher-vars';
+@import '_parscher-ani';
 
 
 // - - - - - - -
+
 
 body {
-	font-size: 18px;
+	@include font-size(1.8);
 	font-family: $font-body;
 	color: $color-black;
 	padding: $grid $grid * 3 $grid * 10 $double;
 	position: relative;
 	z-index: 0;
-	@include respond-r1 {
-		font-size: 18px;
-	}
 	@include respond-r2 { 
 		padding-left: $grid * 5;
 		padding-right: $grid * 5;
@@ -128,7 +71,7 @@ a {
 }
 
 h1 {
-	font-size: 32px;
+	@include font-size(3.2);
 	font-family: $font-title;
 	margin: $grid * 6 0 ;
 	font-weight: 300;
@@ -281,7 +224,7 @@ nav.secondary {
 		margin-top: $grid/2;
 	}
 	@include respond-r5 {
-		width: 1400px;
+		width: $width-max;
 	}
 }
 
@@ -304,6 +247,12 @@ nav.secondary {
 .secondary-nav-item {
 	padding-bottom: .5em;
 	line-height: 1.2;
+}
+
+.entry a {
+	background-color: white;
+    padding: 3px 4px 5px 0;
+    border-radius: 1px;
 }
 
 .entry-list {
@@ -465,7 +414,6 @@ div.comments {
 	margin: $grid * 7 $grid * -3 0 $grid * -2;
 	width: auto;
 	background-color: $color-trans-whispergray;
-	//animation: ani-commentsBg ease-in-out 5s infinite alternate;
 	@include respond-r3 {
 		margin: $grid * 8 $grid * -5 0 $grid * -5;
 		padding: $grid * 8 $grid * 5 $grid * 8;

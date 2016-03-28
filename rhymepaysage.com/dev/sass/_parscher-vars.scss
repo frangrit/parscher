@@ -1,0 +1,29 @@
+$font-title: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",  sans-serif;
+$font-alt: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+
+$color-black: #222;
+
+$width-max: 1400px;
+$width-margin-mobile: $double;
+$width-margin-desktop: $grid * 5;
+$width-inner-bounded: $grid * 60;
+$width-outer-column: $grid * 22;
+$width-outer-edge: $width-outer-column + $width-margin-desktop;
+$width-outer-bounded: $width-inner-bounded + (2 * ($width-outer-column + $width-margin-desktop));
+
+$width-gutter: $double;
+
+$width-outer-calc: ($width-inner-bounded / 2) + $width-margin-desktop;
+$width-outer-margin-calc: $width-outer-calc + $width-outer-column ;
+
+$respond-r3: 560px;
+$respond-r4: 984px;
+$respond-r5: $width-max + ($width-margin-desktop * 2);
+
+$ui-close-large: 34px;
+$ui-close-small: 26px;
+
+$time-xlong: 25s;
+$time-long: 10s;
+$time-short: 4s;
+$color-trans-whispergray: rgba(0,0,0,.02);

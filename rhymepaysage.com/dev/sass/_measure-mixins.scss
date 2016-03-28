@@ -12,10 +12,14 @@
 	box-sizing: $box-sizing;
 }
 
+@mixin font-size($sizeValue: 1.8) {
+  font-size: ($sizeValue * 10) + px;
+  font-size: $sizeValue + rem;
+}
 
 
 @mixin respond-r0 {
-	@media only screen and (max-width: $respond-r0) {
+	@media only screen and (max-width: $respond-r1 - 1) {
 		@content;
 	}
 }

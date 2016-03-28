@@ -1,0 +1,19 @@
+@keyframes ani-fadeOut {
+    from {color: $color-black;}
+    to {color: white;}
+}
+
+@keyframes ani-blackOut {
+    from {background-color: white;}
+    to {background-color: $color-trans-whispergray;}
+}
+
+@keyframes ani-clearOut {
+    from {color: $color-black;}
+    to {color: rgba(0,0,0,0);}
+}
+
+@keyframes ani-commentsBg {
+    from {background-color: $color-trans-whispergray;}
+    to {background-color: #dbe6d5;}
+}
