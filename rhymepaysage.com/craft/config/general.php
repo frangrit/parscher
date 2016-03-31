@@ -13,10 +13,6 @@ return array(
         'usePathInfo' => true,
 	    'omitScriptNameInUrls' => true,
 	    'addTrailingSlashesToUrls' => true,
-        'environmentVariables' => array(
-            'assetPath' => '/home/rhyme_site/sites/rhymepaysage.com/public/',
-            'assetUrl'  => 'http://rhymepaysage.com/',
-        )
     ),
 
     'rhymepaysage.dev' => array(
