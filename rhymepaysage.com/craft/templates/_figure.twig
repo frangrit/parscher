@@ -35,6 +35,8 @@
 		{% set boundWidth = outerWidth %}
 	{% case 'max-bounded' %}
 		{% set boundWidth = maxWidth %}
+	{% default %}
+		{% set boundWidth = innerWidth %}
 {% endswitch %}
 
 {# find the total images in the container #}
