@@ -67,20 +67,20 @@
 	{% endswitch %}
 	{% set sizeBreakBound = "(min-width: #{thisBound}px) #{imgWidth}" %}
 	{% set thisSizes = "#{sizeBreakBound}, #{sizeDefault}" %}
-	{% else %}
+{% else %}
 	{% if block.containerBound != 'unbounded' %}
 		{% set imgWidth = ( boundWidth - gutterTotal ) / imgCount %}
 		{% set thisBound = boundWidth + marginGlobalOuter %}
 		{% set thisBreakVw = 100 / imgCount %}
 		{% set sizeDefault = "calc(100vw - #{sizeMobM}px)" %}
-		{% set sizeBreakMob = "(min-width: #{breakMob}px) calc(#{thisBreakVw}vw - #{thisBreakMargins}px)" %}
+		{% set sizeBreakMob = "calc(#{thisBreakVw}vw - #{thisBreakMargins}px" %}
 		{% set sizeBreakBound = "(min-width: #{thisBound}px) #{imgWidth}px" %}
-		{% set thisSizes = "#{sizeBreakBound}, #{sizeBreakMob}, #{sizeDefault}" %}
+		{% set thisSizes = "#{sizeBreakBound}, #{sizeBreakMob}" %}
 			{% else %}
 		{% set thisBreakVw = 100 / imgCount %}
 		{% set imgWidth = "calc(#{thisBreakVw}vw - #{thisBreakMargins}px)" %}
 		{% set sizeBreakTab = "(min-width: #{breakInner}px) #{imgWidth}" %}
-		{% set thisSizes = "#{sizeBreakTab}, 100vw" %}
+		{% set thisSizes = imgWidth %}
 	{% endif %}
 {% endif %}
 
@@ -118,27 +118,29 @@
 			{% set isHoverable = false %}
 			{% if image.imageHover | length %} {% set isHoverable = true %}{% endif %}
 			<figure{% if isHoverable %} class="hoverable"{% endif %}>
-				<picture>
-					<img{% if isHoverable %}
-						class="hoverable-display" {% endif %}
-						sizes="{{ thisSizes }}"
-						srcset="{{ image.url('fit200w') }} 200w, {{ image.url('fit400w') }} 400w, {{ image.url('fit800w') }} 800w, {{ image.url('fit1200w') }} 1200w, {{ image.url('fit1600w') }} 1600w, {{ image.url('fit2000w') }} 2000w"
-						{# src="{{ image.url }}" #}
-						{% if image.imageAlt | length %}
-						alt="{{ image.imageAlt }}">
-						{% endif %}
-					{% if isHoverable %}
-						{% set hover = image.imageHover.first() %}
-						<img
-							class="hoverable-onHover {{ hover }}" 
+				<a href="{{ image.url }}">
+					<picture>
+						<img{% if isHoverable %}
+							class="hoverable-display" {% endif %}
 							sizes="{{ thisSizes }}"
-							srcset="{{ hover.url('fit200w') }} 200w, {{ hover.url('fit400w') }} 400w, {{ hover.url('fit800w') }} 800w, {{ hover.url('fit1200w') }} 1200w, {{ hover.url('fit1600w') }} 1600w, {{ hover.url('fit2000w') }} 2000w"
-							{# src="{{ hover.url }}" #}
-							{% if hover.imageAlt | length %}
-							alt="{{ hover.imageAlt }}">
+							srcset="{{ image.url('fit200w') }} 200w, {{ image.url('fit400w') }} 400w, {{ image.url('fit800w') }} 800w, {{ image.url('fit1200w') }} 1200w, {{ image.url('fit1600w') }} 1600w, {{ image.url('fit2000w') }} 2000w"
+							{# src="{{ image.url }}" #}
+							{% if image.imageAlt | length %}
+							alt="{{ image.imageAlt }}">
 							{% endif %}
-					{% endif %}	
-				</picture>
+						{% if isHoverable %}
+							{% set hover = image.imageHover.first() %}
+							<img
+								class="hoverable-onHover {{ hover }}" 
+								sizes="{{ thisSizes }}"
+								srcset="{{ hover.url('fit200w') }} 200w, {{ hover.url('fit400w') }} 400w, {{ hover.url('fit800w') }} 800w, {{ hover.url('fit1200w') }} 1200w, {{ hover.url('fit1600w') }} 1600w, {{ hover.url('fit2000w') }} 2000w"
+								{# src="{{ hover.url }}" #}
+								{% if hover.imageAlt | length %}
+								alt="{{ hover.imageAlt }}">
+								{% endif %}
+						{% endif %}	
+					</picture>
+				</a>
 				{% if image.imageCaption | length %}<figcaption>{{ image.imageCaption }}</figcaption>{% endif %}
 			</figure>
 		{% endfor %}

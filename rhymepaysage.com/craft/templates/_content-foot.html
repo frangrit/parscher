@@ -1,4 +1,25 @@
 {% include "_nav-bottom" %}
 {% if bodyClass == "content" %} 
+	{% if entry.indexTags | length %}
+		<ul class="text-index inner-bounded">
+		{% for thisTag in entry.indexTags %}
+			{% set taggedEntries = craft.entries.section('texts').relatedTo(thisTag) %}
+			{% if taggedEntries | length %}
+				{% if taggedEntries | length == 1 %}
+					{% set taggedEntry = taggedEntries.first() %}
+					<li class="index-entry"><a href="{{ taggedEntry.url }}">{{ thisTag.title }}</a></li>
+					{% else %}
+						<li class="index-entry"><strong>{{ thisTag.title }}</strong>
+							<ul class="index-multiples">
+								{% for taggedEntry in taggedEntries %}
+								<li class="index-multiple-entry"><a href="{{ taggedEntry.url }}">{{ loop.index }}</a></li>
+								{% endfor %}
+							</ul>
+						</li>
+				{% endif %}
+			{% endif %}
+		{% endfor %}
+		</ul>
+	{% endif %}
 	{% include "_comments" %}
 {% endif %}
