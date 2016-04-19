@@ -4,7 +4,6 @@
 // 2016
 
 @import '_measure-vars.scss';
-@import '_measure-mixins.scss';
 
 /*	-----------------------------------------------
 	uBand variables	*/
@@ -18,6 +17,8 @@
 @import '_measure-defaults';
 @import '_parscher-vars';
 @import '_parscher-ani';
+
+@import '_measure-mixins.scss';
 
 
 // - - - - - - -

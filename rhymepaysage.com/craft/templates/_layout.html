@@ -44,11 +44,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
 	<head>
 		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 		<title>{% if title is defined %}{{ title }} / {% endif %}{{ siteName }}</title>
 		<link rel="home" href="{{ siteUrl }}" />
-		<style>{{ source('css/uband.css') }}</style>
-		{#<link rel="stylesheet" href="/css/uband.css"/>#}
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+		{#<style>{{ source('css/uband.css') }}</style> #}
+		<link rel="stylesheet" href="/css/uband.css"/>
 	</head>
 	
 	<body class="{{ bodyClass }}">
@@ -63,5 +63,5 @@
 		</div>{# /#container #}
 	</body>
 	<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
-	<script type="text/javascript" src="js/rp-app.js"></script>
+	<script type="text/javascript" src="/js/rp-app.js"></script>
 </html>

@@ -30,7 +30,7 @@ $width-marginGlobalOuter: $width-margin-desktop * 2;
 $break-mobile: $width-inner-bounded - $width-marginGlobalOuter;
 $break-inner: $width-inner-bounded + $width-marginGlobalOuter;
 $break-outer: $width-outer-bounded + $width-marginGlobalOuter;
-$break-max: $width-outer-bounded + $width-marginGlobalOuter;
+$break-max: 1400px + $width-marginGlobalOuter;
 
 $respond-r2: $break-mobile;
 $respond-r3: $break-inner;
