@@ -17,6 +17,13 @@ $width-column: $width-mobile;
 $width-sidebar: $grid * 22; //172px;
 
 // respond
+$zindex-below: -1;
+$zindex-0: 0;
+$zindex-1: 100;
+$zindex-2: 200;
+$zindex-3: 300;
+
+// respond
 $respond-r0: 320px;
 $respond-r1: 480px;
 $respond-r2: 768px;

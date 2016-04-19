@@ -38,11 +38,11 @@
             var $index = $(this).index();
             var options = {
                 index: $index,
-                bgOpacity: 0.7,
+                bgOpacity: 1,
                 showHideOpacity: true
             };
 
-            var lightBox = new PhotoSwipe($pswp, PhotoSwipeUI_Default, items, options);
+            var lightBox = new PhotoSwipe($pswp, false, items, options);
             lightBox.init();
         });
     });

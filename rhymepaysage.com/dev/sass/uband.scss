@@ -30,7 +30,7 @@ body {
 	color: $color-black;
 	padding: $grid $grid * 3 $grid * 10 $double;
 	position: relative;
-	z-index: 0;
+	z-index: $zindex-0;
 	@include respond-r2 { 
 		padding-left: $grid * 5;
 		padding-right: $grid * 5;
@@ -54,7 +54,7 @@ a {
 	height: $ui-close-small;
 	text-indent: -10000px;
 	overflow: hidden;
-	z-index: 100000;
+	z-index: $zindex-2;
 	&:hover {
 		background-position: 0;
 		@include respond-r3 {
@@ -83,12 +83,12 @@ h1 {
 
 main {
 	position: relative;
-	z-index: 0;
+	z-index: $zindex-0;
 }
 
 .content-start {
 	position: relative;
-	z-index: 0;
+	z-index: $zindex-0;
 }
 
 .unbounded {
@@ -204,7 +204,7 @@ nav.secondary {
 	font-family: $font-title;
 	font-size: 95%;
 	position: relative;
-	z-index: 1;
+	z-index: $zindex-1;
 	width: 100%;
 	a {
 		&:hover {
@@ -234,7 +234,7 @@ nav.secondary {
 	position: absolute;
 	right: 0;
 	top: 0;
-	z-index: -100;
+	z-index: $zindex-below;
 	img {
 		display: block;
 		width: 100%;
@@ -262,7 +262,7 @@ nav.secondary {
 }
 
 .entry-list {
-	z-index: 10;
+	z-index: $zindex-1;
 	position: relative;
 }
 
@@ -447,12 +447,12 @@ body.home ._revealOnHome {
 ._fadeOnSiblingTriggerHover {
 	opacity: 0;
 	transition: opacity .3s;
-	z-index: -5;
+	z-index: $zindex-below;
 }
 
 .trigger:hover + ._fadeOnSiblingTriggerHover {
 	opacity: 1;
-	z-index: -1;
+	z-index: $zindex-below;
 }
 
 // - - - - 

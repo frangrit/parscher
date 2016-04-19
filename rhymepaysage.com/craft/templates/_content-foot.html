@@ -2,7 +2,7 @@
 {% if bodyClass == "content" %} 
 	{% if entry.indexTags | length %}
 		<ul class="text-index inner-bounded">
-		{% for thisTag in entry.indexTags %}
+		{% for thisTag in entry.indexTags.order('title').find() %}
 			{% set taggedEntries = craft.entries.section('texts').relatedTo(thisTag) %}
 			{% if taggedEntries | length %}
 				{% if taggedEntries | length == 1 %}
