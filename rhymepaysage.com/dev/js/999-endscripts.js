@@ -37,12 +37,10 @@
             
             var $index = $(this).index();
             var options = {
-                index: $index,
-                bgOpacity: 1,
-                showHideOpacity: true
+                bgOpacity: 1
             };
 
-            var lightBox = new PhotoSwipe($pswp, false, items, options);
+            var lightBox = new PhotoSwipe($pswp, PhotoSwipeUI_Default, items, options);
             lightBox.init();
         });
     });
