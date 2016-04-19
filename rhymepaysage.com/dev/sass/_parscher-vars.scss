@@ -27,7 +27,7 @@ $color-trans-whispergray: rgba(0,0,0,.02);
 $width-marginGlobalOuter: $width-margin-desktop * 2;
 
 
-$break-mobile: $width-inner-bounded - $width-marginGlobalOuter;
+$break-mobile: $width-inner-bounded;
 $break-inner: $width-inner-bounded + $width-marginGlobalOuter;
 $break-outer: $width-outer-bounded + $width-marginGlobalOuter;
 $break-max: 1400px + $width-marginGlobalOuter;
