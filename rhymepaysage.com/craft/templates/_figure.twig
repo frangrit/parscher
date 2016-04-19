@@ -73,7 +73,7 @@
 		{% set thisBound = boundWidth + marginGlobalOuter %}
 		{% set thisBreakVw = 100 / imgCount %}
 		{% set sizeDefault = "calc(100vw - #{sizeMobM}px)" %}
-		{% set sizeBreakMob = "calc(#{thisBreakVw}vw - #{thisBreakMargins}px" %}
+		{% set sizeBreakMob = "calc(#{thisBreakVw}vw - #{thisBreakMargins}px)" %}
 		{% set sizeBreakBound = "(min-width: #{thisBound}px) #{imgWidth}px" %}
 		{% set thisSizes = "#{sizeBreakBound}, #{sizeBreakMob}" %}
 			{% else %}
@@ -99,7 +99,7 @@
 	{% endswitch %}
 {% endif %}
 
-<div class="container {{ block.containerBound }} {{ containerType }}">
+<div class="container {{ block.containerBound }} {{ containerType }} itemscope itemtype="http://schema.org/ImageGallery"">
 
 	{% if block.figureTitle | length %}
 		<h3 class="figure-title">{{ block.figureTitle | raw }}</h3>
@@ -117,14 +117,15 @@
 		{% for image in theseImages %}
 			{% set isHoverable = false %}
 			{% if image.imageHover | length %} {% set isHoverable = true %}{% endif %}
-			<figure{% if isHoverable %} class="hoverable"{% endif %}>
-				<a href="{{ image.url }}">
+			<figure{% if isHoverable %} class="hoverable"{% endif %} itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="_forLightbox">
+				<a href="{{ image.url }}" data-size="{{ image.width }}x{{ image.height }}">
 					<picture>
 						<img{% if isHoverable %}
 							class="hoverable-display" {% endif %}
 							sizes="{{ thisSizes }}"
+							itemprop="thumbnail"
 							srcset="{{ image.url('fit200w') }} 200w, {{ image.url('fit400w') }} 400w, {{ image.url('fit800w') }} 800w, {{ image.url('fit1200w') }} 1200w, {{ image.url('fit1600w') }} 1600w, {{ image.url('fit2000w') }} 2000w"
-							{# src="{{ image.url }}" #}
+							{#src="{{ image.url('fit200w') }}"#}
 							{% if image.imageAlt | length %}
 							alt="{{ image.imageAlt }}">
 							{% endif %}
@@ -133,8 +134,9 @@
 							<img
 								class="hoverable-onHover {{ hover }}" 
 								sizes="{{ thisSizes }}"
+								itemprop="thumbnail"
 								srcset="{{ hover.url('fit200w') }} 200w, {{ hover.url('fit400w') }} 400w, {{ hover.url('fit800w') }} 800w, {{ hover.url('fit1200w') }} 1200w, {{ hover.url('fit1600w') }} 1600w, {{ hover.url('fit2000w') }} 2000w"
-								{# src="{{ hover.url }}" #}
+								{#src="{{ image.url('fit200w') }}"#}
 								{% if hover.imageAlt | length %}
 								alt="{{ hover.imageAlt }}">
 								{% endif %}
