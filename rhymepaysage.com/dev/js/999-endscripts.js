@@ -8,7 +8,7 @@ $(document).ready(function(){
 		  dots: false,
 		  responsive: [
 		    {
-		      breakpoint: 600,
+		      breakpoint: 424,
 		      settings: {
 		        dots: true,
 		        arrows: false,

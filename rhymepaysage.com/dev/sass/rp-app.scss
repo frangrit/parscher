@@ -30,4 +30,10 @@ body {
 .pswp__top-bar { display: none; }
 
 .row.slider,
-.container.slideshow { overflow: visible; }
+.container.slideshow { 
+	overflow: visible; 
+	margin-bottom: $grid * 8;
+	@include respond-r2 {
+		margin-bottom: $grid * 6;
+	}
+}
