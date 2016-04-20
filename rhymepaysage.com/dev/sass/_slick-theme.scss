@@ -87,21 +87,30 @@ $slick-opacity-not-active: 0.25 !default;
     }
 }
 
+.slick-prev, .slick-next {
+    &:hover::before {
+	    border-bottom: 1px solid;
+    }
+}
+
 .slick-prev:before, .slick-next:before {
-    font-family: $slick-font-family;
+    //font-family: $slick-font-family;
     font-size: 20px;
-    line-height: 1;
+    //line-height: 1;
     color: $slick-arrow-color;
-    opacity: $slick-opacity-default;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    //opacity: $slick-opacity-default;
+    //-webkit-font-smoothing: antialiased;
+    //-moz-osx-font-smoothing: grayscale;
+    &::hover {
+	    text-decoration: underline;
+    }
 }
 
 .slick-prev {
-    left: -25px;
+    left: -$grid * 3;
     [dir="rtl"] & {
         left: auto;
-        right: -25px;
+        right: -$grid * 3;
     }
     &:before {
         content: $slick-prev-character;

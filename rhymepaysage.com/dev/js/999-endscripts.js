@@ -4,23 +4,14 @@ $(document).ready(function(){
 	$('.slider').slick({
 		  speed: 300,
 		  lazyLoad: 'ondemand',
+		  arrows: true,
+		  dots: false,
 		  responsive: [
-		    {
-		      breakpoint: 1024,
-		      settings: {
-		        dots: true
-		      }
-		    },
 		    {
 		      breakpoint: 600,
 		      settings: {
-		        dots: true
-		      }
-		    },
-		    {
-		      breakpoint: 480,
-		      settings: {
-		        dots: true
+		        dots: true,
+		        arrows: false,
 		      }
 		    }
 		    // You can unslick at a given breakpoint now by adding:
