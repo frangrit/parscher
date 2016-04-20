@@ -13,6 +13,7 @@
 
 {% set containerType = null %}
 {% set isHanging = false %}
+{% set isSlider = false %}
 
 {% switch block.imageBlockType %}
 	{% case 'center' %}
@@ -25,6 +26,7 @@
 		{% set isHanging = true %}
 	{% case 'slideshow' %}
 		{% set containerType = "slideshow" %}
+		{% set isSlider = true %}
 {% endswitch %}
 
 
@@ -52,36 +54,48 @@
 
 {# build the _sizes_ attribute #}
 {% set thisBreakMargins = ( sizeM + gutterTotal ) / imgCount %}
-{% if isHanging == true %}
-	{% set boundWidth = outerWidth %}
-	{% set thisBound = boundWidth + marginGlobalOuter %}
-	{% set sizeDefault = "calc(100vw - #{sizeMobM}px)" %}
-	{% switch block.containerBound %}
-		{% case 'unbounded' %}
-			{% set sizeDefault = "100vw" %}
-			{% set imgWidth = "calc(50vw - #{halfInnerWidth}px - #{marginGlobal}px)" %}
-		{% case 'max-bounded' %}
-			{% set imgWidth = "calc(50vw - #{halfInnerWidth}px - #{marginGlobalOuter}px)" %}
-		{% default %}
-			{% set imgWidth = "#{hangWidth}px" %}
-	{% endswitch %}
-	{% set sizeBreakBound = "(min-width: #{thisBound}px) #{imgWidth}" %}
-	{% set thisSizes = "#{sizeBreakBound}, #{sizeDefault}" %}
-{% else %}
-	{% if block.containerBound != 'unbounded' %}
-		{% set imgWidth = ( boundWidth - gutterTotal ) / imgCount %}
+
+
+{% if isSlider == false %}
+	{% if isHanging == true %}
+		{% set boundWidth = outerWidth %}
 		{% set thisBound = boundWidth + marginGlobalOuter %}
-		{% set thisBreakVw = 100 / imgCount %}
 		{% set sizeDefault = "calc(100vw - #{sizeMobM}px)" %}
-		{% set sizeBreakMob = "calc(#{thisBreakVw}vw - #{thisBreakMargins}px)" %}
-		{% set sizeBreakBound = "(min-width: #{thisBound}px) #{imgWidth}px" %}
-		{% set thisSizes = "#{sizeBreakBound}, #{sizeBreakMob}" %}
-			{% else %}
-		{% set thisBreakVw = 100 / imgCount %}
-		{% set imgWidth = "calc(#{thisBreakVw}vw - #{thisBreakMargins}px)" %}
-		{% set sizeBreakTab = "(min-width: #{breakInner}px) #{imgWidth}" %}
-		{% set thisSizes = imgWidth %}
+		{% switch block.containerBound %}
+			{% case 'unbounded' %}
+				{% set sizeDefault = "100vw" %}
+				{% set imgWidth = "calc(50vw - #{halfInnerWidth}px - #{marginGlobal}px)" %}
+			{% case 'max-bounded' %}
+				{% set imgWidth = "calc(50vw - #{halfInnerWidth}px - #{marginGlobalOuter}px)" %}
+			{% default %}
+				{% set imgWidth = "#{hangWidth}px" %}
+		{% endswitch %}
+		{% set sizeBreakBound = "(min-width: #{thisBound}px) #{imgWidth}" %}
+		{% set thisSizes = "#{sizeBreakBound}, #{sizeDefault}" %}
+	{% else %}
+		{% if block.containerBound != 'unbounded' %}
+			{% set imgWidth = ( boundWidth - gutterTotal ) / imgCount %}
+			{% set thisBound = boundWidth + marginGlobalOuter %}
+			{% set thisBreakVw = 100 / imgCount %}
+			{% set sizeDefault = "calc(100vw - #{sizeMobM}px)" %}
+			{% set sizeBreakMob = "calc(#{thisBreakVw}vw - #{thisBreakMargins}px)" %}
+			{% set sizeBreakBound = "(min-width: #{thisBound}px) #{imgWidth}px" %}
+			{% set thisSizes = "#{sizeBreakBound}, #{sizeBreakMob}" %}
+				{% else %}
+			{% set thisBreakVw = 100 / imgCount %}
+			{% set imgWidth = "calc(#{thisBreakVw}vw - #{thisBreakMargins}px)" %}
+			{% set sizeBreakTab = "(min-width: #{breakInner}px) #{imgWidth}" %}
+			{% set thisSizes = imgWidth %}
+		{% endif %}
 	{% endif %}
+{% else %}
+	{% set imgWidth = boundWidth %}
+	{% set thisBound = boundWidth + marginGlobalOuter %}
+	{% set thisBreakVw = 100 %}
+	{% set sizeDefault = "calc(100vw - #{sizeMobM}px)" %}
+	{% set sizeBreakMob = "calc(#{thisBreakVw}vw - #{thisBreakMargins}px)" %}
+	{% set sizeBreakBound = "(min-width: #{thisBound}px) #{imgWidth}px" %}
+	{% set thisSizes = "#{sizeBreakBound}, #{sizeBreakMob}" %}
 {% endif %}
 
 {# set the row class based on total images #}
@@ -97,6 +111,8 @@
 		{% default %}
 			{% set rowClass = 'four-across' %}
 	{% endswitch %}
+{% elseif block.imageBlockType == "slideshow" %}
+	{% set rowClass = 'slider' %}
 {% endif %}
 
 <div class="container {{ block.containerBound }} {{ containerType }} itemscope itemtype="http://schema.org/ImageGallery"">
@@ -104,6 +120,7 @@
 	{% if block.figureTitle | length %}
 		<h3 class="figure-title">{{ block.figureTitle | raw }}</h3>
 	{% endif %}
+
 	<div class="row {{ rowClass }}">
 		{% if isHanging == false and block.imageBlockType != "slideshow" %}
 			{# only founr images total for non-slideshow images #}
@@ -117,6 +134,7 @@
 		{% for image in theseImages %}
 			{% set isHoverable = false %}
 			{% if image.imageHover | length %} {% set isHoverable = true %}{% endif %}
+			{% if isSlider %}<div class="slide">{% endif %}
 			<figure{% if isHoverable %} class="hoverable"{% endif %} itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="_forLightbox">
 				<a href="{{ image.url }}" data-size="{{ image.width }}x{{ image.height }}">
 					<picture>
@@ -145,9 +163,10 @@
 				</a>
 				{% if image.imageCaption | length %}<figcaption>{{ image.imageCaption }}</figcaption>{% endif %}
 			</figure>
+			{% if isSlider %}</div>{# /.slide #}{% endif %}
 		{% endfor %}
 		{% if block.commonCaption | length and isHanging == false %}
 			<p class="common-caption">{{ block.commonCaption }}</p>
 		{% endif %}
-	</div>
+	</div> {# /.row #}
 </div>

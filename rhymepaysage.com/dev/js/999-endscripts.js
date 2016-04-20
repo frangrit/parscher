@@ -1,4 +1,35 @@
-(function($) {
+$(document).ready(function(){
+
+	// initialize slider
+	$('.slider').slick({
+		  speed: 300,
+		  lazyLoad: 'ondemand',
+		  responsive: [
+		    {
+		      breakpoint: 1024,
+		      settings: {
+		        dots: true
+		      }
+		    },
+		    {
+		      breakpoint: 600,
+		      settings: {
+		        dots: true
+		      }
+		    },
+		    {
+		      breakpoint: 480,
+		      settings: {
+		        dots: true
+		      }
+		    }
+		    // You can unslick at a given breakpoint now by adding:
+		    // settings: "unslick"
+		    // instead of a settings object
+		  ]
+	});
+
+	// initialize lightbox
     var $pswp = $('.pswp')[0];
     var image = [];
 
@@ -44,4 +75,5 @@
             lightBox.init();
         });
     });
-})(jQuery);
+});
+

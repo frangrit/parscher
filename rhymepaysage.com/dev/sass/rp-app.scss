@@ -9,6 +9,8 @@
 @import '_parscher-ani';
 @import '_pswipe';
 @import '_pswipe-default-skin';
+@import '_slick';
+@import '_slick-theme';
 
 /*	-----------------------------------------------
 	uBand variables	*/
@@ -26,3 +28,6 @@ body {
 }
 
 .pswp__top-bar { display: none; }
+
+.row.slider,
+.container.slideshow { overflow: visible; }
