@@ -35,7 +35,7 @@
 									{% set taggedEntry = taggedEntries.first() %}
 									<li class="index-entry"><a href="{{ taggedEntry.url }}">{{ tag.title }}</a></li>
 									{% else %}
-										<li class="index-entry"><strong>{{ tag.title }}</strong>
+										<li class="index-entry">{{ tag.title }}
 											<ul class="index-multiples">
 												{% for taggedEntry in taggedEntries %}
 												<li class="index-multiple-entry"><a href="{{ taggedEntry.url }}">{{ loop.index }}</a></li>

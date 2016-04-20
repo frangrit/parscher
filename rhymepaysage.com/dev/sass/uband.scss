@@ -169,13 +169,17 @@ div.body {
 	}
 }
 
+.hed-h4 {
+	margin-top: 2em;
+	font-family: $font-title;
+	font-size: 65%;
+	font-weight: 600;
+}
+
 div.meta {
 	p {
 		@extend .inner-bounded;
-		margin-top: 2em;
-		font-family: $font-title;
-		font-size: 65%;
-		font-weight: 600;
+		@extend .hed-h4;
 	}
 }
 

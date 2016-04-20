@@ -1,6 +1,7 @@
 {% include "_nav-bottom" %}
 {% if bodyClass == "content" %} 
 	{% if entry.indexTags | length %}
+		<h4 class="hed-h4 text-index-title inner-bounded">Indexed under:</h4>
 		<ul class="text-index inner-bounded">
 		{% for thisTag in entry.indexTags.order('title').find() %}
 			{% set taggedEntries = craft.entries.section('texts').relatedTo(thisTag) %}
@@ -9,7 +10,7 @@
 					{% set taggedEntry = taggedEntries.first() %}
 					<li class="index-entry"><a href="{{ taggedEntry.url }}">{{ thisTag.title }}</a></li>
 					{% else %}
-						<li class="index-entry"><strong>{{ thisTag.title }}</strong>
+						<li class="index-entry">{{ thisTag.title }}
 							<ul class="index-multiples">
 								{% for taggedEntry in taggedEntries %}
 								<li class="index-multiple-entry"><a href="{{ taggedEntry.url }}">{{ loop.index }}</a></li>
