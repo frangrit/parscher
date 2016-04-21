@@ -9,9 +9,9 @@
 
 	# Disables font hotlinking
 	RewriteCond %{HTTP:Origin}  !^$|http(s)?://(www\.)?example\.com$ [NC]
-	RewriteRule \.(woff|eot)$ - [NC,L]
+	RewriteRule \.(woff2|woff|eot)$ - [NC,L]
 	RewriteCond %{HTTP_REFERER} !.
-	RewriteRule \.(woff|eot)$ - [F,NC,L]
+	RewriteRule \.(woff2|woff|eot)$ - [F,NC,L]
 	Options -Indexes
 </IfModule>
 
@@ -45,10 +45,13 @@
 	ExpiresByType image/x-icon "access 1 year"
 	ExpiresDefault "access 1 month"
 
-	#cache font files for 1 year
-	<FilesMatch "\.(svg|eof|ttf|woff)$">
-	ExpiresDefault "access 1 year"
-	</FilesMatch>
+	ExpiresByType application/vnd.ms-fontobject "access plus 1 year"
+	ExpiresByType application/font-ttf "access plus 1 year"
+	ExpiresByType application/font-opentype "access plus 1 year"
+	ExpiresByType application/font-woff "access plus 1 year"
+	ExpiresByType application/font-woff2 "access plus 1 year"
+	ExpiresByType image/svg+xml "access plus 1 year"
+
 	FileETag none
 </IfModule>
 
@@ -65,5 +68,5 @@
 
 # compress webfont files (EOT, TTF, and SVG)
 #AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
-#AddOutputFilterByType DEFLATE application/x-font-ttf 
+#AddOutputFilterByType DEFLATE application/font-ttf 
 #AddOutputFilterByType DEFLATE image/svg+xml
