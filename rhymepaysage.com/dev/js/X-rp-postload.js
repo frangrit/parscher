@@ -98,13 +98,6 @@ $(document).ready(function(){
         });
     });
 
-});
-
-$(document).ready(function( w ){
-    if( w.document.documentElement.className.indexOf( "fonts-loaded" ) > -1 ){
-        return;
-    }
-    
 	// look for font load
 	var fontTitle = new FontFaceObserver('Founders Grotesk Web', {
 	  weight: 300
@@ -133,11 +126,13 @@ $(document).ready(function( w ){
 	  weight: 400,
 	  style: 'italic'
 	});
-	
-	// when fonts are loaded, add .fonts-loaded class
-    w.Promise
-        .all([fontTitle.check(), fontHed.check(), fontHedItalic.check(), fontAlt.check(), fontAltItalic.check(), fontBody.check(), fontBodyItalic.check()])
-        .then(function(){
-            w.document.documentElement.className += " fonts-loaded";
-        });
-}( this ));
+
+	// when fonts are loaded, tell me
+	Promise.all([fontTitle.load(), fontHed.load(), fontHedItalic.load(), fontAlt.load(), fontAltItalic.load(), fontBody.load(), fontBodyItalic.load()]).then(function () {
+			console.log('Fonts are available.');
+		$('html').addClass('fonts-loaded');
+		}, 
+		function () {
+			console.log('Fonts NOT available.');
+	});
+});
