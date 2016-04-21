@@ -473,7 +473,7 @@ p + .container.hanging {
 		@extend .inner-bounded; 
 		padding: $grid * 2 $grid * 4 0 ($width-margin-mobile / 2);
 		@include respond-r3 {
-			padding: $grid * 2 $double 0;
+			padding: $grid * 2 $grid * 4 0 0;
 		}
 	}
 }
