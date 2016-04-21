@@ -131,6 +131,7 @@ $(document).ready(function(){
 	Promise.all([fontTitle.load(), fontHed.load(), fontHedItalic.load(), fontAlt.load(), fontAltItalic.load(), fontBody.load(), fontBodyItalic.load()]).then(function () {
 			console.log('Fonts are available.');
 		$('html').addClass('fonts-loaded');
+		cookie( 'rp-fonts-loaded', 'true', 7 );
 		}, 
 		function () {
 			console.log('Fonts NOT available.');
