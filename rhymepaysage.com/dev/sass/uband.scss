@@ -187,6 +187,9 @@ div.body {
 	p {
 		@include font-size(1.8);
 		line-height: 1.45;
+		@include respond-r4 {
+			line-height: 1.6;
+		}
 	}
 	h3 {
 		font-family: $font-alt-loaded;
