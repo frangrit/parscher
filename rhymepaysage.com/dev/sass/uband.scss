@@ -165,8 +165,8 @@ div.body {
 		font-weight: 600;
 		letter-spacing: .05em;
 		font-size: 100%;
-		margin-top: 2em;
-		margin-bottom: $grid;
+		margin-top: $grid * 6;
+		margin-bottom: $grid * 3;
 		line-height: 1.3;
 		text-transform: uppercase;
 	}
