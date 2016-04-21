@@ -423,7 +423,7 @@ p + .container.hanging {
 	}
 	h3.figure-title {
 		margin-top: 0;
-		margin-bottom: .75em;
+		margin-bottom: $grid * 3;
 	}
 	.row {
 		margin: 0 ($width-gutter / -2);
