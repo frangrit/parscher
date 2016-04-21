@@ -13,6 +13,8 @@
 	uBand (micro bandwidth) Styles
 	Critical CSS for inline	*/
 
+@import '_parscher-fonts';
+
 @import '_measure-reset';
 @import '_measure-defaults';
 @import '_parscher-vars';
@@ -36,6 +38,10 @@ body {
 		padding-right: $grid * 5;
 	}
 	&.content { padding-bottom: 0; }
+}
+
+.fonts-loaded body {
+	font-family: $font-body-loaded;
 }
 
 a {
@@ -79,6 +85,11 @@ h1 {
 	@include respond-r2 {
 		margin: $grid * 8 0;
 	}
+}
+
+.fonts-loaded h1 {
+	font-family: $font-title-loaded;
+	@include font-size(4);
 }
 
 main {
@@ -140,7 +151,7 @@ div.body {
 		@extend .inner-bounded;
 	}
 	p + p {
-		margin-top: 1em;
+		margin-top: 1.35em;
 	}
 	h2 {
 		@extend h1;
@@ -150,14 +161,14 @@ div.body {
 		color: $color-black !important;
 	}
 	h3 {
-		font-family: $font-alt;
-		font-weight: 700;
-		font-size: 80%;
-		text-transform: uppercase;
-		letter-spacing: .1em;
-		margin-top: 2.5em;
-		margin-bottom: .75em;
+		font-family: $font-title;
+		font-weight: 600;
+		letter-spacing: .05em;
+		font-size: 100%;
+		margin-top: 2em;
+		margin-bottom: $grid;
 		line-height: 1.3;
+		text-transform: uppercase;
 	}
 	p.text-subtitle {
 		font-style: italic;
@@ -166,6 +177,20 @@ div.body {
 	}
 	p {
 		line-height: 1.4;
+		@include respond-r4 {
+			line-height: 1.6;
+		}
+	}
+}
+
+.fonts-loaded div.body {
+	p {
+		@include font-size(1.8);
+		line-height: 1.45;
+	}
+	h3 {
+		font-family: $font-alt-loaded;
+		@include font-size(1.6);
 	}
 }
 
@@ -176,12 +201,22 @@ div.body {
 	font-weight: 600;
 }
 
+.fonts-loaded .hed-h4 {
+	font-family: $font-alt-loaded;
+	@include font-size(1.3);
+}
+
+
 div.meta {
 	p {
 		@extend .inner-bounded;
 		@extend .hed-h4;
 	}
 }
+
+.fonts-loaded div.meta p {
+}
+
 
 div.comments {
 	margin-top: $grid * 7;
@@ -213,7 +248,7 @@ nav.secondary {
 	a {
 		&:hover {
 			font-family: $font-title;
-			font-weight: bold;
+			font-weight: 600;
 		}
 	}
 	@include respond-r3 {
@@ -230,6 +265,17 @@ nav.secondary {
 	}
 	@include respond-r5 {
 		width: $width-max;
+	}
+}
+
+.fonts-loaded nav.secondary {
+	a:hover {
+		font-family: $font-title-loaded;
+		font-weight: 600;
+	    bottom: 2px;
+		position: relative;
+		@include font-size(2);
+		letter-spacing: .01em;
 	}
 }
 
@@ -256,7 +302,13 @@ nav.secondary {
 .primary-nav-item,
 .secondary-nav-item {
 	padding-bottom: .5em;
-	line-height: 1.2;
+	line-height: 1.35;
+	min-height: $grid * 4;
+}
+
+.primary-nav-item,
+.secondary-nav-item {
+	height: $grid * 4;
 }
 
 .entry a {
@@ -284,28 +336,21 @@ nav.primary a,
 */
 
 // stolen from pictchfork.com (sorry.)
+
+$color-text-shadow: white;
+
 span.title,
 nav.primary a,
 .index-entry a {   
 	background: linear-gradient(#fff,#fff),linear-gradient(#fff,#fff),linear-gradient($color-black,$color-black);
 	background-size: .05em 1px,.05em 1px,1px 1px;
 	background-repeat: no-repeat,no-repeat,repeat-x;
-	text-shadow: 	.02em 0 #fff,
-					-.02em 0 #fff,
-					0 .02em #fff,
-					0 -.02em #fff,
-					.02em 0 #fff,
-					-.02em 0 #fff,
-					.08em 0 #fff,
-					-.08em 0 #fff,
-					.14em 0 #fff,
-					-.14em 0 #fff,
-					.14em 0 #fff,
-					-.14em 0 #fff;
+	text-shadow: .03em 0 $color-text-shadow,-.03em 0 $color-text-shadow,0 .03em $color-text-shadow,0 -.03em $color-text-shadow,.06em 0 $color-text-shadow,-.06em 0 $color-text-shadow,.09em 0 $color-text-shadow,-.09em 0 $color-text-shadow,.12em 0 $color-text-shadow,-.12em 0 $color-text-shadow,.15em 0 $color-text-shadow,-.15em 0 $color-text-shadow;
 	padding-bottom: 1px;
+	font-weight: regular;
 	background-position: 0 95%,100% 95%,0 95%;
 	&:hover {
-		background-size: .05em 1px,.05em 1px,1px 2px;
+		background-size: .05em 2px,.05em 2px,2px 2px;
 	}
 }
 
@@ -336,7 +381,17 @@ strong, .strong {
 span.date {
 	font-size: 60%;
 	font-family: $font-title;
-	font-weight: bold;
+	font-weight: 600;
+}
+
+.style-micro {
+	font-family: $font-alt-loaded;
+	@include font-size(1.1);
+	letter-spacing: .03em;
+}
+
+.fonts-loaded span.date {
+	@extend .style-micro;
 }
 
 figure img {
@@ -364,7 +419,7 @@ p + .container.hanging {
 	}
 	h3.figure-title {
 		margin-top: 0;
-		margin-bottom: $grid * 3;
+		margin-bottom: .75em;
 	}
 	.row {
 		margin: 0 ($width-gutter / -2);
@@ -406,17 +461,26 @@ p + .container.hanging {
 		padding-top: $grid * 2;
 		font-family: $font-alt;
 		font-weight: 700;
-		font-size: 60%;
+		@include font-size(1.3);
 		line-height: 1.4;
 		padding-bottom: .2em;
 	}
+	figcaption {
+		padding-right: $double;
+	}
 	p.common-caption { 
 		@extend .inner-bounded; 
-		padding: $grid * 2 ($width-margin-mobile / 2) 0;
+		padding: $grid * 2 $grid * 4 0 ($width-margin-mobile / 2);
 		@include respond-r3 {
-			padding: $grid * 2 0 0;
+			padding: $grid * 2 $double 0;
 		}
 	}
+}
+
+.fonts-loaded figcaption,
+.fonts-loaded div.body p.common-caption {
+	font-family: $font-alt-loaded;
+	@include font-size(1.3);
 }
 
 .note {
