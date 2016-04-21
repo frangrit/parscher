@@ -392,6 +392,7 @@ span.date {
 
 .fonts-loaded span.date {
 	@extend .style-micro;
+	padding-left: 4px;
 }
 
 figure img {
