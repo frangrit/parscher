@@ -20,7 +20,6 @@ $(document).ready(function(){
 	    }
 	    else {
 	        $("head").append($("<link rel='stylesheet' href='/css/rp-app.css' type='text/css' media='screen' />"));
-	        $("head").append($("<link href='\/\/cloud.webtype.com/css/a27af272-68ce-4ff3-b0c0-c4f3e4e2766b.css' rel='stylesheet' type='text/css' />"));
 	    }
 	}
 
