@@ -346,15 +346,15 @@ $color-text-shadow: white;
 span.title,
 nav.primary a,
 .index-entry a {   
-	background: linear-gradient(#fff,#fff),linear-gradient(#fff,#fff),linear-gradient($color-black,$color-black);
-	background-size: .05em 1px,.05em 1px,1px 1px;
-	background-repeat: no-repeat,no-repeat,repeat-x;
-	text-shadow: .03em 0 $color-text-shadow,-.03em 0 $color-text-shadow,0 .03em $color-text-shadow,0 -.03em $color-text-shadow,.06em 0 $color-text-shadow,-.06em 0 $color-text-shadow,.09em 0 $color-text-shadow,-.09em 0 $color-text-shadow,.12em 0 $color-text-shadow,-.12em 0 $color-text-shadow,.15em 0 $color-text-shadow,-.15em 0 $color-text-shadow;
+	background-image: linear-gradient(to bottom,$color-black 25%,$color-black 25%);
+	background-size: 1px 1px;
+	background-repeat: repeat-x;
+	text-shadow: 0 -1px 0 #fff,0 1px 0 #fff,-2px -1px 0 #fff,2px 1px 0 #fff,1px 1px 0 #fff,-1px 0 0 #fff;
 	padding-bottom: 1px;
 	font-weight: regular;
-	background-position: 0 95%,100% 95%,0 95%;
+	background-position: 0 19px;
 	&:hover {
-		background-size: .05em 2px,.05em 2px,2px 2px;
+		background-size: 2px 2px;
 	}
 }
 
