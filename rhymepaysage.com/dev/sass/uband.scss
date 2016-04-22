@@ -162,7 +162,7 @@ div.body {
 		@include font-size(3.2);
 		margin-bottom: 0;
 		font-weight: 600;
-		padding-top: 0;
+		padding-top: 4px;
 		animation: none !important;
 		color: $color-black !important;
 	}
