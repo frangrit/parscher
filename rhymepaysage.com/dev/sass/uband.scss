@@ -30,7 +30,7 @@ body {
 	@include font-size(1.8);
 	font-family: $font-body;
 	color: $color-black;
-	padding: $grid $double $grid * 10 $double;
+	padding: $grid $grid * 3 $grid * 10 $double;
 	position: relative;
 	z-index: $zindex-0;
 	@include respond-r2 { 
