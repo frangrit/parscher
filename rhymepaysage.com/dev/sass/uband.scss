@@ -436,8 +436,17 @@ p + .container.hanging {
 .container {
 	margin: $grid * 6 $grid * -1 $grid * 6 0;
 	overflow: hidden;
-	@include respond-r3 {
+	@include respond-r2 {
 		margin: $grid * 6 auto;
+	}
+	&.unbounded {
+		margin-left: -$width-margin-mobile;
+		margin-right: -($width-margin-mobile + $grid);
+		width: auto;
+		@include respond-r2 {
+			margin-left: -$width-margin-desktop;
+			margin-right: -$width-margin-desktop;
+		}
 	}
 	&.hanging {
 		margin: $grid 0 0;
