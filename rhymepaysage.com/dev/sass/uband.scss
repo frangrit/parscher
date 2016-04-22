@@ -146,7 +146,7 @@ main {
 
 div.body {
 	.body-main {
-		margin-top: $grid * 4;
+		margin-top: $grid * 6;
 		@include respond-r3 { margin-top: $grid * 8 	}
 	}
 	h2, h3, h4, p, ul, ol {
@@ -163,7 +163,7 @@ div.body {
 		@include font-size(2.2);
 		margin-bottom: 0;
 		font-weight: 600;
-		padding-top: $grid * 4;
+		padding-top: $grid * 10;
 		animation: none !important;
 		color: $color-black !important;
 	}
@@ -193,13 +193,13 @@ div.body {
 .fonts-loaded div.body {
 	p {
 		@include font-size(1.8);
-		line-height: 1.4;
+		line-height: 1.45;
 		@include respond-r3 {
 			line-height: 1.6;
 		}
 	}
 	h2 {
-		@include font-size(2.2);
+		@include font-size(1.8);
 	}
 	h3 {
 		font-family: $font-alt-loaded;
