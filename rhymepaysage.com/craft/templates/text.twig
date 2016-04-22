@@ -24,7 +24,7 @@
 		<main id="content" role="main">
 			<div class="body">
 				<h2 class="text-title">{{ entry.title|raw }}</h2>
-				<p class="text-subtitle">{{ entry.textSubtitle|raw }}</h2>
+				{% if entry.textSubtitle | length %} <p class="text-subtitle">{{ entry.textSubtitle|raw }}</h2>{% endif %}
 				
 				<div class="body-main">
 					{% for block in entry.textBuilder %}
