@@ -8,12 +8,16 @@
 			{% if taggedEntries | length %}
 				{% if taggedEntries | length == 1 %}
 					{% set taggedEntry = taggedEntries.first() %}
-					<li class="index-entry"><a href="{{ taggedEntry.url }}">{{ thisTag.title }}</a></li>
+					<li class="index-entry">{{ thisTag.title }}</li>
 					{% else %}
 						<li class="index-entry">{{ thisTag.title }}
 							<ul class="index-multiples">
 								{% for taggedEntry in taggedEntries %}
-								<li class="index-multiple-entry"><a href="{{ taggedEntry.url }}">{{ loop.index }}</a></li>
+									{% if taggedEntry.slug == entry.slug %}
+									<li class="index-multiple-entry">{{ loop.index }}</li>
+									{% else %}
+									<li class="index-multiple-entry"><a href="{{ taggedEntry.url }}">{{ loop.index }}</a></li>
+									{% endif %}
 								{% endfor %}
 							</ul>
 						</li>
