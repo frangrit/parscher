@@ -8,10 +8,10 @@
 	RewriteRule (.+) index.php?p=$1 [QSA,L]
 
 	# Disables font hotlinking
-	RewriteCond %{HTTP:Origin}  !^$|http(s)?://(www\.)?example\.com$ [NC]
-	RewriteRule \.(woff2|woff|eot)$ - [NC,L]
-	RewriteCond %{HTTP_REFERER} !.
-	RewriteRule \.(woff2|woff|eot)$ - [F,NC,L]
+	# RewriteCond %{HTTP:Origin}  !^$|http(s)?://(www\.)?example\.com$ [NC]
+	# RewriteRule \.(woff2|woff|eot)$ - [NC,L]
+	# RewriteCond %{HTTP_REFERER} !.
+	# RewriteRule \.(woff2|woff|eot)$ - [F,NC,L]
 	Options -Indexes
 </IfModule>
 
