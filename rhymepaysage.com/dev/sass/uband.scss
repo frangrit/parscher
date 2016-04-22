@@ -85,13 +85,23 @@ h1 {
 	text-transform: uppercase;
 	letter-spacing: .05em;
 	@include respond-r2 {
-		margin: $grid * 8 0;
+		margin: $grid * 4 0 $grid * 8 0;
+	}
+	@include respond-r3 {
+		@include font-size(2);
 	}
 }
 
 .fonts-loaded h1 {
 	font-family: $font-alt-loaded;
 	@include font-size(1.8);
+	@include respond-r3 {
+		@include font-size(3.2);
+		font-family: $font-title-loaded;
+		font-weight: 600;
+		letter-spacing: normal;
+		text-transform: none;
+	}
 }
 
 main {
@@ -147,7 +157,7 @@ main {
 div.body {
 	.body-main {
 		margin-top: $grid * 6;
-		@include respond-r3 { margin-top: $grid * 8 	}
+		@include respond-r3 { margin-top: 68px 	}
 	}
 	h2, h3, h4, p, ul, ol {
 		@extend .inner-bounded;
@@ -155,7 +165,7 @@ div.body {
 	p + p {
 		margin-top: .85em;
 		@include respond-r3 {
-			margin-top: 1.35em;
+			margin-top: 1.2em;
 		}
 	}
 	h2 {
@@ -165,6 +175,9 @@ div.body {
 		padding-top: 5px;
 		animation: none !important;
 		color: $color-black !important;
+		@include respond-r3 {
+			padding-top: 0;
+		}
 	}
 	h3 {
 		font-family: $font-title;
@@ -276,7 +289,7 @@ nav.secondary {
 		position: fixed;
 		width: 92%;
 		width: calc(100% - 80px);
-		margin-top: $grid/2;
+		margin-top: -$grid;
 	}
 	@include respond-r5 {
 		width: $width-max;
@@ -297,7 +310,7 @@ nav.secondary {
 	width: auto;
 	position: absolute;
 	right: 0;
-	top: 0;
+	top: 13px;
 	z-index: $zindex-below;
 	img {
 		display: block;
@@ -523,10 +536,10 @@ p + .container.hanging {
 
 
 div.comments {
-	padding: $grid * 3 $double $grid * 7;
+	padding: 0 $double 4px;
 	margin: $grid * 7 $grid * -3 0 $grid * -2;
 	width: auto;
-	background-color: $color-trans-whispergray;
+	background-color: white;
 	@include respond-r3 {
 		margin: $grid * 8 $grid * -5 0 $grid * -5;
 		padding: $grid * 8 $grid * 5 $grid * 8;
