@@ -284,13 +284,12 @@ nav.secondary {
 }
 
 .fonts-loaded nav.secondary {
+	font-family: $font-title-loaded;
+	font-weight: 300;
+	@include font-size(3.2);
 	a:hover {
 		font-family: $font-title-loaded;
 		font-weight: 600;
-	    bottom: 2px;
-		position: relative;
-		@include font-size(2);
-		letter-spacing: .01em;
 	}
 }
 
@@ -574,8 +573,7 @@ body.essays .secondary-nav-item._activeOn.essays,
 body.projects .secondary-nav-item._activeOn.projects, 
 body.landscapes .secondary-nav-item._activeOn.landscapes, 
 body.backyards .secondary-nav-item._activeOn.backyards {
-	font-family: $font-title;
-	font-weight: bold;
+	font-weight: 600;
 }
 
 body.home .secondary-nav-item._activeOn { display: block; visibility: visible; }
