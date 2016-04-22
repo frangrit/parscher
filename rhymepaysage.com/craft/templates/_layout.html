@@ -41,11 +41,8 @@
 {% set respond_r5 = breakMax %}
 
 <!DOCTYPE html>
-<!--#if expr="$HTTP_COOKIE= /rp\-butt\-poo\=baz/" -->
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" class="">
-<!--#else -->
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
-<!--#endif -->
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" class="{{ craft.lj_cookies.get( rp-fonts-loaded ) }}">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
