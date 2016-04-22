@@ -146,7 +146,7 @@ main {
 
 div.body {
 	.body-main {
-		margin-top: $grid * 16;
+		margin-top: $grid * 6;
 		@include respond-r3 { margin-top: $grid * 8 	}
 	}
 	h2, h3, h4, p, ul, ol {
@@ -163,7 +163,7 @@ div.body {
 		@include font-size(2.2);
 		margin-bottom: 0;
 		font-weight: 600;
-		padding-top: $grid * 10;
+		padding-top: 0;
 		animation: none !important;
 		color: $color-black !important;
 	}
