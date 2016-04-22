@@ -146,7 +146,7 @@ main {
 
 div.body {
 	.body-main {
-		margin-top: $grid * 6;
+		margin-top: $grid * 16;
 		@include respond-r3 { margin-top: $grid * 8 	}
 	}
 	h2, h3, h4, p, ul, ol {
