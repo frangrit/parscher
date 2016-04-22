@@ -41,8 +41,10 @@
 {% set respond_r5 = breakMax %}
 
 <!DOCTYPE html>
+{% set fontsLoaded = null %}
+{% if craft.lj_cookies.get( 'rp-fonts-loaded' ) | length %}{% set fontsLoaded = 'fonts-loaded' %}{% endif %}
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" class="{{ craft.lj_cookies.get( 'rp-fonts-loaded' ) }}">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" class="{{ fontsLoaded }}">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
