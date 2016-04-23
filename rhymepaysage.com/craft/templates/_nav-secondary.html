@@ -1,7 +1,7 @@
 <nav class="secondary" id="nav-secondary">
 	<ul class="secondary-nav-list">
 		{% for category in craft.categories %}
-			<li class="secondary-nav-item s-xl  _activeOn {{ category.slug }}">
+			<li class="secondary-nav-item st-xl  _activeOn {{ category.slug }}">
 				<a href="{{ category.url }}" class="trigger" id="{{ category.slug }}">{{ category.title|title }}</a>
 				{% if not craft.request.isMobileBrowser %}
 					{% if category.primaryImage|length %}
