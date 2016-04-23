@@ -232,3 +232,13 @@
 	margin-right: -$page-mobile-margin;
 	width: auto;
 }
+
+@mixin smallcaps-tight {
+	text-transform: uppercase;
+	letter-spacing: .01em;
+}
+
+@mixin smallcaps-wide {
+	text-transform: uppercase;
+	letter-spacing: .05em;
+}

@@ -33,12 +33,13 @@ body {
 	padding: $grid $grid * 3 $grid * 10 $double;
 	position: relative;
 	z-index: $zindex-0;
-	@include respond-r2 { 
+	@include respond-r1 { 
 		padding-left: $grid * 5;
 		padding-right: $grid * 5;
 	}
-	&.content { padding-bottom: 0; }
 }
+
+body.content { padding-bottom: 0; }
 
 .fonts-loaded body {
 	font-family: $font-body-loaded;
@@ -63,11 +64,11 @@ a {
 	z-index: $zindex-2;
 	&:hover {
 		background-position: 0;
-		@include respond-r3 {
+		@include respond-r2 {
 			background-position: 0;
 		}
 	}
-	@include respond-r3 {
+	@include respond-r2 {
 		background-image: url('/img/ui/ui-close-large.svg'); 
 		background-size: auto $ui-close-large;
 		width: $ui-close-large;
@@ -77,32 +78,46 @@ a {
 	}
 }
 
-h1 {
-	@include font-size(1.4);
+
+.s-xl {
 	font-family: $font-title;
-	margin: $grid 0 $grid * 6 0 ;
 	font-weight: 300;
-	text-transform: uppercase;
-	letter-spacing: .05em;
-	@include respond-r2 {
-		margin: $grid * 4 0 $grid * 8 0;
+	@include font-size(2);
+}
+.fonts-loaded .s-xl {
+	font-family: $font-title-loaded;
+	@include font-size(3.2);
+}
+
+.s-xl-alt {
+	font-family: $font-alt;
+	font-weight: 600;
+	@include font-size(1.4);
+	@include respond-r0 {
+		@include smallcaps-wide;
 	}
-	@include respond-r3 {
-		@include font-size(2);
+	@include respond-r1 {
+		font-family: $font-title;
+		@include font-size(3.2);
+	}	
+}
+.fonts-loaded .s-xl-alt {
+	@include font-size(1.8);	
+	@include respond-r0 {
+		font-family: $font-alt-loaded;
+	}
+	@include respond-r1 {
+		@include font-size(3.2);
+	}	
+}
+
+.site-title {
+	margin: $grid 0 $grid * 6 0 ;
+	@include respond-r1 {
+		margin: $grid * 4 0 $grid * 8 0;
 	}
 }
 
-.fonts-loaded h1 {
-	font-family: $font-alt-loaded;
-	@include font-size(1.8);
-	@include respond-r3 {
-		@include font-size(3.2);
-		font-family: $font-title-loaded;
-		font-weight: 600;
-		letter-spacing: normal;
-		text-transform: none;
-	}
-}
 
 main {
 	position: relative;
@@ -119,7 +134,7 @@ main {
 }
 
 .inner-bounded {
-	@include respond-r3 {
+	@include respond-r2 {
 		max-width: $width-inner-bounded;
 		margin-left: auto;
 		margin-right: auto;
@@ -127,7 +142,7 @@ main {
 }
 
 .outer-bounded {
-	@include respond-r3 {
+	@include respond-r2 {
 		max-width: $width-outer-bounded;
 		margin-left: auto;
 		margin-right: auto;
@@ -135,7 +150,7 @@ main {
 }
 
 .max-bounded {
-	@include respond-r3 {
+	@include respond-r2 {
 		max-width: $width-max;
 		margin-left: auto;
 		margin-right: auto;
@@ -157,14 +172,14 @@ main {
 div.body {
 	.body-main {
 		margin-top: $grid * 6;
-		@include respond-r3 { margin-top: 68px 	}
+		@include respond-r2 { margin-top: 68px 	}
 	}
 	h2, h3, h4, p, ul, ol {
 		@extend .inner-bounded;
 	}
 	p + p {
 		margin-top: .85em;
-		@include respond-r3 {
+		@include respond-r2 {
 			margin-top: 1.2em;
 		}
 	}
@@ -175,7 +190,7 @@ div.body {
 		padding-top: 5px;
 		animation: none !important;
 		color: $color-black !important;
-		@include respond-r3 {
+		@include respond-r2 {
 			padding-top: 0;
 		}
 	}
@@ -196,7 +211,7 @@ div.body {
 	}
 	p {
 		line-height: 1.4;
-		@include respond-r3 {
+		@include respond-r2 {
 			line-height: 1.6;
 		}
 	}
@@ -206,7 +221,7 @@ div.body {
 	p {
 		@include font-size(1.8);
 		line-height: 1.45;
-		@include respond-r3 {
+		@include respond-r2 {
 			line-height: 1.6;
 		}
 	}
@@ -254,11 +269,11 @@ nav.primary {
 	font-style: italic;
 	&.top {
 		margin-bottom: $grid * 4;
-		@include respond-r2 { margin-top: $grid * 5; }
+		@include respond-r1 { margin-top: $grid * 5; }
 	}
 	&.bottom {
 		margin-top: $grid * 3;
-		@include respond-r2 { margin-top: $grid * 7; }
+		@include respond-r1 { margin-top: $grid * 7; }
 	}
 }
 
@@ -268,41 +283,20 @@ main + nav.primary.bottom {
 
 nav.secondary {
 	margin: $double 0 $grid * 4;
-	font-family: $font-title;
-	font-size: 95%;
 	position: relative;
 	z-index: $zindex-1;
 	width: 100%;
-	a {
-		&:hover {
-			font-family: $font-title;
-			font-weight: 600;
-		}
+	a:hover {
+		font-weight: 600;
 	}
 	@include respond-r3 {
-		font-family: $font-body;
-		font-size: 100%;
-	}
-	@include respond-r4 {
-		font-family: $font-body;
-		font-size: 100%;
 		position: fixed;
 		width: 92%;
 		width: calc(100% - 80px);
 		margin-top: -$grid;
 	}
-	@include respond-r5 {
+	@include respond-r4 {
 		width: $width-max;
-	}
-}
-
-.fonts-loaded nav.secondary {
-	font-family: $font-title-loaded;
-	font-weight: 300;
-	@include font-size(3.2);
-	a:hover {
-		font-family: $font-title-loaded;
-		font-weight: 600;
 	}
 }
 
@@ -445,14 +439,14 @@ p + .container.hanging {
 .container {
 	margin: $grid * 6 $grid * -1 $grid * 6 0;
 	overflow: hidden;
-	@include respond-r2 {
+	@include respond-r1 {
 		margin: $grid * 6 auto;
 	}
 	&.unbounded {
 		margin-left: -$width-margin-mobile;
 		margin-right: -($width-margin-mobile + $grid);
 		width: auto;
-		@include respond-r2 {
+		@include respond-r1 {
 			margin-left: -$width-margin-desktop;
 			margin-right: -$width-margin-desktop;
 		}
@@ -517,7 +511,7 @@ p + .container.hanging {
 	p.common-caption { 
 		@extend .inner-bounded; 
 		padding: $grid * 2 $grid * 4 0 ($width-margin-mobile / 2);
-		@include respond-r3 {
+		@include respond-r2 {
 			padding: $grid * 2 $grid * 4 0 0;
 		}
 	}
@@ -558,7 +552,7 @@ div.comments {
 	margin: $grid * 7 $grid * -3 0 $grid * -2;
 	width: auto;
 	background-color: white;
-	@include respond-r3 {
+	@include respond-r2 {
 		margin: $grid * 8 $grid * -5 0 $grid * -5;
 		padding: $grid * 8 $grid * 5 $grid * 8;
 	}
@@ -621,7 +615,7 @@ body.backyards .secondary-nav-item._activeOn.backyards {
 
 ._showOn {
 	display: none;
-	@include respond-r2 { 
+	@include respond-r1 { 
 		display: block;
 		visibility: hidden;
 		opacity: 0;
@@ -636,7 +630,7 @@ body.backyards .entry._showOn.backyards,
 body.home .entry._showOn,
 body.all .entry._showOn { 
 	display: block;
-	@include respond-r2 { 
+	@include respond-r1 { 
 		visibility: visible; 
 		opacity: 1;
 	}
@@ -644,35 +638,35 @@ body.all .entry._showOn {
 
 body.home ._hideMobileHome {
 	display: none;
-	@include respond-r3 { display: block; }
+	@include respond-r2 { display: block; }
 }
 
 // - - - - 
 
 ._hideOnMobile {
 	display: none;
-	@include respond-r3 {
+	@include respond-r2 {
 		display: block;
 	}
 }
 
 ._invisibleOnMobile {
 	visibility: hidden;
-	@include respond-r3 {
+	@include respond-r2 {
 		visibility: visible;
 	}
 }
 
 ._showOnMobile {
 	display: block;
-	@include respond-r3 {
+	@include respond-r2 {
 		display: none;
 	}
 }
 
 body:not(.home) ._showOnInterior {
 	display: block;
-	@include respond-r3 {
+	@include respond-r2 {
 		display: block;
 	}
 }
