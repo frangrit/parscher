@@ -135,7 +135,7 @@
 			{% set isHoverable = false %}
 			{% if image.imageHover | length %} {% set isHoverable = true %}{% endif %}
 			{% if isSlider %}<div class="slide">{% endif %}
-			<figure class="text--figure{% if isHoverable %} hoverable{% endif %}" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="_forLightbox">
+			<figure itemscope class="text--figure _forLightbox{% if isHoverable %} hoverable{% endif %}" itemprop="associatedMedia"  itemtype="http://schema.org/ImageObject">
 				<a href="{{ image.url }}" data-size="{{ image.width }}x{{ image.height }}">
 					<picture>
 						<img{% if isHoverable %}
