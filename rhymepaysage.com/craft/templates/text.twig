@@ -23,14 +23,14 @@
 	<div class="content-start">
 		<main id="content" role="main">
 			<div class="text">
-				<h2 class="text--title type--d-xl">{{ entry.title|raw }}</h2>
-				{% if entry.textSubtitle | length %} <p class="text--subtitle type--b">{{ entry.textSubtitle|raw }}</h2>{% endif %}
+				<h2 class="text--title type--d-xl inner-bounded">{{ entry.title|raw }}</h2>
+				{% if entry.textSubtitle | length %} <p class="text--subtitle type--b inner-bounded">{{ entry.textSubtitle|raw }}</h2>{% endif %}
 				
 				<div class="text--body">
 					{% for block in entry.textBuilder %}
 						{% switch block.type %}
 						    {% case "blockSection" %}
-						    	<section>
+						    	<section class="text--body-block">
 							        {{ block.bodyText }}
 						    	</section>
 						    {% case "blockFigures" %}

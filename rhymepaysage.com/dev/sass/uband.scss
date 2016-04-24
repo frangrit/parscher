@@ -335,16 +335,16 @@ main { position: relative; }
 
 .text--index-title { margin-top: 2em; }
 
-.text h2, 
-.text h3, 
-.text h4, 
-.text p, 
-.text ul, 
-.text ol {
+.text--body-block h2, 
+.text--body-block h3, 
+.text--body-block h4, 
+.text--body-block p, 
+.text--body-block ul, 
+.text--body-block ol {
 	@extend .inner-bounded;
 }
 
-.text h3 {
+.text--body-block h3 {
 	@extend .type--d-l;
 	margin-top: $grid * 6;
 	margin-bottom: $grid * 3;
