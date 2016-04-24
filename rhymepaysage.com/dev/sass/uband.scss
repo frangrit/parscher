@@ -295,12 +295,14 @@ main { position: relative; }
 
 .entry-list--entry,
 .site-index--entry,
+.text-index--entry,
 .primary-nav--item,
 .secondary-nav--item {
 	padding-bottom: .5em;
 	line-height: 1.35;
 	min-height: $grid * 4;
 }
+
 
 // - - - - - - -
 
@@ -333,9 +335,7 @@ main { position: relative; }
 	@include block-italic;
 }
 
-.text--index-title {
-	margin-top: 2em;
-}
+.text--index-title { margin-top: 2em; }
 
 .text h2, 
 .text h3, 
@@ -377,6 +377,8 @@ main { position: relative; }
 	&:last-child { padding-right: 0; }
 	&:last-child::after { content: none; }
 }
+
+.text--index { margin-top: $double; }
 
 // - - - - - - -
 
