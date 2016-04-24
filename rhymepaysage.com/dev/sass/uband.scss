@@ -25,32 +25,125 @@
 
 // - - - - - - -
 
-
-body {
-	@include font-size(1.8);
-	font-family: $font-body;
-	color: $color-black;
-	padding: $grid $grid * 3 $grid * 10 $double;
-	position: relative;
-	z-index: $zindex-0;
-	@include respond-r1 { 
-		padding-left: $grid * 5;
-		padding-right: $grid * 5;
-	}
-}
-
-body.content { padding-bottom: 0; }
-
-.fonts-loaded body {
-	font-family: $font-body-loaded;
-}
-
 a {
 	text-decoration: none;
 	color: inherit;
 }
 
-.ui-close {
+strong, 
+.strong {
+	font-family: $font-alt;
+	font-size: 95%;
+	font-weight: 700;
+}
+.fonts-loaded strong,
+.fonts-loaded .strong {
+	font-family: $font-title-loaded;
+	font-weight: 600;
+}
+
+figure img {
+	display: block;
+	max-width: 100%;
+	width: 100%;
+	height: auto;
+}
+
+// stolen from medium.com (sorry.)
+
+$color-text-shadow: white;
+._isUnderlined {
+	background-image: linear-gradient(to bottom,$color-black 25%,$color-black 25%);
+	background-size: 1px 1px;
+	background-repeat: repeat-x;
+	text-shadow: 0 -1px 0 $color-text-shadow,0 1px 0 $color-text-shadow,-2px -1px 0 $color-text-shadow,2px 1px 0 $color-text-shadow,1px 1px 0 $color-text-shadow,-1px 0 0 $color-text-shadow;
+	padding-bottom: 1px;
+	font-weight: regular;
+	background-position: 0 19px;
+	&:hover {
+		background-size: 2px 2px;
+	}
+}
+
+// - - - - - - -
+
+.type--b {
+	font-family: $font-body;
+	line-height: 1.45;
+	@include font-size(1.8);
+	@include respond-r2 {
+		line-height: 1.6;
+	}
+}
+.fonts-loaded .type--b {
+	font-family: $font-body-loaded;
+	line-height: 1.4;
+}
+
+.type--d-xl {
+	font-family: $font-title;
+	font-weight: 300;
+	@include font-size(2);
+}
+.fonts-loaded .type--d-xl {
+	font-family: $font-title-loaded;
+	@include font-size(3.2);
+}
+
+.type--d-xl-alt {
+	@extend .type--d-xl;
+	@include respond-r0 {
+		font-family: $font-alt;
+		@include smallcaps-wide;
+		font-weight: 600;
+		@include font-size(1.4);
+	}
+	@include respond-r1 {
+		font-weight: 600;
+	}	
+}
+.fonts-loaded .type--d-xl-alt {
+	@include respond-r0 {
+		font-family: $font-alt-loaded;
+		@include font-size(1.8);	
+	}
+}
+
+.type--d-l {
+	font-family: $font-title;
+	font-weight: 800;
+	@include smallcaps-wide;
+	@include font-size(1.6);
+	line-height: 1.3;
+}
+.fonts-loaded .type--d-l {
+	font-family: $font-alt-loaded;
+	font-weight: 600;
+	@include font-size(1.6);
+}
+
+.type--d-s {
+	font-family: $font-title;
+	font-weight: 600;
+	@include font-size(1.3);
+}
+.fonts-loaded .type--d-s {
+	font-family: $font-alt-loaded;
+}
+
+.type--d-xs {
+	font-family: $font-title;
+	font-weight: 600;
+	@include font-size(1.1);
+	@include smallcaps-wide;
+}
+.fonts-loaded .type--d-xs {
+	font-family: $font-alt-loaded;
+}
+
+// - - - - - - -
+
+.ui--close {
 	position: fixed;
 	top: $double;
 	right: 10px;
@@ -78,83 +171,56 @@ a {
 	}
 }
 
+// - - - - - - -
 
-.st-xl {
-	font-family: $font-title;
-	font-weight: 300;
-	@include font-size(2);
-}
-.fonts-loaded .st-xl {
-	font-family: $font-title-loaded;
-	@include font-size(3.2);
-}
-
-.st-xl-alt {
-	font-family: $font-alt;
-	font-weight: 600;
-	@include font-size(1.4);
-	@include respond-r0 {
-		@include smallcaps-wide;
-	}
-	@include respond-r1 {
-		font-family: $font-title;
-		@include font-size(3.2);
-	}	
-}
-.fonts-loaded .st-xl-alt {
-	@include font-size(1.8);	
-	@include respond-r0 {
-		font-family: $font-alt-loaded;
-	}
-	@include respond-r1 {
-		@include font-size(3.2);
-	}	
-}
-
-.site-title {
-	margin: $grid 0 $grid * 6 0 ;
-	@include respond-r1 {
-		margin: $grid * 4 0 $grid * 8 0;
-	}
-}
-
-
-main {
+body {
+	color: $color-black;
+	padding: $grid $grid * 3 $grid * 10 $double;
 	position: relative;
 	z-index: $zindex-0;
+	@include respond-r1 { 
+		padding-left: $width-margin-desktop;
+		padding-right: $width-margin-desktop;
+	}
 }
 
-.content-start {
-	position: relative;
-	z-index: $zindex-0;
+body.content { padding-bottom: 0; }
+
+main { position: relative; }
+
+.content-start { position: relative; }
+
+
+// - - - - - - -
+
+.container,
+.inner-bounded,
+.outer-bounded,
+.max-bounded {
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .unbounded {
-	width: 100%;
+	margin-left: -$width-margin-mobile;
+	margin-right: -$width-margin-mobile - $grid;
+	width: auto;
+	@include respond-r1 {
+		margin-left: -$width-margin-desktop;
+		margin-right: -$width-margin-desktop;
+	}
 }
 
 .inner-bounded {
-	@include respond-r2 {
-		max-width: $width-inner-bounded;
-		margin-left: auto;
-		margin-right: auto;
-	}
+	max-width: $width-inner-bounded;
 }
 
 .outer-bounded {
-	@include respond-r2 {
-		max-width: $width-outer-bounded;
-		margin-left: auto;
-		margin-right: auto;
-	}
+	max-width: $width-outer-bounded;
 }
 
 .max-bounded {
-	@include respond-r2 {
-		max-width: $width-max;
-		margin-left: auto;
-		margin-right: auto;
-	}
+	max-width: $width-max;
 }
 
 .hanging {
@@ -169,119 +235,14 @@ main {
 	}
 }
 
-div.body {
-	.body-main {
-		margin-top: $grid * 6;
-		@include respond-r2 { margin-top: 68px 	}
-	}
-	h2, h3, h4, p, ul, ol {
-		@extend .inner-bounded;
-	}
-	p + p {
-		margin-top: .85em;
-		@include respond-r2 {
-			margin-top: 1.2em;
-		}
-	}
-	h2 {
-		@include font-size(3.2);
-		margin-bottom: 0;
-		font-weight: 600;
-		padding-top: 5px;
-		animation: none !important;
-		color: $color-black !important;
-		@include respond-r2 {
-			padding-top: 0;
-		}
-	}
-	h3 {
-		font-family: $font-title;
-		font-weight: 800;
-		letter-spacing: .05em;
-		@include font-size(1.6);
-		margin-top: $grid * 6;
-		margin-bottom: $grid * 3;
-		line-height: 1.3;
-		text-transform: uppercase;
-	}
-	p.text-subtitle {
-		font-style: italic;
-		margin-top: $grid;
-		i, em, cite { font-style: normal; }
-	}
-	p {
-		line-height: 1.4;
-		@include respond-r2 {
-			line-height: 1.6;
-		}
-	}
-}
+// - - - - - - -
 
-.fonts-loaded div.body {
-	p {
-		@include font-size(1.8);
-		line-height: 1.45;
-		@include respond-r2 {
-			line-height: 1.6;
-		}
-	}
-	h2 {
-		@include font-size(3.2);
-		font-family: $font-title-loaded;
-		font-weight: 300;
-	}
-	h3 {
-		font-family: $font-alt-loaded;
-		@include font-size(1.6);
-		font-weight: 600;
-	}
-}
-
-.hed-h4 {
-	margin-top: 2em;
-	font-family: $font-title;
-	font-size: 65%;
-	font-weight: 600;
-}
-
-.fonts-loaded .hed-h4 {
-	font-family: $font-alt-loaded;
-	@include font-size(1.3);
-}
-
-
-div.meta {
-	p {
-		@extend .inner-bounded;
-		@extend .hed-h4;
-	}
-}
-
-.fonts-loaded div.meta p {
-}
-
-
-div.comments {
-	margin-top: $grid * 7;
-}
-
-nav.primary {
+.primary-nav {
 	font-style: italic;
-	&.top {
-		margin-bottom: $grid * 4;
-		@include respond-r1 { margin-top: $grid * 5; }
-	}
-	&.bottom {
-		margin-top: $grid * 3;
-		@include respond-r1 { margin-top: $grid * 7; }
-	}
-}
-
-main + nav.primary.bottom {
 	margin-top: $grid * 7;
 }
 
-nav.secondary {
+.secondary-nav {
 	margin: $double 0 $grid * 4;
 	position: relative;
 	z-index: $zindex-1;
@@ -300,7 +261,12 @@ nav.secondary {
 	}
 }
 
-.category-highlight {
+.primary-nav--item,
+.secondary-nav--item {
+	height: $grid * 4;
+}
+
+.secondary-nav--item-highlight {
 	width: auto;
 	position: absolute;
 	right: 0;
@@ -313,127 +279,110 @@ nav.secondary {
 	}
 }
 
-
-.text-index {
-	margin-top: 1em;
+.entry-list {
+	z-index: $zindex-1;
+	position: relative;
+	margin-top: $grid * 7;
 }
 
-.entry,
-.index-entry,
-.primary-nav-item,
-.secondary-nav-item {
-	padding-bottom: .5em;
-	line-height: 1.35;
-	min-height: $grid * 4;
-}
+.entry-list--date { padding-left: 4px; }
 
-.primary-nav-item,
-.secondary-nav-item {
-	height: $grid * 4;
-}
-
-.entry a {
+.entry-list--entry a {
 	background-color: white;
     padding: 1px 2px 3px 0;
     border-radius: 1px;
 }
 
-.entry-list {
-	z-index: $zindex-1;
-	position: relative;
+.entry-list--entry,
+.site-index--entry,
+.primary-nav--item,
+.secondary-nav--item {
+	padding-bottom: .5em;
+	line-height: 1.35;
+	min-height: $grid * 4;
 }
 
-/*
-span.title,
-nav.primary a,
-.index-entry a {
-	box-shadow: inset 0 -2px 0 white, inset 0 -3px 0 $color-black;
-	padding-bottom: 1px;
-	&:hover {
-		text-decoration: none;
-		box-shadow: inset 0 -1px 0 white, inset 0 -3px 0 $color-black;
-	}
-}
-*/
+// - - - - - - -
 
-// stolen from pictchfork.com (sorry.)
-
-$color-text-shadow: white;
-
-span.title,
-nav.primary a,
-.index-entry a {   
-	background-image: linear-gradient(to bottom,$color-black 25%,$color-black 25%);
-	background-size: 1px 1px;
-	background-repeat: repeat-x;
-	text-shadow: 0 -1px 0 #fff,0 1px 0 #fff,-2px -1px 0 #fff,2px 1px 0 #fff,1px 1px 0 #fff,-1px 0 0 #fff;
-	padding-bottom: 1px;
-	font-weight: regular;
-	background-position: 0 19px;
-	&:hover {
-		background-size: 2px 2px;
+.header--title {
+	margin: $grid 0 $grid * 6 0 ;
+	@include respond-r1 {
+		margin: $grid * 4 0 $grid * 8 0;
 	}
 }
 
-strong, .strong {
-	font-family: $font-alt;
-	font-size: 95%;
-	font-weight: 700;
+.text--body {
+	margin-top: $grid * 6;
+	line-height: 1.4;
+	@include respond-r2 { 
+		margin-top: 68px; 
+		line-height: 1.6;
+	}
 }
 
-.index-multiples {
+.text--title {
+	margin-bottom: 0;
+	padding-top: 5px;
+	@include respond-r2 {
+		padding-top: 0;
+	}
+}
+
+.text--subtitle {
+	margin-top: $grid;
+	@include block-italic;
+}
+
+.text--index-title {
+	margin-top: 2em;
+}
+
+.text h2, 
+.text h3, 
+.text h4, 
+.text p, 
+.text ul, 
+.text ol {
+	@extend .inner-bounded;
+}
+
+.text h3 {
+	@extend .type--d-l;
+	margin-top: $grid * 6;
+	margin-bottom: $grid * 3;
+}
+
+.text p + p {
+	margin-top: .85em;
+	@include respond-r2 {
+		margin-top: 1.2em;
+	}
+}
+
+.text-meta { margin-top: $grid * 3; }
+
+.comments { margin-top: $grid * 7; }
+
+// - - - - - - -
+
+.site-index--entry-multiples {
 	display: inline;
 	padding-left: .5em;
-	.index-multiple-entry {
-		display: inline;
-		padding-right: .25em;
-		&:after {
-			content: ',';
-		}
-		&:last-child {
-			padding-right: 0;
-		}
-		&:last-child::after {
-			content: none;
-		}
-		a {
-			font-family: $font-alt;
-			@include font-size(1.5);
-			font-weight: 600;
-		}
-	}
 }
 
-.fonts-loaded .index-multiples .index-multiple-entry a {
-	font-family: $font-alt-loaded;
+.site-index--entry-multiples-entry {
+	display: inline;
+	padding-right: .25em;
+	&:after { content: ','; }
+	&:last-child { padding-right: 0; }
+	&:last-child::after { content: none; }
 }
 
-span.date {
-	font-size: 60%;
-	font-family: $font-title;
-	font-weight: 600;
-}
+// - - - - - - -
 
-.style-micro {
-	font-family: $font-alt-loaded;
-	@include font-size(1.1);
-	letter-spacing: .03em;
-}
-
-.fonts-loaded span.date {
-	@extend .style-micro;
-	padding-left: 4px;
-}
-
-figure img {
-	display: block;
-	max-width: 100%;
-	width: 100%;
-	height: auto;
-}
-
-p + .container.hanging {
-	margin-top: 1.5em;
+.row {
+	margin: 0 ($width-gutter / -2);
+	overflow: auto;
 }
 
 .container {
@@ -442,86 +391,69 @@ p + .container.hanging {
 	@include respond-r1 {
 		margin: $grid * 6 auto;
 	}
-	&.unbounded {
-		margin-left: -$width-margin-mobile;
-		margin-right: -($width-margin-mobile + $grid);
-		width: auto;
-		@include respond-r1 {
-			margin-left: -$width-margin-desktop;
-			margin-right: -$width-margin-desktop;
-		}
-	}
-	&.hanging {
-		margin: $grid 0 0;
-		& + p,
-		& + ul, 
-		& + ol { margin-top: 1em; }
-	}
-	h3.figure-title {
-		margin-top: 0;
-		margin-bottom: $grid * 3;
-	}
-	.row {
-		margin: 0 ($width-gutter / -2);
-		overflow: auto;
-	}
-	.row + .row {
-		figure {
-			margin-top: $width-margin-mobile;
-		}
-	}
-	figure {
-		padding: 0 $width-gutter / 2;
-		float: left;
-		&.hoverable { 
-			position: relative;
-			.hoverable-display {
-			}
-			.hoverable-onHover {
-				position: absolute;
-				top: 0;
-				left: 0;
-				display: none;
-				padding: 0 $width-gutter / 2;
-			}
-			&:hover {
-				.hoverable-onHover {
-					display: block;
-				}
-			}
-		}
-	}
-	.single figure { width: 100%; }
-	.two-across figure { width: 50%;  }
-	.three-across figure { width: 33.333333%; }
-	.four-across figure { width: 25%; } 
-	figcaption, 
-	p.common-caption { 
-		clear: both; 
-		padding-top: $grid * 2;
-		font-family: $font-alt;
-		font-weight: 700;
-		@include font-size(1.3);
-		line-height: 1.4;
-		padding-bottom: .2em;
-	}
-	figcaption {
-		padding-right: $double;
-	}
-	p.common-caption { 
-		@extend .inner-bounded; 
-		padding: $grid * 2 $grid * 4 0 ($width-margin-mobile / 2);
-		@include respond-r2 {
-			padding: $grid * 2 $grid * 4 0 0;
-		}
+}
+
+.container.hanging {
+	margin: $grid 0 0;
+	& + p,
+	& + ul, 
+	& + ol { margin-top: 1em; }
+}
+
+p + .container.hanging { margin-top: 1.5em; }
+
+// - - - - - - -
+
+.text--figure {
+	padding: 0 $width-gutter / 2;
+	float: left;
+}
+
+.text--figure.hoverable {  position: relative; }
+
+.text--figure-hoverable-display {}
+	
+.text--figure-hoverable-onHover {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: none;
+	padding: 0 $width-gutter / 2;
+}
+
+.text--figure.hoverable:hover {
+	.text--figure-hoverable-onHover { display: block; }
+}
+
+.single > .text--figure { width: 100%; }
+.two-across > .text--figure { width: 50%;  }
+.three-across > .text--figure { width: 33.333333%; }
+.four-across > .text--figure { width: 25%; } 
+
+.row + .row .text--figure { margin-top: $width-margin-mobile; }
+
+.text--figure-title {
+	margin-top: 0;
+	margin-bottom: $grid * 3;
+}
+
+.text--figure-caption, 
+.text--figure-common-caption { 
+	clear: both; 
+	padding-top: $grid * 2;
+	line-height: 1.4;
+	padding-bottom: .2em;
+}
+
+.text--figure-caption { padding-right: $double; }
+
+.text--figure-common-caption { 
+	padding: $grid * 2 $grid * 4 0 ($width-margin-mobile / 2);
+	@include respond-r2 {
+		padding: $grid * 2 $grid * 4 0 0;
 	}
 }
 
-.fonts-loaded figcaption,
-.fonts-loaded div.body p.common-caption {
-	font-family: $font-alt-loaded;
-	@include font-size(1.3);
-}
 
 .note {
 	font-family: $font-alt;
@@ -593,23 +525,16 @@ body.home ._revealOnHome {
 
 // - - - - 
 
-body.all .secondary-nav-item._activeOn.all, 
-body.essays .secondary-nav-item._activeOn.essays, 
-body.projects .secondary-nav-item._activeOn.projects, 
-body.landscapes .secondary-nav-item._activeOn.landscapes, 
-body.backyards .secondary-nav-item._activeOn.backyards {
-	font-weight: 600;
+// rest of these rules calculated in the <head>
+body.all .secondary-nav--item._activeOn.all { font-weight: 600; }
+
+body.home .secondary-nav--item._activeOn { 
+	display: block; 
+	visibility: visible; 
 }
 
-body.home .secondary-nav-item._activeOn { display: block; visibility: visible; }
-
-body.all .secondary-nav-item._activeOn.all, 
-body.essays .secondary-nav-item._activeOn.essays, 
-body.projects .secondary-nav-item._activeOn.projects, 
-body.landscapes .secondary-nav-item._activeOn.landscapes, 
-body.backyards .secondary-nav-item._activeOn.backyards {
-	visibility: visible;
-}
+// rest of these rules calculated in the <head>
+body.all .secondary-nav--item._activeOn.all { visibility: visible; }
 
 // - - - - 
 
@@ -623,12 +548,9 @@ body.backyards .secondary-nav-item._activeOn.backyards {
 	}
 }
 
-body.essays .entry._showOn.essays,
-body.projects .entry._showOn.projects,
-body.landscapes .entry._showOn.landscapes,
-body.backyards .entry._showOn.backyards,
-body.home .entry._showOn,
-body.all .entry._showOn { 
+// rest of these rules calculated in the <head>
+body.home .entry-list--entry._showOn,
+body.all .entry-list--entry._showOn { 
 	display: block;
 	@include respond-r1 { 
 		visibility: visible; 

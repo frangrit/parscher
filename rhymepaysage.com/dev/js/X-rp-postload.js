@@ -12,8 +12,11 @@ $(function() {
 
 
 $(document).ready(function(){
+    
+    // initialize fastclick
     FastClick.attach(document.body);
 
+    // add stylesheets
 	if($("#container").size()>0){
 	    if (document.createStyleSheet){
 	        document.createStyleSheet('/css/rp-app.css');
@@ -23,10 +26,12 @@ $(document).ready(function(){
 	    }
 	}
 
+    // change body class on nav click
 	$('#nav-secondary li a').on("click", function( event ){
        event.preventDefault();
 	    thisBodyClass = $(this).attr('id');
 	    $('body').removeClass().addClass( thisBodyClass ); 
+	    $('body').addClass( 'type--b' ); 
     });
 
 

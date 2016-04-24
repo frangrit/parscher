@@ -22,11 +22,11 @@
 	{% include "_nav-binary-home" %}
 	<div class="content-start">
 		<main id="content" role="main">
-			<div class="body">
-				<h2 class="text-title">{{ entry.title|raw }}</h2>
-				{% if entry.textSubtitle | length %} <p class="text-subtitle">{{ entry.textSubtitle|raw }}</h2>{% endif %}
+			<div class="text">
+				<h2 class="text--title type--d-xl">{{ entry.title|raw }}</h2>
+				{% if entry.textSubtitle | length %} <p class="text--subtitle type--b">{{ entry.textSubtitle|raw }}</h2>{% endif %}
 				
-				<div class="body-main">
+				<div class="text--body">
 					{% for block in entry.textBuilder %}
 						{% switch block.type %}
 						    {% case "blockSection" %}
@@ -40,13 +40,13 @@
 						        <p>The bartender says, “Hey, we don’t serve your type in here!”</p>
 						{% endswitch %}
 					{% endfor %}
-				</div> {# /div.body-main #}
-			</div> {# /div.body #}
-			<div class="meta">
-				<p class="date">({{ displayDate }})</p>
+				</div> {# .text--body #}
+			</div> {# .body #}
+			<div class="text-meta inner-bounded">
+				<p class="text-meta--date type--d-s">({{ displayDate }})</p>
 			</div>
 		</main>
 		{% include "_content-foot" %}
-	</div>{# /.content-start #}
+	</div>{# .content-start #}
 	{% include "_pswipe-ui" %}
 {% endblock %}

@@ -5,7 +5,7 @@
 	formattingAdd: {
 	    'body-h3': {
 		    title: 'Subhed (h3)',
-		    args: ['h3', 'toggle']
+		    args: ['h3', 'class', 'type--d-l', 'toggle']
 	    },    
 	    'body-p': {
 		    title: 'Plain Text (p)',

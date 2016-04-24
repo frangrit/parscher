@@ -242,3 +242,8 @@
 	text-transform: uppercase;
 	letter-spacing: .05em;
 }
+
+@mixin block-italic {
+	font-style: italic;
+	i, em, cite { font-style: normal; }
+}

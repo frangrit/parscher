@@ -1,17 +1,17 @@
-<nav class="secondary" id="nav-secondary">
-	<ul class="secondary-nav-list">
+<nav class="secondary-nav" id="nav-secondary">
+	<ul class="secondary-nav--list">
 		{% for category in craft.categories %}
-			<li class="secondary-nav-item st-xl  _activeOn {{ category.slug }}">
+			<li class="secondary-nav--item type--d-xl  _activeOn {{ category.slug }}">
 				<a href="{{ category.url }}" class="trigger" id="{{ category.slug }}">{{ category.title|title }}</a>
 				{% if not craft.request.isMobileBrowser %}
 					{% if category.primaryImage|length %}
 						{% set thisAsset = category.primaryImage.first() %}
 						{% if thisAsset.kind == 'video' %}
-							<video class="category-highlight _fadeOnSiblingTriggerHover" autoplay loop>
+							<video class="secondary-nav--item-highlight _fadeOnSiblingTriggerHover" autoplay loop>
 								<source src="{{ thisAsset.url }}" type="{{ thisAsset.mimeType }}" />
 							</video>
 						{% else %}
-							<figure class="category-highlight _fadeOnSiblingTriggerHover">
+							<figure class="secondary-nav--item-highlight _fadeOnSiblingTriggerHover">
 								<source src="{{ thisAsset.url }}" type="{{ thisAsset.mimeType }}" />
 							</figure>
 						{% endif %}

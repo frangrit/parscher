@@ -118,7 +118,7 @@
 <div class="container {{ block.containerBound }} {{ containerType }} itemscope itemtype="http://schema.org/ImageGallery"">
 
 	{% if block.figureTitle | length %}
-		<h3 class="figure-title">{{ block.figureTitle | raw }}</h3>
+		<h3 class="text--figure-title type--d-l">{{ block.figureTitle | raw }}</h3>
 	{% endif %}
 
 	<div class="row {{ rowClass }}">
@@ -135,11 +135,11 @@
 			{% set isHoverable = false %}
 			{% if image.imageHover | length %} {% set isHoverable = true %}{% endif %}
 			{% if isSlider %}<div class="slide">{% endif %}
-			<figure{% if isHoverable %} class="hoverable"{% endif %} itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="_forLightbox">
+			<figure class="text--figure{% if isHoverable %} hoverable{% endif %}" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="_forLightbox">
 				<a href="{{ image.url }}" data-size="{{ image.width }}x{{ image.height }}">
 					<picture>
 						<img{% if isHoverable %}
-							class="hoverable-display" {% endif %}
+							class="text--figure-hoverable-display" {% endif %}
 							sizes="{{ thisSizes }}"
 							itemprop="thumbnail"
 							srcset="{{ image.url('fit200w') }} 200w, {{ image.url('fit400w') }} 400w, {{ image.url('fit800w') }} 800w, {{ image.url('fit1200w') }} 1200w, {{ image.url('fit1600w') }} 1600w, {{ image.url('fit2000w') }} 2000w"
@@ -150,7 +150,7 @@
 						{% if isHoverable %}
 							{% set hover = image.imageHover.first() %}
 							<img
-								class="hoverable-onHover {{ hover }}" 
+								class="text--figure-hoverable-onHover {{ hover }}" 
 								sizes="{{ thisSizes }}"
 								itemprop="thumbnail"
 								srcset="{{ hover.url('fit200w') }} 200w, {{ hover.url('fit400w') }} 400w, {{ hover.url('fit800w') }} 800w, {{ hover.url('fit1200w') }} 1200w, {{ hover.url('fit1600w') }} 1600w, {{ hover.url('fit2000w') }} 2000w"
@@ -161,12 +161,12 @@
 						{% endif %}	
 					</picture>
 				</a>
-				{% if image.imageCaption | length %}<figcaption>{{ image.imageCaption }}</figcaption>{% endif %}
+				{% if image.imageCaption | length %}<figcaption class="text--figure-caption type--d-s">{{ image.imageCaption }}</figcaption>{% endif %}
 			</figure>
 			{% if isSlider %}</div>{# /.slide #}{% endif %}
 		{% endfor %}
 		{% if block.commonCaption | length and isHanging == false %}
-			<p class="common-caption">{{ block.commonCaption }}</p>
+			<p class="text--figure-common-caption type--d-s inner-bounded">{{ block.commonCaption }}</p>
 		{% endif %}
 	</div> {# /.row #}
 </div>

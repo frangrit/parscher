@@ -51,14 +51,23 @@
 		<title>{% if title is defined %}{{ title }} / {% endif %}{{ siteName }}</title>
 		<link rel="home" href="{{ siteUrl }}" />
 		<style>{{ source('css/uband.css') }}</style>
+		<style>
+			{# set visibility rules for categories #}
+			{% for category in craft.categories %}
+				body.{{ category.slug }} .secondary-nav--item._activeOn.{{ category.slug }} { font-weight: 600; }
+				body.{{ category.slug }} .secondary-nav--item._activeOn.{{ category.slug }} { visibility: visible; }
+				body.{{ category.slug }} .entry-list--entry._showOn.{{ category.slug }} { display: block; }
+				@media only screen and (min-width: {{ respond_r1 }}) { body.{{ category.slug }} .entry-list--entry._showOn.{{ category.slug }}{ visibility: visible; opacity: 1; } }
+			{% endfor %}
+		</style>
 		{#<link rel="stylesheet" href="/css/uband.css"/>#}
 	</head>
 	
-	<body class="{{ bodyClass }}">
+	<body class="{{ bodyClass }} type--b">
 		<div id="container">
 			{% cache %}
 			<header id="header" class="inner-bounded">
-				<h1 class="site-title st-xl-alt"><a href="{{ siteUrl }}" class="">{{ siteName }}</a></h1>
+				<h1 class="header--title type--d-xl-alt"><a href="{{ siteUrl }}" class="">{{ siteName }}</a></h1>
 			</header>
 			{% endcache %}
 			{% block content %}
