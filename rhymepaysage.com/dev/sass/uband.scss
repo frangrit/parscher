@@ -386,10 +386,15 @@ main { position: relative; }
 }
 
 .container {
-	margin: $grid * 6 $grid * -1 $grid * 6 0;
+	margin-top: $grid * 6;
+	margin-bottom: $grid * 6;
 	overflow: hidden;
-	@include respond-r1 {
-		margin: $grid * 6 auto;
+	&.inner-bounded,
+	&.outer-bounded,
+	&.max-bounded {
+		@include respond-r0 {
+			margin-right: -$grid;
+		}
 	}
 }
 
