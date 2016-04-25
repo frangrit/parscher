@@ -55,7 +55,6 @@ $(document).ready(function(){
 		  ]
 	});
 
-/*
 
 	// initialize lightbox
     var $pswp = $('.pswp')[0];
@@ -89,6 +88,7 @@ $(document).ready(function(){
             image[index].src = value['src'];
         });
 
+/*
         $pic.on('click', function(event) {
             event.preventDefault();
             
@@ -102,8 +102,8 @@ $(document).ready(function(){
             var lightBox = new PhotoSwipe($pswp, PhotoSwipeUI_Default, items, options);
             lightBox.init();
         });
-    });
-*/
+ */
+   });
 
 	// look for font load
 	var fontTitle = new FontFaceObserver('Founders Grotesk Web', {
