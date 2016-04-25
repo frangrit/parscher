@@ -9,6 +9,7 @@
  # http://twig.sensiolabs.org/doc/templates.html#template-inheritance
  #}
 
+{% cache globally %}
 {% set grid = 8 %}
 {% set maxWidth = 1400 %}
 {% set marginGlobal = grid * 5 %}
@@ -39,6 +40,7 @@
 {% set respond_r3 = breakInner %}
 {% set respond_r4 = breakOuter %}
 {% set respond_r5 = breakMax %}
+{% endcache %}
 
 <!DOCTYPE html>
 {% set fontsLoaded = null %}
@@ -51,6 +53,7 @@
 		<title>{% if title is defined %}{{ title }} / {% endif %}{{ siteName }}</title>
 		<link rel="home" href="{{ siteUrl }}" />
 		<style>{{ source('css/uband.css') }}</style>
+		{% cache globally %}
 		<style>
 			{# set visibility rules for categories #}
 			{% for category in craft.categories %}
@@ -60,6 +63,7 @@
 				@media only screen and (min-width: {{ respond_r1 }}) { body.{{ category.slug }} .entry-list--entry._showOn.{{ category.slug }}{ visibility: visible; opacity: 1; } }
 			{% endfor %}
 		</style>
+		{% endcache %}
 		{#<link rel="stylesheet" href="/css/uband.css"/>#}
 	</head>
 	

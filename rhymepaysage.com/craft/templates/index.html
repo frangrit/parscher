@@ -22,6 +22,7 @@
 {% set bodyClass = "home" %}
 
 {% block content %}
+	{% cache %}
 	<div class="content-start">
 		<main id="content" class="max-bounded" role="main">
 			{% include "_nav-secondary" %}
@@ -29,4 +30,5 @@
 		</main>
 		{% include "_content-foot" %}
 	</div>{# /.content-start #}
+	{% endcache %}
 {% endblock %}
