@@ -1,5 +1,5 @@
 {
-	plugins: ['source','fullscreen'],
+	plugins: ['inlinestyles','source','fullscreen'],
 	buttons: ['format','bold','italic','lists','link','file'],
 	formatting: [],
 	formattingAdd: {

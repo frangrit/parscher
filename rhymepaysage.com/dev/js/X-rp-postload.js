@@ -83,7 +83,6 @@ $(document).ready(function(){
 
         var items = getItems();
 
-
         $pic.on('click', function(event) {
             event.preventDefault();
             
