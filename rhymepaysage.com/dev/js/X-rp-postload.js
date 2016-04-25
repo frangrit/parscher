@@ -140,4 +140,31 @@ $(document).ready(function(){
 		function () {
 			console.log('Fonts NOT available.');
 	});
+	
+	// disqus async
+	//var dsq = document.createElement('script');
+	//dsq.type = 'text/javascript';
+	//dsq.async = true;
+	//dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	//(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	
+	// disqus lazy load
+	var ds_loaded = false, 
+    top = $("#disqus_thread").offset().top;
+	window.disqus_developer = 1;
+	window.disqus_shortname = 'rhymepaysage';
+	function check(){
+	    if ( !ds_loaded && $(window).scrollTop() + $(window).height() > top ) {
+	        $.ajax({
+	            type: "GET",
+	            url: "http://" + disqus_shortname + ".disqus.com/embed.js",
+	            dataType: "script",
+	            cache: true
+	        });
+	        ds_loaded = true;
+	    }
+	}
+	$(window).scroll(check);
+	check();
+	
 });
