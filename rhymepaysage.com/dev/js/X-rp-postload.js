@@ -140,13 +140,14 @@ $(document).ready(function(){
 	});
 	
 	// disqus async
-	//var dsq = document.createElement('script');
-	//dsq.type = 'text/javascript';
-	//dsq.async = true;
-	//dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-	//(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	var dsq = document.createElement('script');
+	dsq.type = 'text/javascript';
+	dsq.async = true;
+	dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 	
 	// disqus lazy load
+	/*
 	var ds_loaded = false, 
     top = $("#disqus_thread").offset().top;
 	window.disqus_developer = 1;
@@ -164,5 +165,6 @@ $(document).ready(function(){
 	}
 	$(window).scroll(check);
 	check();
+	*/
 	
 });
