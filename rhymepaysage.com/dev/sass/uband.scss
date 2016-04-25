@@ -83,7 +83,7 @@ $color-text-shadow: white;
 .type--d-xl {
 	font-family: $font-title;
 	font-weight: 300;
-	@include font-size(2);
+	@include font-size(2.9);
 }
 .fonts-loaded .type--d-xl {
 	font-family: $font-title-loaded;
