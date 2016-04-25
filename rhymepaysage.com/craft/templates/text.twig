@@ -18,11 +18,11 @@
 {% extends "_layout" %}
 {% set bodyClass = "content" %}
 
-{% cache %}
 {% block content %}
 	{% include "_nav-binary-home" %}
 	<div class="content-start">
 		<main id="content" role="main">
+			{% cache %}
 			<div class="text">
 				<h2 class="text--title type--d-xl inner-bounded">{{ entry.title|raw }}</h2>
 				{% if entry.textSubtitle | length %} <p class="text--subtitle type--b inner-bounded">{{ entry.textSubtitle|raw }}</h2>{% endif %}
@@ -47,8 +47,8 @@
 				<p class="text-meta--date type--d-s">({{ displayDate }})</p>
 			</div>
 		</main>
+		{% endcache %}
 		{% include "_content-foot" %}
 	</div>{# .content-start #}
 	{% cache globally %}{% include "_pswipe-ui" %}{% endcache %}
 {% endblock %}
-{% endcache %}
