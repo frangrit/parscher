@@ -1,3 +1,4 @@
+{% cache globally %}
 <nav class="secondary-nav" id="nav-secondary">
 	<ul class="secondary-nav--list">
 		{% for category in craft.categories %}
@@ -21,3 +22,4 @@
 		{% endfor %}
 	</ul>
 </nav>
+{% endcache %}
