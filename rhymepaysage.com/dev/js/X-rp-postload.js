@@ -83,12 +83,7 @@ $(document).ready(function(){
 
         var items = getItems();
 
-        $.each(items, function(index, value) {
-            image[index]     = new Image();
-            image[index].src = value['src'];
-        });
 
-/*
         $pic.on('click', function(event) {
             event.preventDefault();
             
@@ -102,8 +97,8 @@ $(document).ready(function(){
             var lightBox = new PhotoSwipe($pswp, PhotoSwipeUI_Default, items, options);
             lightBox.init();
         });
- */
    });
+
 
 	// look for font load
 	var fontTitle = new FontFaceObserver('Founders Grotesk Web', {

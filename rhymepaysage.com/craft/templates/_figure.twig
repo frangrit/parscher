@@ -136,7 +136,7 @@
 			{% if image.imageHover | length %} {% set isHoverable = true %}{% endif %}
 			{% if isSlider %}<div class="slide">{% endif %}
 			<figure itemscope class="text--figure _forLightbox{% if isHoverable %} hoverable{% endif %}" itemprop="associatedMedia"  itemtype="http://schema.org/ImageObject">
-				<a href="{{ image.url }}" data-size="{{ image.width }}x{{ image.height }}">
+				<a href="{{ image.url }}" data-size="{{ image.width }}x{{ image.height }}" itemprop="contentUrl">
 					<picture>
 						<img{% if isHoverable %}
 							class="text--figure-hoverable-display" {% endif %}
@@ -161,12 +161,14 @@
 						{% endif %}	
 					</picture>
 				</a>
-				{% if image.imageCaption | length %}<figcaption class="text--figure-caption type--d-s">{{ image.imageCaption }}</figcaption>{% endif %}
+				<meta itemprop="width" content="{{ image.width }}">
+				<meta itemprop="height" content="{{ image.height }}">
+				{% if image.imageCaption | length %}<figcaption class="text--figure-caption type--d-s" itemprop="caption description">{{ image.imageCaption }}</figcaption>{% endif %}
 			</figure>
 			{% if isSlider %}</div>{# /.slide #}{% endif %}
 		{% endfor %}
 		{% if block.commonCaption | length and isHanging == false %}
-			<p class="text--figure-common-caption type--d-s inner-bounded">{{ block.commonCaption }}</p>
+			<p class="text--figure-common-caption type--d-s inner-bounded" itemprop="caption description">{{ block.commonCaption }}</p>
 		{% endif %}
 	</div> {# /.row #}
 </div>
