@@ -5,15 +5,21 @@
 	<ul class="primary-nav--list">
 		{% switch bodyClass %}
 			{% case "content" %}
+				{% cache globally %}
 				<li class="primary-nav--item"><a href="{{ siteUrl }}" class="_isUnderlined">Contents</a></li>
 				<li class="primary-nav--item"><a href="{{ about.url }}" class="_isUnderlined">About</a></li>
 				<li class="primary-nav--item"><a href="{{ readersIndex.url }}" class="_isUnderlined">Index</a></li>
+				{% endcache %}
 			{% case "site-index" %}
+				{% cache globally %}
 				<li class="primary-nav--item"><a href="{{ siteUrl }}" class="_isUnderlined">Contents</a></li>
 				<li class="primary-nav--item"><a href="{{ about.url }}" class="_isUnderlined">About</a></li>
+				{% endcache %}
 			{% default %}
+				{% cache globally %}
 				<li class="primary-nav--item"><a href="{{ about.url }}" class="_isUnderlined">About</a></li>
 				<li class="primary-nav--item"><a href="{{ readersIndex.url }}" class="_isUnderlined">Index</a></li>
+				{% endcache %}
 		{% endswitch %} 
 	</ul>
 </nav>

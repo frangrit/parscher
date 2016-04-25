@@ -18,6 +18,7 @@
 {% extends "_layout" %}
 {% set bodyClass = "content" %}
 
+{% cache %}
 {% block content %}
 	{% include "_nav-binary-home" %}
 	<div class="content-start">
@@ -48,5 +49,6 @@
 		</main>
 		{% include "_content-foot" %}
 	</div>{# .content-start #}
-	{% include "_pswipe-ui" %}
+	{% cache globally %}{% include "_pswipe-ui" %}{% endcache %}
 {% endblock %}
+{% endcache %}
