@@ -55,6 +55,8 @@ $(document).ready(function(){
 		  ]
 	});
 
+/*
+
 	// initialize lightbox
     var $pswp = $('.pswp')[0];
     var image = [];
@@ -101,6 +103,7 @@ $(document).ready(function(){
             lightBox.init();
         });
     });
+*/
 
 	// look for font load
 	var fontTitle = new FontFaceObserver('Founders Grotesk Web', {
