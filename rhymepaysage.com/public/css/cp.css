@@ -23,6 +23,8 @@ body .redactor-editor mark.ntr,
 body .redactor-editor mark.ntl {
 	display: inline;
 	white-space: normal;
+    padding: 0;
+    background-color: transparent;
 }
 
 body .redactor-dropdown-noteleft span:after,
