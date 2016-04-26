@@ -17,6 +17,7 @@
 
 {% extends "_layout" %}
 {% set bodyClass = "content" %}
+{% import '_macros' as siteMacros %}
 
 {% block content %}
 	{% include "_nav-binary-home" %}
@@ -32,7 +33,7 @@
 						{% switch block.type %}
 						    {% case "blockSection" %}
 						    	<section class="text--body-block">
-							        {{ block.bodyText }}
+							        {{ siteMacros.cleanup(block.bodyText) }}
 						    	</section>
 						    {% case "blockFigures" %}
 								{% include "_figure" %}
