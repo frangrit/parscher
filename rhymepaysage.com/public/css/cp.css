@@ -25,32 +25,32 @@ body .redactor-editor mark.ntl {
 	white-space: normal;
 }
 
-body .redactor-dropdown-marked span:after,
-body .redactor-dropdown-marked span:after,
+body .redactor-dropdown-noteleft span:after,
+body .redactor-dropdown-noteright span:after,
 body .redactor-editor mark.ntl:after,
 body .redactor-editor mark.ntr:after {
 	content: ']';
 }
 
-body .redactor-dropdown-marked span:before,
-body .redactor-dropdown-marked span:before,
+body .redactor-dropdown-noteleft span:before,
+body .redactor-dropdown-noteright span:before,
 body .redactor-editor mark.ntl:before,
-body .redactor-editor mark.ntl:before {
+body .redactor-editor mark.ntr:before {
 	content: '[';
 }
 
-body .redactor-dropdown-marked span:before,
-body .redactor-dropdown-marked span:after,
+body .redactor-dropdown-noteright span:before,
+body .redactor-dropdown-noteright span:after,
 body .redactor-editor mark.ntr:before,
 body .redactor-editor mark.ntr:after {
-	color: #ea6e31;
+	color: #f85b0d;
 }
 
-body .redactor-dropdown-marked span:before,
-body .redactor-dropdown-marked span:after,
+body .redactor-dropdown-noteleft span:before,
+body .redactor-dropdown-noteleft span:after,
 body .redactor-editor mark.ntl:before,
 body .redactor-editor mark.ntl:after  {
-	color: #317beb;
+	color: #0067ff;
 }
 
 body .redactor-dropdown-body-h3 span {
