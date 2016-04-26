@@ -19,6 +19,14 @@ body .redactor-editor p {
     line-height: 1.5;
 }
 
+body .redactor-editor kbd {
+	background-color: black;
+	color: white;
+	padding: 2px;
+	font-size: 90%; 
+	font-weight: 600;
+}
+
 body .redactor-dropdown-body-h3 span {
 	font-size: 17px;
     line-height: 32px;
