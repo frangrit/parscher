@@ -1,5 +1,5 @@
 {% macro cleanup(string) -%}
     {%- if string|length -%}
-        {{- string|typogrify|replace('<p><br></p>','')|replace('[ ]*redactor-inline-converted','')|raw -}}
+        {{- string|typogrify|replace('<p><br></p>','')|replace(' class="redactor-inline-converted"','')|replace('/[ ]*redactor-inline-converted/','')|raw -}}
     {%- endif -%}
 {%- endmacro %}
