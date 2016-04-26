@@ -17,10 +17,6 @@ return array(
                     'title' => 'Note Right',
                     'args' => ['mark', 'class', 'ntr'],
                 ),
-                array(
-                    'title' => 'Remove all styles',
-                    'clear' => true,
-                ),
             ),
         ),
     ),
