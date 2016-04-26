@@ -11,11 +11,11 @@ return array(
             'dropdown' => array(
                 array(
                     'title' => 'Note Left',
-                    'args' => ['noteleft'],
+                    'args' => ['ntl'],
                 ),
                 array(
                     'title' => 'Note Right',
-                    'args' => ['noteright'],
+                    'args' => ['ntr'],
                 ),
                 array(
                     'title' => 'Remove all styles',

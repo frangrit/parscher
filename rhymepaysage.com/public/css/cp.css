@@ -19,13 +19,18 @@ body .redactor-editor p {
     line-height: 1.5;
 }
 
-body .redactor-editor noteleft,
-body .redactor-editor noteright {
+body .redactor-editor ntr,
+body .redactor-editor ntl {
+	display: inline;
 	background-color: black;
 	color: white;
 	padding: 2px;
 	font-size: 90%; 
 	font-weight: 600;
+	font-family: -apple-system, BlinkMacSystemFont, 
+    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", 
+    "Fira Sans", "Droid Sans", "Helvetica Neue", 
+    sans-serif;
 }
 
 body .redactor-dropdown-body-h3 span {
