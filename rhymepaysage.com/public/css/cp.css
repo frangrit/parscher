@@ -19,8 +19,8 @@ body .redactor-editor p {
     line-height: 1.5;
 }
 
-body .redactor-editor ntr,
-body .redactor-editor ntl {
+body .redactor-editor .ntr,
+body .redactor-editor .ntl {
 	display: inline;
 	background-color: black;
 	color: white;
