@@ -1,5 +1,5 @@
 {% macro cleanup(string) -%}
     {%- if string|length -%}
-        {{- string|typogrify|replace('<p><br></p>','')|replace(' class="redactor-inline-converted"','')|replace('/[ ]*redactor-inline-converted/','')|raw -}}
+        {{- string|typogrify|replace('<p><br></p>','')|replace(' class="redactor-inline-converted"','')|replace('/[ ]*redactor-inline-converted/','')|replace('/(<mark class="ntr">)(.+?)(<.mark>)/','$1<span class="note type--d-s hanging hang-right">$2</span>$3')|replace('/(<mark class="ntl">)(.+?)(<.mark>)/','$1<span class="note type--d-s hanging hang-left">$2</span>$3')|raw -}}
     {%- endif -%}
 {%- endmacro %}

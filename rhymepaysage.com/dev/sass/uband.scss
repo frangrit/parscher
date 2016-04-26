@@ -49,6 +49,11 @@ figure img {
 	height: auto;
 }
 
+mark {
+	background-color: transparent;
+	color: $color-black;
+}
+
 // stolen from medium.com (sorry.)
 
 $color-text-shadow: white;
@@ -314,6 +319,7 @@ main { position: relative; }
 .text--body {
 	margin-top: $grid * 6;
 	line-height: 1.4;
+	counter-reset: note-counter;
 	@include respond-r2 { 
 		margin-top: 68px; 
 		line-height: 1.6;
@@ -459,30 +465,43 @@ p + .container.hanging { margin-top: 1.5em; }
 	}
 }
 
+mark {
+	counter-increment: note-counter;
+}
+
+mark:before {
+	content: counter(note-counter);
+	display: inline-block;
+	@extend .type--d-s;
+	position: relative;
+	bottom: .4em;
+    border-bottom: 1px solid;
+    margin-right: .3em;
+    padding-bottom: 0;
+    line-height: 1;
+    margin-left: .1em;
+    text-align: center;
+    width: 1em;
+}
 
 .note {
-	font-family: $font-alt;
-	font-weight: 700;
-	font-size: 60%;
 	&.hanging {
+		margin-top: -2.05em;
 		width: $width-outer-column;
+		&:before {
+			content: counter(note-counter);
+			display: block;
+		}
 		&.hang-left {
+		    left: 0;
 			margin-left: calc(50% - #{$width-outer-margin-calc});
 		}
 		&.hang-right {
+		    right: 0;
 			margin-right: calc(50% - #{$width-outer-margin-calc});
 		}
 	}
 }
-
-.margin-note.hang-right {
-    right: 0;
-}
-
-.margin-note.hang-left {
-    left: 0;
-}
-
 
 div.comments {
 	padding: 0 $double 4px;
