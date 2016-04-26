@@ -139,10 +139,6 @@
   border-bottom: 1px dotted #777 !important;
 }
 
-.redactor-dropdown-marked span {
-  background-color: #ff8;
-}
-
 .redactor-dropdown-preventlinebreak span {
   position: relative;
 }
@@ -196,17 +192,12 @@
   content: close-quote;
 }
 
-.redactor-editor mark,
 .redactor-editor code,
 .redactor-editor samp,
 .redactor-editor kbd {
   display: inline !important;
   padding: 0 0.25em !important;
   border-radius: 0 !important;
-}
-
-.redactor-editor mark {
-  padding: 0.1em 0 !important;
 }
 
 .redactor-editor kbd {
@@ -225,10 +216,6 @@
 .redactor-editor ins {
   border-bottom: 1px dotted #777;
   text-decoration: none !important;
-}
-
-.redactor-editor mark {
-  background-color: #ff8 !important;
 }
 
 .redactor-editor nobr {

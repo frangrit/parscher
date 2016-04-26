@@ -19,37 +19,37 @@ body .redactor-editor p {
     line-height: 1.5;
 }
 
-body .redactor-editor nobr.ntr,
-body .redactor-editor nobr.ntl {
+body .redactor-editor mark.ntr,
+body .redactor-editor mark.ntl {
 	display: inline;
 	white-space: normal;
 }
 
-body .redactor-dropdown-noteright span:after,
-body .redactor-dropdown-noteleft span:after,
-body .redactor-editor nobr.ntl:after,
-body .redactor-editor nobr.ntr:after {
+body .redactor-dropdown-marked span:after,
+body .redactor-dropdown-marked span:after,
+body .redactor-editor mark.ntl:after,
+body .redactor-editor mark.ntr:after {
 	content: ']';
 }
 
-body .redactor-dropdown-noteleft span:before,
-body .redactor-dropdown-noteright span:before,
-body .redactor-editor nobr.ntl:before,
-body .redactor-editor nobr.ntl:before {
+body .redactor-dropdown-marked span:before,
+body .redactor-dropdown-marked span:before,
+body .redactor-editor mark.ntl:before,
+body .redactor-editor mark.ntl:before {
 	content: '[';
 }
 
-body .redactor-dropdown-noteright span:before,
-body .redactor-dropdown-noteright span:after,
-body .redactor-editor nobr.ntr:before,
-body .redactor-editor nobr.ntr:after {
+body .redactor-dropdown-marked span:before,
+body .redactor-dropdown-marked span:after,
+body .redactor-editor mark.ntr:before,
+body .redactor-editor mark.ntr:after {
 	color: #ea6e31;
 }
 
-body .redactor-dropdown-noteleft span:before,
-body .redactor-dropdown-noteleft span:after,
-body .redactor-editor nobr.ntl:before,
-body .redactor-editor nobr.ntl:after  {
+body .redactor-dropdown-marked span:before,
+body .redactor-dropdown-marked span:after,
+body .redactor-editor mark.ntl:before,
+body .redactor-editor mark.ntl:after  {
 	color: #317beb;
 }
 
