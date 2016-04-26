@@ -33,6 +33,23 @@ body .redactor-editor ntl {
     sans-serif;
 }
 
+body .redactor-editor ntr:before,
+body .redactor-editor ntl:before {
+    content: 'note left';
+    background-color: white;
+    font-weight: 600;
+    padding: -2px;
+    padding: 0;
+    margin-left: -1px;
+    padding: 1px 7px 1px 6px;
+    margin-right: 6px;
+    color: black;
+}
+
+body .redactor-editor ntr:before {
+    content: 'note right';
+}
+
 body .redactor-dropdown-body-h3 span {
 	font-size: 17px;
     line-height: 32px;
