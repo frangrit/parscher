@@ -19,35 +19,38 @@ body .redactor-editor p {
     line-height: 1.5;
 }
 
-body .redactor-editor .ntr,
-body .redactor-editor .ntl {
+body .redactor-editor nobr.ntr,
+body .redactor-editor nobr.ntl {
 	display: inline;
-	background-color: black;
-	color: white;
-	padding: 2px;
-	font-size: 90%; 
-	font-weight: 600;
-	font-family: -apple-system, BlinkMacSystemFont, 
-    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", 
-    "Fira Sans", "Droid Sans", "Helvetica Neue", 
-    sans-serif;
+	white-space: normal;
 }
 
-body .redactor-editor .ntr:before,
-body .redactor-editor .ntl:before {
-    content: 'note left';
-    background-color: white;
-    font-weight: 600;
-    padding: -2px;
-    padding: 0;
-    margin-left: -1px;
-    padding: 1px 7px 1px 6px;
-    margin-right: 6px;
-    color: black;
+body .redactor-dropdown-body-noteright span:after,
+body .redactor-dropdown-body-noteleft span:after,
+body .redactor-editor nobr.ntl:after,
+body .redactor-editor nobr.ntr:after {
+	content: ']';
 }
 
-body .redactor-editor .ntr:before {
-    content: 'note right';
+body .redactor-dropdown-body-noteleft span:before,
+body .redactor-dropdown-body-noteright span:before,
+body .redactor-editor nobr.ntl:before,
+body .redactor-editor nobr.ntl:before {
+	content: '[';
+}
+
+body .redactor-dropdown-body-noteright span:before,
+body .redactor-dropdown-body-noteright span:after,
+body .redactor-editor nobr.ntr:before,
+body .redactor-editor nobr.ntr:after {
+	color: #ea6e31;
+}
+
+body .redactor-dropdown-body-noteleft span:before,
+body .redactor-dropdown-body-noteleft span:after,
+body .redactor-editor nobr.ntl:before,
+body .redactor-editor nobr.ntl:after  {
+	color: #317beb;
 }
 
 body .redactor-dropdown-body-h3 span {
