@@ -25,29 +25,29 @@ body .redactor-editor nobr.ntl {
 	white-space: normal;
 }
 
-body .redactor-dropdown-body-noteright span:after,
-body .redactor-dropdown-body-noteleft span:after,
+body .redactor-dropdown-noteright span:after,
+body .redactor-dropdown-noteleft span:after,
 body .redactor-editor nobr.ntl:after,
 body .redactor-editor nobr.ntr:after {
 	content: ']';
 }
 
-body .redactor-dropdown-body-noteleft span:before,
-body .redactor-dropdown-body-noteright span:before,
+body .redactor-dropdown-noteleft span:before,
+body .redactor-dropdown-noteright span:before,
 body .redactor-editor nobr.ntl:before,
 body .redactor-editor nobr.ntl:before {
 	content: '[';
 }
 
-body .redactor-dropdown-body-noteright span:before,
-body .redactor-dropdown-body-noteright span:after,
+body .redactor-dropdown-noteright span:before,
+body .redactor-dropdown-noteright span:after,
 body .redactor-editor nobr.ntr:before,
 body .redactor-editor nobr.ntr:after {
 	color: #ea6e31;
 }
 
-body .redactor-dropdown-body-noteleft span:before,
-body .redactor-dropdown-body-noteleft span:after,
+body .redactor-dropdown-noteleft span:before,
+body .redactor-dropdown-noteleft span:after,
 body .redactor-editor nobr.ntl:before,
 body .redactor-editor nobr.ntl:after  {
 	color: #317beb;
