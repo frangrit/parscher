@@ -33,6 +33,15 @@ return array(
         )
     ),
 
+    'rhymepaysage-sam.dev' => array(
+        'devMode' => true,
+        'siteUrl' => 'http://rhymepaysage-sam.dev/',
+        'environmentVariables' => array(
+            'basePath' => '/Users/danielwilliams/code/parscher/rhymepaysage.com/public',
+            'baseUrl'  => 'http://rhymepaysage-sam.dev/',
+        )
+    ),
+
     '.com' => array(
         'cooldownDuration' => 0,
 		'siteUrl' => 'http://rhymepaysage.com/',
