@@ -337,7 +337,7 @@ class EntryElementType extends BaseElementType
 	/**
 	 * @inheritDoc IElementType::defineSortableAttributes()
 	 *
-	 * @retrun array
+	 * @return array
 	 */
 	public function defineSortableAttributes()
 	{
@@ -928,6 +928,9 @@ EOD;
 			craft()->elements->updateElementSlugAndUri($element, true, true, true);
 		}
 	}
+
+	// Protected methods
+	// =========================================================================
 
 	/**
 	 * Preps the element criteria for a given table attribute
