@@ -245,15 +245,17 @@ main { position: relative; }
 	max-width: $width-max;
 }
 
-.hanging {
-    width: calc(50% - #{$width-outer-calc});
-    position: absolute;
-	display: block;
-	&.hang-right { 
-		right: 0;	
-	}
-	&.hang-left { 
-		left: 0;	
+@include respond-r3 {
+	.hanging {
+	    width: calc(50% - #{$width-outer-calc});
+	    position: absolute;
+		display: block;
+		&.hang-right { 
+			right: 0;	
+		}
+		&.hang-left { 
+			left: 0;	
+		}
 	}
 }
 
@@ -488,7 +490,7 @@ mark {
 
 mark:before {
 	content: counter(note-counter);
-	display: inline-block;
+	display: none;
 	@extend .type--d-s;
 	position: relative;
 	bottom: .4em;
@@ -502,20 +504,38 @@ mark:before {
 }
 
 .note {
-	&.hanging {
-		margin-top: -2.05em;
-		width: $width-outer-column;
-		&:before {
-			content: counter(note-counter);
-			display: block;
-		}
-		&.hang-left {
-		    left: 0;
-			margin-left: calc(50% - #{$width-outer-margin-calc});
-		}
-		&.hang-right {
-		    right: 0;
-			margin-right: calc(50% - #{$width-outer-margin-calc});
+	position: relative;
+    bottom: 3px;
+    padding-left: $grid;
+    padding-right: $grid;
+}
+
+
+@include respond-r3 {
+	mark:before {
+		display: inline-block;
+	}
+	
+	.note {
+		position: absolute;
+	    bottom: auto;
+	    padding-left: 0;
+	    padding-right: 0;
+		&.hanging {
+			margin-top: -2.05em;
+			width: $width-outer-column;
+			&:before {
+				content: counter(note-counter);
+				display: block;
+			}
+			&.hang-left {
+			    left: 0;
+				margin-left: calc(50% - #{$width-outer-margin-calc});
+			}
+			&.hang-right {
+			    right: 0;
+				margin-right: calc(50% - #{$width-outer-margin-calc});
+			}
 		}
 	}
 }
