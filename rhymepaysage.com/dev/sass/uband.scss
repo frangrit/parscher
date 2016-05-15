@@ -36,6 +36,10 @@ strong,
 	font-size: 95%;
 	font-weight: 700;
 }
+
+.italic { font-style: italic; }
+.normal { font-style: normal; }
+
 .fonts-loaded strong,
 .fonts-loaded .strong {
 	font-family: $font-title-loaded;
@@ -53,6 +57,19 @@ mark {
 	background-color: transparent;
 	color: $color-black;
 }
+
+.block { display: block; }
+
+.mt0 { margin-top: 0; }
+.mt1 { margin-top: $grid; }
+.mt2 { margin-top: $grid * 2; }
+.mt3 { margin-top: $grid * 3; }
+.mt4 { margin-top: $grid * 4; }
+.repeat--mt0 + .repeat--mt0 { margin-top: 0; }
+.repeat--mt1 + .repeat--mt1 { margin-top: $grid; }
+.repeat--mt2 + .repeat--mt2 { margin-top: $grid * 2; }
+.repeat--mt3 + .repeat--mt3 { margin-top: $grid * 3; }
+.repeat--mt4 + .repeat--mt4 { margin-top: $grid * 4; }
 
 // stolen from medium.com (sorry.)
 

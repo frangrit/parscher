@@ -36,6 +36,11 @@
 						    	</section>
 						    {% case "blockFigures" %}
 								{% include "_figure" %}
+						    {% case "blockDownload" %}
+								<section class="text--download inner-bounded">
+									{% set thisDownload = block.downloadableAsset | first %}
+									<a href="{{ thisDownload.url }}">{{ block.downloadLabel }} <span>({{ thisDownload.kind }}; {{ thisDownload.size | filesize }})</span></a>
+								</section>
 						    {% default %}
 						        <p>A font walks into a bar.</p>
 						        <p>The bartender says, “Hey, we don’t serve your type in here!”</p>

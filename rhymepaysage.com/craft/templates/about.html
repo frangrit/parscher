@@ -21,9 +21,9 @@
 						    {% case "blockFigures" %}
 								{% include "_figure" %}
 						    {% case "blockDownload" %}
-								<section class="text--download inner-bounded">
+								<section class="text--download inner-bounded mt4 repeat--mt0">
 									{% set thisDownload = block.downloadableAsset | first %}
-									<a href="{{ thisDownload.url }}">{{ block.downloadLabel }} <span>({{ thisDownload.kind }}; {{ thisDownload.size | filesize }})</span></a>
+									<a href="{{ thisDownload.url }}" class="italic"><span class="_isUnderlined">{{ block.downloadLabel }}</span> <span class="text--title type--d-s normal">({{ thisDownload.kind }}; {{ thisDownload.size | filesize }})</span></a>
 								</section>
 						    {% default %}
 						        <p>A font walks into a bar.</p>
