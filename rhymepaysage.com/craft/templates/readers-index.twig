@@ -25,8 +25,8 @@
 	<div class="content-start">
 		<main id="content" role="main">
 			<div class="body">
-				<h2 class="text-title">Index</h2>
-				<div class="body-main">
+				<h2 class="text--title type--d-xl inner-bounded">Index</h2>
+				<div class="text--body inner-bounded">
 					<ul class="site-index">
 						{% for tag in craft.tags.group('indexTags')%}
 							{% set taggedEntries = craft.entries.section('texts').relatedTo(tag) %}
