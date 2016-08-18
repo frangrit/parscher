@@ -72,7 +72,6 @@ class CraftTwigExtension extends \Twig_Extension
 				new RequireEdition_TokenParser(),
 				new RequireLogin_TokenParser(),
 				new RequirePermission_TokenParser(),
-				new Switch_TokenParser(),
 
 				new DeprecatedTag_TokenParser('endpaginate'),
 			));
@@ -392,6 +391,10 @@ class CraftTwigExtension extends \Twig_Extension
 					break;
 				}
 			}
+		}
+		else
+		{
+			$index = null;
 		}
 
 		if ($index !== false)

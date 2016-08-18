@@ -211,6 +211,11 @@ class ElementsService extends BaseApplicationComponent
 			return array();
 		}
 
+		if ($justIds)
+		{
+			return $query->queryColumn();
+		}
+
 		$results = $query->queryAll();
 
 		if (!$results)
@@ -218,22 +223,7 @@ class ElementsService extends BaseApplicationComponent
 			return array();
 		}
 
-		// Do they just care about the IDs?
-		if ($justIds)
-		{
-			$ids = array();
-
-			foreach ($results as $result)
-			{
-				$ids[] = $result['id'];
-			}
-
-			return $ids;
-		}
-		else
-		{
-			return $this->populateElements($results, $criteria, $contentTable, $fieldColumns, $justIds);
-		}
+		return $this->populateElements($results, $criteria, $contentTable, $fieldColumns);
 	}
 
 	/**
@@ -547,23 +537,40 @@ class ElementsService extends BaseApplicationComponent
 	 */
 	public function getTotalElements($criteria = null)
 	{
+		// TODO: Lots in here MySQL specific.
 		$query = $this->buildElementsQuery($criteria, $contentTable, $fieldColumns, true);
 
 		if ($query)
 		{
-			// Get the GROUP BY query part
-			$groupBy = $query->getGroup();
-
-			// Remove the order, group by, offset, limit, and any additional tables in the FROM clause
 			$query
 				->order('')
-				->group('')
 				->offset(0)
 				->limit(-1)
 				->from('elements elements');
 
-			// Count the number of distinct columns based on the GROUP BY
-			$count = $query->count(sprintf('DISTINCT(%s)', $groupBy));
+			$elementsIdColumn = 'elements.id';
+			$selectedColumns = $query->getSelect();
+
+			// Normalize with no quotes. setSelect later will properly add them back in.
+			$selectedColumns = str_replace('`', '', $selectedColumns);
+
+			// Guarantee we select an elements.id column
+			if (strpos($selectedColumns, $elementsIdColumn) === false)
+			{
+				$selectedColumns = $elementsIdColumn.', '.$selectedColumns;
+			}
+
+			// Alias elements.id as elementsId
+			$selectedColumns = str_replace($elementsIdColumn, $elementsIdColumn.' AS elementsId', $selectedColumns);
+
+			$query->setSelect($selectedColumns);
+
+			$masterQuery = craft()->db->createCommand();
+			$masterQuery->params = $query->params;
+
+			$masterQuery->from(sprintf('(%s) derivedElementsTable', $query->getText()));
+
+			$count = $masterQuery->count('derivedElementsTable.elementsId');
 
 			return $count;
 		}
@@ -2075,7 +2082,7 @@ class ElementsService extends BaseApplicationComponent
 	 *
 	 * @param string $class The element action class handle.
 	 *
-	 * @return IElementType|null The element action, or `null`.
+	 * @return IElementAction|null The element action, or `null`.
 	 */
 	public function getAction($class)
 	{
@@ -2109,13 +2116,9 @@ class ElementsService extends BaseApplicationComponent
 				}
 				else
 				{
-					$parts = explode('_', $matches[1]);
-
-					$parts = array_map(function ($part) {
-						return ucfirst($part);
-					}, $parts);
-
-					$elementTypeHandle = implode('_', $parts);
+					$elementTypeHandle = preg_replace_callback('/^\w|_\w/', function($matches) {
+						return strtoupper($matches[0]);
+					}, $matches[1]);
 				}
 
 				$token = '{'.StringHelper::randomString(9).'}';
@@ -2202,8 +2205,25 @@ class ElementsService extends BaseApplicationComponent
 										{
 											if (!empty($refTag['matches'][3]) && isset($element->{$refTag['matches'][3]}))
 											{
-												$value = (string) $element->{$refTag['matches'][3]};
-												$replace[] = $this->parseRefs($value);
+												try
+												{
+													$value = $element->{$refTag['matches'][3]};
+
+													if (is_object($value) && !method_exists($value, '__toString'))
+													{
+														throw new Exception('Object of class '.get_class($value).' could not be converted to string');
+													}
+
+													$replace[] = $this->parseRefs((string)$value);
+												}
+												catch (\Exception $e)
+												{
+													// Log it
+													Craft::log('An exception was thrown when parsing the ref tag "'.$refTag['matches'][0]."\":\n".$e->getMessage(), LogLevel::Error);
+
+													// Replace the token with the original ref tag
+													$replace[] = $refTag['matches'][0];
+												}
 											}
 											else
 											{

@@ -238,6 +238,7 @@ return array(
 
 	/**
 	 * The amount of time a user’s elevated session will last, which is required for some sensitive actions (e.g. user group/permission assignment).
+	 * Set to `false` to disable elevated session support.
 	 *
 	 * @see http://www.php.net/manual/en/dateinterval.construct.php
 	 */
@@ -632,6 +633,15 @@ return array(
 	 * will never automatically set the flag.
 	 */
 	'useSecureCookies' => 'auto',
+
+	/**
+	 * Determines what protocol/schema Craft will use when generating tokenized URLs. If set to 'auto',
+	 * Craft will check the siteUrl and the protocol of the current request and if either of them are https
+	 * will use https in the tokenized URL. If not, will use http.
+	 * 
+	 * If set to `false`, the Craft will always use http. If set to `true`, then, Craft will always use `https`. 
+	 */
+	'useSslOnTokenizedUrls' => 'auto',
 
 	/**
 	 * The amount of time a user stays logged in.

@@ -160,7 +160,9 @@ class TemplatesService extends BaseApplicationComponent
 			$loaderClass = __NAMESPACE__.'\\TemplateLoader';
 		}
 
-		if (!isset($this->_twigs[$loaderClass]))
+		$cacheKey = $loaderClass.':'.md5(serialize($options));
+
+		if (!isset($this->_twigs[$cacheKey]))
 		{
 			$loader = new $loaderClass();
 			$options = array_merge($this->_getTwigOptions(), $options);
@@ -179,16 +181,16 @@ class TemplatesService extends BaseApplicationComponent
 			$timezone = craft()->getTimeZone();
 			$twig->getExtension('core')->setTimezone($timezone);
 
-			// Give plugins a chance to add their own Twig extensions
-			$this->_addPluginTwigExtensions($twig);
-
 			// Set our custom parser to support "include" tags using the capture mode
 			$twig->setParser(new TwigParser($twig));
 
-			$this->_twigs[$loaderClass] = $twig;
+			$this->_twigs[$cacheKey] = $twig;
+
+			// Give plugins a chance to add their own Twig extensions
+			$this->_addPluginTwigExtensions($twig);
 		}
 
-		return $this->_twigs[$loaderClass];
+		return $this->_twigs[$cacheKey];
 	}
 
 	/**
@@ -234,12 +236,14 @@ class TemplatesService extends BaseApplicationComponent
 	 *
 	 * @param mixed $template  The name of the template to load, or a StringTemplate object.
 	 * @param array $variables The variables that should be available to the template.
+	 * @param bool  $safeMode  Whether to limit what's available to in the Twig context
+	 *                         in the interest of security.
 	 *
 	 * @return string The rendered template.
 	 */
-	public function render($template, $variables = array())
+	public function render($template, $variables = array(), $safeMode = false)
 	{
-		$twig = $this->getTwig();
+		$twig = $this->getTwig(null, array('safe_mode' => $safeMode));
 
 		$lastRenderingTemplate = $this->_renderingTemplate;
 		$this->_renderingTemplate = $template;
@@ -275,17 +279,20 @@ class TemplatesService extends BaseApplicationComponent
 	 *
 	 * @param string $template  The source template string.
 	 * @param array  $variables Any variables that should be available to the template.
+	 * @param bool   $safeMode  Whether to limit what's available to in the Twig context
+	 *                          in the interest of security.
 	 *
 	 * @return string The rendered template.
 	 */
-	public function renderString($template, $variables = array())
+	public function renderString($template, $variables = array(), $safeMode = false)
 	{
 		$stringTemplate = new StringTemplate(md5($template), $template);
 
 		$lastRenderingTemplate = $this->_renderingTemplate;
 		$this->_renderingTemplate = 'string:'.$template;
-		$result = $this->render($stringTemplate, $variables);
+		$result = $this->render($stringTemplate, $variables, $safeMode);
 		$this->_renderingTemplate = $lastRenderingTemplate;
+
 		return $result;
 	}
 
@@ -313,14 +320,15 @@ class TemplatesService extends BaseApplicationComponent
 		// Get a Twig instance with the String template loader
 		$twig = $this->getTwig('Twig_Loader_String', array('safe_mode' => $safeMode));
 
-
 		// Have we already parsed this template?
-		if (!isset($this->_objectTemplates[$template]))
+		$cacheKey = $template.':'.($safeMode ? 'safe' : 'unsafe');
+
+		if (!isset($this->_objectTemplates[$cacheKey]))
 		{
 			// Replace shortcut "{var}"s with "{{object.var}}"s, without affecting normal Twig tags
 			$formattedTemplate = preg_replace('/(?<![\{\%])\{(?![\{\%])/', '{{object.', $template);
 			$formattedTemplate = preg_replace('/(?<![\}\%])\}(?![\}\%])/', '|raw}}', $formattedTemplate);
-			$this->_objectTemplates[$template] = $twig->loadTemplate($formattedTemplate);
+			$this->_objectTemplates[$cacheKey] = $twig->loadTemplate($formattedTemplate);
 		}
 
 		// Temporarily disable strict variables if it's enabled
@@ -334,7 +342,7 @@ class TemplatesService extends BaseApplicationComponent
 		// Render it!
 		$lastRenderingTemplate = $this->_renderingTemplate;
 		$this->_renderingTemplate = 'string:'.$template;
-		$result = $this->_objectTemplates[$template]->render(array(
+		$result = $this->_objectTemplates[$cacheKey]->render(array(
 			'object' => $object
 		));
 
