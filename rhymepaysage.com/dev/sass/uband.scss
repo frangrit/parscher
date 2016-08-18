@@ -246,10 +246,12 @@ main { position: relative; }
 }
 
 @include respond-r3 {
-	.hanging {
+	.hanging,
+	div.container.hanging {
 	    width: calc(50% - #{$width-outer-calc});
 	    position: absolute;
-		display: block;
+      display: block;
+      margin: 1.4em 0 0;
 		&.hang-right { 
 			right: 0;	
 		}
@@ -424,9 +426,10 @@ main { position: relative; }
 }
 
 .container.hanging {
-	margin: $grid 0 0;
+	margin: 1em 0 0;
 	& + p,
 	& + ul, 
+	& + section,
 	& + ol { margin-top: 1em; }
 }
 
