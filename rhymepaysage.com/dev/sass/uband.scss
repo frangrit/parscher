@@ -362,6 +362,10 @@ main { position: relative; }
 
 .text--index-title { margin-top: 2em; }
 
+.text--body-block + .text--body-block {
+  margin-top: 1em;
+}
+
 .text--body-block h2, 
 .text--body-block h3, 
 .text--body-block h4, 
