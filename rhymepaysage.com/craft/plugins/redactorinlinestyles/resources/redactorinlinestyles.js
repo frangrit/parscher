@@ -3,56 +3,34 @@ if (!RedactorPlugins) var RedactorPlugins = {};
 RedactorPlugins.inlinestyles = function()
 {
   return {
-    buttonsAdd: null,
-    buttonsAddAfter: null,
-    setIcons: null,
-    iconsFile: null,
-
     init: function()
     {
-      this.inlinestyles.buttonsAdd = this.inlinestyles.getConfig('buttonsAdd').reverse();
-      this.inlinestyles.buttonsAddAfter = this.inlinestyles.getConfig('buttonsAddAfter');
-      this.inlinestyles.setIcons = this.inlinestyles.getConfig('setIcons');
-      this.inlinestyles.iconsFile = RedactorInlineStyles.config.iconsFile;
+      if ('buttonsAdd' in this.opts) {
+        var buttonsAdd = this.inlinestyles.prepareButtonsAddConfig(this.opts.buttonsAdd);
+        var buttonsAddAfter = 'buttonsAddAfter' in this.opts ? this.opts.buttonsAddAfter : 'italic';
 
-      // Add buttons and dropdowns
-      this.inlinestyles.addButtons();
-
-      // Set (additional) button icons
-      this.inlinestyles.changeButtonIcons();
-
-      // Add tooltips to icon buttons
-      this.inlinestyles.addButtonTooltips();
+        this.inlinestyles.addButtons(buttonsAdd, buttonsAddAfter);
+      }
     },
 
-    addButtons: function()
+    addButtons: function(buttonsAdd, buttonsAddAfter)
     {
-      $.each(this.inlinestyles.buttonsAdd, $.proxy(function(i, s)
-      {
-        var pos = 'addAfter' in s ? s.addAfter : this.inlinestyles.buttonsAddAfter;
-        var id = this.inlinestyles.createClassName(s.title);
+      $.each(buttonsAdd, $.proxy(function(i, s) {
+        var pos = 'addAfter' in s ? s.addAfter : buttonsAddAfter;
 
-        var btn = this.button.addAfter(pos, id, Craft.t(s.title));
+        var btn = this.button.addAfter(pos, s.key, Craft.t(s.title));
 
-        if ('icon' in s)
-        {
-          this.button.setIcon(btn, this.inlinestyles.getIconHtml(s.icon));
-        }
-
-        if (!('dropdown' in s))
-        {
+        if (!('dropdown' in s)) {
+          // Add button functionality
           this.button.addCallback(btn, function() {
             this.inlinestyles.applyFormat(s.args, s.clear);
           });
-        }
-        else
-        {
+        } else {
+          // Add dropdown functionality
           var dropdown = {};
 
           $.each(s.dropdown, $.proxy(function(o, g) {
-            var key = this.inlinestyles.createClassName(g.title);
-
-            dropdown[key] = {
+            dropdown[g.key] = {
               title: Craft.t(g.title),
               func: function() {
                 this.inlinestyles.applyFormat(g.args, g.clear);
@@ -67,88 +45,68 @@ RedactorPlugins.inlinestyles = function()
 
     applyFormat: function(args, clear)
     {
-      if (clear)
-      {
+      if (clear) {
         this.inline.removeFormat();
       }
 
-      if (typeof args[0] !== 'undefined')
-      {
+      if (typeof args !== 'undefined') {
         var type = (this.utils.isBlockTag(args[0])) ? 'block' : 'inline';
 
-        this[type].format(args[0]);
-
-        if (args.length === 3)
-        {
-          this[type].toggleAttr(args[1], args[2]);
+        switch(args.length) {
+          case 1: this[type].format(args[0]); break;
+          case 2: this[type].format(args[0], args[1]); break;
+          case 3: this[type].format(args[0], args[1], args[2]); break;
+          case 4: this[type].format(args[0], args[1], args[2], args[3]); break;
+          default: throw new Error('Illegal argument count');
         }
       }
     },
 
-    changeButtonIcons: function()
+    prepareButtonsAddConfig: function(buttonsAdd)
     {
-      if (this.inlinestyles.setIcons !== null)
-      {
-        setTimeout($.proxy(function()
-        {
-          $.each(this.button.all(), $.proxy(function(i, s)
-          {
-              var key = $(s).attr('rel');
-              var iconId = this.inlinestyles.setIcons[key];
+      buttonsAdd = this.inlinestyles.restructureObject(buttonsAdd);
 
-              if (typeof iconId !== 'undefined')
-              {
-                  var button = this.button.get(key);
-                  this.button.setIcon(button, this.inlinestyles.getIconHtml(iconId));
-              }
-          }, this));
-        }, this), 0);
+      return buttonsAdd.reverse();
+    },
+
+    restructureObject: function(obj)
+    {
+      // Did they use the right syntax?
+      if (!typeof obj === 'object' && obj !== null) {
+        return [];
       }
+
+      // Add a "key" property to every element, use the element's index or create
+      // one from the "title" property
+      var arr = [];
+      var keys = Object.keys(obj);
+
+      for (var i = 0; i < keys.length; i++) {
+        var el = obj[keys[i]];
+
+        if (typeof el === 'object' && el !== null) {
+          // Is this an array like object (numeric keys)?
+          if (keys[i] == i) {
+            el['key'] = this.inlinestyles.createKeyFromString(el.title);
+          } else {
+            el['key'] = keys[i];
+          }
+
+          // Is this a dropdown configuration?
+          if ('dropdown' in el) {
+            el['dropdown'] = this.inlinestyles.restructureObject(el.dropdown);
+          }
+
+          arr.push(el);
+        }
+      }
+
+      return arr;
     },
 
-    addButtonTooltips: function()
-    {
-      setTimeout(function() {
-        $('.re-button:has(svg)').addClass('re-button-tooltip');
-      }, 0);
-    },
-
-    createClassName: function(str)
+    createKeyFromString: function(str)
     {
       return str.replace(/[^a-zA-Z]/g, '').toLowerCase();
     },
-
-    getIconHtml: function(id)
-    {
-      return '<svg class="re-button-icon">' +
-        '<use xlink:href="'+this.inlinestyles.iconsFile+'#'+id+'"></use>' +
-        '</svg>';
-    },
-
-    cleanObject: function(obj)
-    {
-      for (var k in obj)
-      {
-        if (obj[k] === null)
-        {
-          obj instanceof Array ? obj.splice(k, 1) : delete obj[k];
-        }
-        else if (typeof obj[k] == "object")
-        {
-          this.inlinestyles.cleanObject(obj[k]);
-        }
-      }
-    },
-
-    getConfig: function(s)
-    {
-      if (this.opts[s] instanceof Array)
-      {
-        this.inlinestyles.cleanObject(this.opts[s]);
-      }
-
-      return s in this.opts ? this.opts[s] : RedactorInlineStyles.config[s];
-    },
-
   };
 };

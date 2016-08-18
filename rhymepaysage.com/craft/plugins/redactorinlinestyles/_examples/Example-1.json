@@ -1,54 +1,26 @@
 {
-  "buttons": ["format","bold","italic","lists","file","image","link","horizontalrule"],
-  "plugins": ["inlinestyles","source","video","table","fullscreen"],
+  "buttons": ["format","bold","italic","lists","link"], // + "ul","ol","image","file","horizontalrule"
+  "plugins": ["fullscreen","inlinestyles"], // + "source","table","video"
   "toolbarFixed": false,
 
-  /**
-   * Maps icons to buttons.
-   *
-   * Key-value pairs to map icons (referenced SVG symbol elements) to your toolbar buttons. You can
-   * reference icons from your own SVG file if you prefer. Just set the path to it via the "iconsFile"
-   * setting in your craft/config/redactorinlinestyles.php config file.
-   *
-   * key:   The button's rel attribute value (usually the button's title without whitespace).
-   * value: The symbol element's ID attribute value.
-   */
-  "setIcons": {
-    "html": "html",
-    "format": "format",
-    "bold": "bold",
-    "italic": "italic",
-    "lists": "lists",
-    "file": "file",
-    "image": "image",
-    "video": "video",
-    "table": "table",
-    "link": "link",
-    "horizontalrule": "horizontalrule",
-    "fullscreen": "fullscreen",
-    "superscript": "superscript",
-    "subscript": "subscript",
-    "quote": "quote",
-    "sourcecitation": "sourcecitation",
-    "keyboardinput": "keyboardinput",
-    "code": "code",
-    "smallprint": "smallprint",
-    "deleted": "deleted",
-    "inserted": "inserted",
-    "marked": "marked",
-    "preventlinebreak": "preventlinebreak",
-    "removeallstyles": "removeallstyles",
-    "alignleft": "alignleft",
-    "alignright": "alignright",
-    "aligncenter": "aligncenter",
-    "justify": "justify",
-    "alignment": "alignment",
-    "color": "color",
-    "style": "ellipsis"
+  "formatting": false,
+  "formattingAdd": {
+    "p": {
+      "title": "Paragraph",
+      "args": ["p"]
+    },
+    "h3": {
+      "title": "Heading",
+      "args": ["h3"]
+    },
+    "h4": {
+      "title": "Subheading",
+      "args": ["h4"]
+    }
   },
 
   /**
-   * Sets the default position of all Inline Styles buttons.
+   * Sets the default position of Redactor Inline Styles buttons in the toolbar.
    */
   "buttonsAddAfter": "italic",
 
@@ -56,170 +28,106 @@
    * Adds additional buttons to your toolbar.
    *
    * Configure the buttons using the following properties:
-   * - title:    Sets the button's title (only visable if you have no icon specified).
-   * - icon:     Sets an icon (the symbol element's ID attribute value).
-   * - addAfter: Sets the default position of all Inline Styles buttons.
+   * - title:    Sets the button's title. It's also used to create a class name that gets added to the element in
+   *             the toolbar. If you provide an index with the button configs, the index will be used instead.
+   * - addAfter: Sets the button's position in the toolbar.
    *
    * Use either the dropdown property to make your button trigger a dropdown:
-   * - dropdown: Configures the dropdown options.
+   * - dropdown: Configures the dropdown options and accepts a set button configs.
    *
-   * Or give your button an action using the following properties:
+   * Or give your button a callback action using the following properties:
    * - args:     The HTML element to wrap the selected text (for inline elements) or the HTML element to be
    *             applied to the block element surrounding the selection (for block-level elements). HTML attributes
    *             can be added to the tag like so: `["mark", "data-concern", "review"]`.
-   * - clear:    Removes all inline formatting before the tag is add
+   * - clear:    Removes all inline formatting before the tag is added.
    */
-  "buttonsAdd": [
-    {
-      "title": "Superscript",
-      "args": ["sup"]
-    },
-    {
-      "title": "Subscript",
-      "args": ["sub"]
-    },
-    {
-      "title": "Quote",
-      "args": ["q"]
-    },
-    {
-      "title": "Source citation",
-      "args": ["cite"]
-    },
-    {
-      "title": "Keyboard input",
-      "args": ["kbd"]
-    },
-    {
-      "title": "Code",
-      "args": ["code"]
-    },
-    {
-      "title": "Small print",
-      "args": ["small"]
-    },
-    {
-      "title": "Deleted",
-      "args": ["del"]
-    },
-    {
-      "title": "Inserted",
-      "args": ["ins"]
-    },
-    {
-      "title": "Marked",
-      "args": ["mark"]
-    },
-    {
-      "title": "Remove all styles",
-      "clear": true
-    },
-    {
-      "title": "Prevent line-break",
-      "args": ["nobr"]
-    },
-    {
-      "title": "Color",
-      "dropdown": [
-        {
-          "title": "Blue",
-          "args": ["em","class","color--blue"]
-        },
-        {
-          "title": "Green",
-          "args": ["em","class","color--green"]
-        }
-      ]
-    },
-    {
+  "buttonsAdd": {
+    "style": {
       "title": "Style",
-      "dropdown": [
-        {
+      "dropdown": {
+        "sup": {
           "title": "Superscript",
           "args": ["sup"]
         },
-        {
+        "sub": {
           "title": "Subscript",
           "args": ["sub"]
         },
-        {
+        "q": {
           "title": "Quote",
           "args": ["q"]
         },
-        {
+        "cite": {
           "title": "Source citation",
           "args": ["cite"]
         },
-        {
+        "kbd": {
           "title": "Keyboard input",
           "args": ["kbd"]
         },
-        {
+        "code": {
           "title": "Code",
           "args": ["code"]
         },
-        {
+        "small": {
           "title": "Small print",
           "args": ["small"]
         },
-        {
+        "del": {
           "title": "Deleted",
           "args": ["del"]
         },
-        {
+        "ins": {
           "title": "Inserted",
           "args": ["ins"]
         },
-        {
+        "mark": {
           "title": "Marked",
           "args": ["mark"]
         },
-        {
+        "nobr": {
           "title": "Prevent line-break",
-          "args": ["nobr"]
+          "args": ["span","class","nobr"]
         },
-        {
+        "remove": {
           "title": "Remove all styles",
           "clear": true
         }
-      ]
+      }
     },
-    {
-      "title": "Align left",
-      "args": ["p","class","align-left"]
+    "color": {
+      "title": "Color",
+      "dropdown": {
+        "color-blue": {
+          "title": "Blue",
+          "args": ["em","class","color-blue"]
+        },
+        "color-green": {
+          "title": "Green",
+          "args": ["em","class","color-green"]
+        }
+      }
     },
-    {
-      "title": "Align right",
-      "args": ["p","class","align-right"]
-    },
-    {
-      "title": "Align center",
-      "args": ["p","class","align-center"]
-    },
-    {
-      "title": "Justify",
-      "args": ["p","class","align-justify"]
-    },
-    {
+    "align": {
       "title": "Alignment",
-      "dropdown": [
-        {
+      "dropdown": {
+        "align-left": {
           "title": "Align left",
           "args": ["p","class","align-left"]
         },
-        {
+        "align-right": {
           "title": "Align right",
           "args": ["p","class","align-right"]
         },
-        {
+        "align-center": {
           "title": "Align center",
           "args": ["p","class","align-center"]
         },
-        {
+        "align-justify": {
           "title": "Justify",
           "args": ["p","class","align-justify"]
         }
-      ]
+      }
     }
-  ]
+  }
 }

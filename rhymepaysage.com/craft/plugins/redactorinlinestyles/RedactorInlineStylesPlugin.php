@@ -10,7 +10,7 @@ class RedactorInlineStylesPlugin extends BasePlugin
 
     public function getVersion()
     {
-        return '2.0.4';
+        return '2.1.1';
     }
 
     public function getSchemaVersion()
@@ -25,7 +25,7 @@ class RedactorInlineStylesPlugin extends BasePlugin
 
     public function getDeveloperUrl()
     {
-        return 'https://github.com/carlcs/craft-redactorinlinestyles';
+        return 'https://github.com/carlcs';
     }
 
     public function getDocumentationUrl()
@@ -38,49 +38,83 @@ class RedactorInlineStylesPlugin extends BasePlugin
         return 'https://github.com/carlcs/craft-redactorinlinestyles/raw/master/releases.json';
     }
 
+    // Public Methods
+    // =========================================================================
+
+    /**
+     * Initializes the plugin.
+     */
     public function init()
     {
-        if (!craft()->isConsole()) {
-            if (craft()->request->isCpRequest()) {
-                // Prepare config
-                $config = array();
+        if (craft()->request->isCpRequest()) {
+            $this->includeCpResources();
+        }
+    }
 
-                $config['buttonsAdd'] = craft()->config->get('buttonsAdd', 'redactorinlinestyles');
-                $config['buttonsAddAfter'] = craft()->config->get('buttonsAddAfter', 'redactorinlinestyles');
-                $config['setIcons'] = craft()->config->get('setIcons', 'redactorinlinestyles');
+    /**
+     * Make sure requirements are met before installation.
+     *
+     * @throws Exception
+     */
+    public function onBeforeInstall()
+    {
+        if (!defined('PHP_VERSION') || version_compare(PHP_VERSION, '5.4', '<')) {
+            throw new Exception($this->getName().' plugin requires PHP 5.4 or later.');
+        }
+    }
 
-                if (craft()->config->get('iconsFile', 'redactorinlinestyles')) {
-                    $url = craft()->config->get('iconsFile', 'redactorinlinestyles');
-                    $config['iconsFile'] = craft()->config->parseEnvironmentString($url);
-                } else {
-                    $config['iconsFile'] = UrlHelper::getResourceUrl('redactorinlinestyles/icons/redactor-i.svg');
-                }
+    /**
+     * Registers resource paths for requests starting with config/redactorinlinestyles/.
+     */
+    public function getResourcePath($path)
+    {
+        if (strncmp($path, 'config/redactorinlinestyles/', 28) == 0) {
+            return craft()->path->getConfigPath().'redactorinlinestyles/'.substr($path, 28);
+        }
+    }
 
-                // Include JS
-                $config = JsonHelper::encode($config);
+    // Protected Methods
+    // =========================================================================
 
-                $js = "var RedactorInlineStyles = {}; RedactorInlineStyles.config = {$config};";
+    /**
+     * Includes the plugin's resources for the Control Panel.
+     */
+    protected function includeCpResources()
+    {
+        // Include JS
+        craft()->templates->includeJsResource('redactorinlinestyles/redactorinlinestyles.js');
 
-                craft()->templates->includeJs($js);
-                craft()->templates->includeJsResource('redactorinlinestyles/redactorinlinestyles.js');
+        // Include CSS
+        $includeCustomCpResources = craft()->config->get('includeCustomCpResources', 'redactorinlinestyles');
+        if (filter_var($includeCustomCpResources, FILTER_VALIDATE_BOOLEAN)) {
+            $this->includeCustomCpResources();
+        }
 
-                // Include CSS
-                if (craft()->config->get('cssFile', 'redactorinlinestyles')) {
-                    $url = craft()->config->get('cssFile', 'redactorinlinestyles');
-                    $url = craft()->config->parseEnvironmentString($url);
-                    craft()->templates->includeCssFile($url);
-                } else {
-                    craft()->templates->includeCssResource('redactorinlinestyles/redactorinlinestyles.css');
-                }
+        // Include translations
+        $translatable = craft()->config->get('translatable', 'redactorinlinestyles');
+        call_user_func_array([craft()->templates, 'includeTranslations'], $translatable);
+    }
 
-                // Include Translations
-                $translatable = craft()->config->get('translatable', 'redactorinlinestyles');
-                call_user_func_array(array(craft()->templates, 'includeTranslations'), $translatable);
+    /**
+     * Includes resources for the Control Panel from the craft/config/redactorinlinestyles/ folder.
+     */
+    protected function includeCustomCpResources()
+    {
+        $folderPath = craft()->path->getConfigPath().'redactorinlinestyles/';
 
-                // Add external spritemaps support for IE9+ and Edge 12
-                if (craft()->config->get('ieShim', 'redactorinlinestyles') !== false) {
-                    craft()->templates->includeJsResource('redactorinlinestyles/lib/svg4everybody.min.js');
-                    craft()->templates->includeJs('svg4everybody();');
+        if (IOHelper::folderExists($folderPath)) {
+            $filePaths = glob($folderPath.'*.{css,js}', GLOB_BRACE);
+
+            foreach ($filePaths as $filePath) {
+                $resourcePath = 'config/redactorinlinestyles/'.str_replace($folderPath, '', $filePath);
+
+                switch (IOHelper::getExtension($filePath)) {
+                    case 'css':
+                        craft()->templates->includeCssResource($resourcePath);
+                        break;
+                    case 'js':
+                        craft()->templates->includeJsResource($resourcePath);
+                        break;
                 }
             }
         }
