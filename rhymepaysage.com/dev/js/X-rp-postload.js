@@ -10,6 +10,7 @@ $(function() {
 });
 */
 
+var disqus_shortname = 'rhymepaysage';
 
 $(document).ready(function(){
     
