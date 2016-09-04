@@ -1077,6 +1077,20 @@ body.rtl .meta > .field > .input > .datetimewrapper > .datewrapper, body.rtl .me
 
 .meta > .field > .input > .datewrapper, .meta > .field > .input > .timewrapper { display: block; width: 100%; }
 
+.meta > .field > .input > .elementselect > .elements > .element { height: 18px; float: none; margin: 0; }
+
+.meta > .field > .input > .elementselect > .elements > .element + .element { margin-top: 7px; }
+
+.meta > .field > .input > .elementselect > .elements > .element:not(.hasstatus):not(.hasthumb) { width: calc(100% - 14px); }
+
+.meta > .field > .input > .elementselect > .elements > .element.hasstatus:not(.hasthumb) { width: calc(100% - 32px); }
+
+.meta > .field > .input > .elementselect > .elements > .element.hasthumb:not(.hasstatus) { width: calc(100% - 54px); }
+
+.meta > .field > .input > .elementselect > .elements > .element.hasstatus.hasthumb { width: calc(100% - 72px); }
+
+.meta > .field > .input > .elementselect > .elements > .element > .label { width: calc(100% - 20px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
 @media screen and (-webkit-min-device-pixel-ratio: 0) { .meta > .field > .input .select { display: block; margin: -8px 0; width: 100%; border-radius: 0; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; background: none; }
   .meta > .field > .input .select select { width: 100%; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; }
   body.ltr .meta > .field > .input .select select { padding: 14px 12px 14px 0; }
@@ -1301,7 +1315,7 @@ body.rtl .daterange-hud .daterange-items ul li a[data-icon]:before, body.rtl .da
 
 .menu ul li a { display: block !important; font-size: 12px; }
 
-.menu ul li a:not(.sel):not(.disabled):hover, .menu ul li a:not(.sel):not(.disabled):hover .light, .menu:not(:hover) ul li a:not(.sel):not(.disabled).hover, .menu:not(:hover) ul li a:not(.sel):not(.disabled).hover .light, body .redactor-dropdown a:hover { color: #29323d; background-color: #d5d8dd; }
+.menu ul li a:not(.sel):not(.disabled):hover, .menu ul li a:not(.sel):not(.disabled):hover .light, .menu:not(:hover) ul li a:not(.disabled).hover, .menu:not(:hover) ul li a:not(.sel):not(.disabled).hover .light, body .redactor-dropdown a:hover { color: #29323d; background-color: #d5d8dd; }
 
 body .redactor-dropdown a:hover span { color: #29323d !important; }
 

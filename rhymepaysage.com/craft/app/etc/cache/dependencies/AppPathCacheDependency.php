@@ -14,25 +14,18 @@ namespace Craft;
 class AppPathCacheDependency extends \CCacheDependency
 {
 	/**
-	 * @var string The path to the `craft/app` folder used to check it the dependency has been changed.
+	 * @var boolean Whether this dependency is reusable or not.
 	 */
-	public $appPath;
-
-	/**
-	 * Constructor.
-	 */
-	public function __construct()
-	{
-		$this->reuseDependentData = true;
-	}
+	public $reuseDependentData = true;
 
 	/**
 	 * Generates the data needed to determine if dependency has been changed.
+	 * Derived classes should override this method to generate actual dependent data.
 	 *
-	 * @return string The data needed to determine if dependency has been changed.
+	 * @return mixed The data needed to determine if dependency has been changed.
 	 */
 	protected function generateDependentData()
 	{
-		return $this->appPath = craft()->path->getAppPath();
+		return craft()->path->getAppPath();
 	}
 }
