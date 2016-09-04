@@ -375,8 +375,14 @@ main { position: relative; }
 }
 
 .text--body-block a,
-figcaption a {
+figcaption a,
+.note a {
   @extend ._isUnderlined
+}
+
+figcaption a,
+.note a {
+  background-position: 0 15px;
 }
 
 
