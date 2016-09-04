@@ -374,6 +374,12 @@ main { position: relative; }
 	@extend .inner-bounded;
 }
 
+.text--body-block a,
+figcaption a {
+  @extend ._isUnderlined
+}
+
+
 .text--body-block h3 {
 	@extend .type--d-l;
 	margin-top: $grid * 6;
